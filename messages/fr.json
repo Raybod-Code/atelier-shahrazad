@@ -1,0 +1,108 @@
+{
+  "HomePage": {
+    "title": "Là où le code rencontre l’art.",
+    "subtitle": "Expériences web immersives pour la mode et l’art.",
+    "cta": "Demander un concept"
+  },
+  "Navigation": {
+    "works": "Travaux",
+    "process": "Processus",
+    "pricing": "Tarifs",
+    "about": "À propos",
+    "contact": "Contact"
+  },
+  "Works": {
+    "title": "Travaux Sélectionnés",
+    "subtitle": "Une sélection soignée d'expériences numériques conçues avec précision et une attention obsessionnelle aux détails.",
+    "sectionLabel": "TRAVAUX SÉLECTIONNÉS",
+    "badge": "QUALITÉ ATELIER",
+    "caseLabel": "ÉTUDE DE CAS",
+    "view": "VOIR",
+    "keyOutcomes": "RÉSULTATS CLÉS",
+    "technologies": "TECHNOLOGIES",
+    "cta": "DEMANDER UN CONCEPT",
+    "items": {
+      "01": {
+        "title": "Lumina Mode",
+        "intent": "Redéfinir le défilé numérique",
+        "description": "Une expérience de défilé de mode 3D entièrement immersive. Conçu pour la haute performance et la fidélité visuelle.",
+        "outcome1": "Augmentation de 40% de la durée de session",
+        "outcome2": "Design de mouvement primé"
+      },
+      "02": {
+        "title": "Apex Architecture",
+        "intent": "Système de portfolio minimaliste",
+        "description": "Un système de conception structurel basé sur une grille. Accent sur la grande typographie et l'espace négatif.",
+        "outcome1": "Score Lighthouse parfait (100)",
+        "outcome2": "Transitions de page fluides"
+      },
+      "03": {
+        "title": "Echo Son",
+        "intent": "Synthèse audiovisuelle",
+        "description": "Une plateforme audiovisuelle expérimentale où le son génère des graphiques WebGL en temps réel.",
+        "outcome1": "Partage viral sur les réseaux sociaux",
+        "outcome2": "Analyse audio en temps réel"
+      }
+    }
+  },"Deliverables": {
+    "title": "Ce Que Nous Livrons",
+    "subtitle": "Un artisanat numérique défini par trois piliers fondamentaux.",
+    "items": {
+      "01": {
+        "title": "Mises en Page Narratives",
+        "description": "Nous ne créons pas juste des pages; nous structurons des histoires. Chaque défilement est un chapitre guidant l'utilisateur."
+      },
+      "02": {
+        "title": "Mouvement Maîtrisé",
+        "description": "L'animation doit être invisible. Nous utilisons des micro-interactions qui chuchotent le luxe, sans jamais crier pour attirer l'attention."
+      },
+      "03": {
+        "title": "Performance Avant Tout",
+        "description": "Le luxe, c'est ne jamais attendre. Nous visons un score Lighthouse parfait et un LCP inférieur à 2,5s."
+      }
+    }
+  },"Process": {
+    "title": "La Méthode",
+    "subtitle": "De la pensée abstraite à la réalité pixel-perfect.",
+    "steps": {
+      "01": {
+        "title": "Découverte et Stratégie",
+        "desc": "Nous commençons par décoder l'ADN de votre marque. Aucun code n'est écrit avant de comprendre la philosophie."
+      },
+      "02": {
+        "title": "Direction Artistique",
+        "desc": "Définition du langage visuel. Moodboards, typographie et prototypes de mouvement pour donner le ton."
+      },
+      "03": {
+        "title": "Développement",
+        "desc": "Là où la magie opère. Code propre et sémantique utilisant Next.js et WebGL pour donner vie à la vision."
+      },
+      "04": {
+        "title": "Raffinement et Lancement",
+        "desc": "Polissage obsessionnel. Optimisation des performances, contrôles d'accessibilité et déploiement final."
+      }
+    }
+  },"Footer": {
+    "cta": "Vous avez une idée ?",
+    "bigLink": "Parlons-en",
+    "sitemap": "Plan du site",
+    "socials": "Réseaux",
+    "legal": "Légal",
+    "copyright": "© 2025 Atelier Shahrazad. Tous droits réservés."
+  },
+  "Contact": {
+    "title": "Lancer un Projet",
+    "subtitle": "Parlez-nous de votre vision. Nous répondons sous 24h.",
+    "form": {
+      "name": "Quel est votre nom ?",
+      "email": "Votre adresse email",
+      "budget": "Budget estimé",
+      "message": "Parlez-nous du projet",
+      "send": "Envoyer la proposition"
+    },
+    "info": {
+      "email": "Écrivez-nous",
+      "social": "Suivez-nous"
+    }
+  }
+}

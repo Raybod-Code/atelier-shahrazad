@@ -1,0 +1,108 @@
+{
+  "HomePage": {
+    "title": "Where code meets art.",
+    "subtitle": "Immersive web experiences for fashion & art brands.",
+    "cta": "Request a concept"
+  },
+  "Navigation": {
+    "works": "Works",
+    "process": "Process",
+    "pricing": "Pricing",
+    "about": "About",
+    "contact": "Contact"
+  },
+  "Works": {
+    "title": "Selected Works",
+    "subtitle": "Curated selection of digital experiences crafted with precision and obsessive attention to detail.",
+    "sectionLabel": "SELECTED WORKS",
+    "badge": "ATELIER QUALITY",
+    "caseLabel": "CASE STUDY",
+    "view": "VIEW",
+    "keyOutcomes": "KEY OUTCOMES",
+    "technologies": "TECHNOLOGIES",
+    "cta": "REQUEST A CONCEPT",
+    "items": {
+      "01": {
+        "title": "Lumina Fashion",
+        "intent": "Redefining digital runway",
+        "description": "A fully immersive 3D fashion show experience that allows users to interact with garments in real-time. Built for high-performance and visual fidelity.",
+        "outcome1": "40% increase in session duration",
+        "outcome2": "Award-winning motion design"
+      },
+      "02": {
+        "title": "Apex Architecture",
+        "intent": "Minimalist portfolio system",
+        "description": "A structural and grid-based design system that reflects the precision of architecture. Focus on large typography and negative space.",
+        "outcome1": "Perfect Lighthouse score (100)",
+        "outcome2": "Seamless page transitions"
+      },
+      "03": {
+        "title": "Echo Sound",
+        "intent": "Audio-visual synthesis",
+        "description": "An experimental audio-visual platform where sound generates real-time WebGL graphics. A bridge between music and technology.",
+        "outcome1": "Viral social media sharing",
+        "outcome2": "Real-time audio analysis"
+      }
+    }
+  },"Deliverables": {
+    "title": "What We Deliver",
+    "subtitle": "Digital craftsmanship defined by three core pillars.",
+    "items": {
+      "01": {
+        "title": "Narrative Layouts",
+        "description": "We don't just build pages; we structure linear stories. Every scroll is a chapter, guiding the user through your brand's journey."
+      },
+      "02": {
+        "title": "Motion with Restraint",
+        "description": "Animation should feel invisible. We use micro-interactions and physics-based motion that whisper luxury, never shouting for attention."
+      },
+      "03": {
+        "title": "Performance First",
+        "description": "Luxury means never waiting. We engineer for Core Web Vitals, aiming for LCP under 2.5s and a perfect Lighthouse score."
+      }
+    }
+  },"Process": {
+    "title": "The Method",
+    "subtitle": "From abstract thought to pixel-perfect reality.",
+    "steps": {
+      "01": {
+        "title": "Discovery & Strategy",
+        "desc": "We begin by decoding your brand's DNA. No code is written until the core philosophy is understood."
+      },
+      "02": {
+        "title": "Art Direction",
+        "desc": "Defining the visual language. Moodboards, typography selection, and motion prototypes to set the tone."
+      },
+      "03": {
+        "title": "Development",
+        "desc": "Where the magic happens. Clean, semantic code using Next.js and WebGL to bring the vision to life."
+      },
+      "04": {
+        "title": "Refinement & Launch",
+        "desc": "Obsessive polishing. Performance tuning, accessibility checks, and the final deployment."
+      }
+    }
+  },"Footer": {
+    "cta": "Have an idea?",
+    "bigLink": "Let's Talk",
+    "sitemap": "Sitemap",
+    "socials": "Socials",
+    "legal": "Legal",
+    "copyright": "© 2025 Atelier Shahrazad. All rights reserved."
+  },
+  "Contact": {
+    "title": "Start a Project",
+    "subtitle": "Tell us about your vision. We reply within 24 hours.",
+    "form": {
+      "name": "What's your name?",
+      "email": "Your email address",
+      "budget": "Budget range",
+      "message": "Tell us about the project",
+      "send": "Send Proposal"
+    },
+    "info": {
+      "email": "Email us",
+      "social": "Follow us"
+    }
+  }
+}
