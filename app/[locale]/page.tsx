@@ -12,11 +12,7 @@ export default function Home() {
       
       {/* تایم‌لاین پروسه */}
       <Process />
-      
-      {/* Placeholder برای فوتر و تماس */}
-      <section className="h-screen w-full flex items-center justify-center border-t border-white/5">
-        <p className="text-paper/20">Next: Contact & Footer</p>
-      </section>
+
     </main>
   );
 }

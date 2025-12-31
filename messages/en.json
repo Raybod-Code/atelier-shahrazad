@@ -1,15 +1,15 @@
 {
   "HomePage": {
-    "title": "Where code meets art.",
-    "subtitle": "Immersive web experiences for fashion & art brands.",
-    "cta": "Request a concept"
+    "title": "Designing the Invisible",
+    "subtitle": "Atelier Shahrazad crafts immersive web experiences for fashion & art brands—where code meets soul.",
+    "cta": "Start a Project",
+    "scroll": "Scroll to Explore"
   },
   "Navigation": {
-    "works": "Works",
-    "process": "Process",
-    "pricing": "Pricing",
-    "about": "About",
-    "contact": "Contact"
+    "works": "Selected Works",
+    "process": "The Method",
+    "contact": "Contact",
+    "pricing": "Invest"
   },
   "Works": {
     "title": "Selected Works",
@@ -17,36 +17,39 @@
     "sectionLabel": "SELECTED WORKS",
     "badge": "ATELIER QUALITY",
     "caseLabel": "CASE STUDY",
-    "view": "VIEW",
+    "view": "VIEW CASE",
     "keyOutcomes": "KEY OUTCOMES",
     "technologies": "TECHNOLOGIES",
     "cta": "REQUEST A CONCEPT",
+    "close": "Close",
     "items": {
       "01": {
         "title": "Lumina Fashion",
-        "intent": "Redefining digital runway",
-        "description": "A fully immersive 3D fashion show experience that allows users to interact with garments in real-time. Built for high-performance and visual fidelity.",
+        "intent": "Redefining the Digital Runway",
+        "description": "A fully immersive 3D fashion show experience that allows users to interact with garments in real-time. Built for high-performance and visual fidelity, blurring the line between physical and digital.",
         "outcome1": "40% increase in session duration",
-        "outcome2": "Award-winning motion design"
+        "outcome2": "Award-winning motion design (Awwwards)"
       },
       "02": {
         "title": "Apex Architecture",
-        "intent": "Minimalist portfolio system",
-        "description": "A structural and grid-based design system that reflects the precision of architecture. Focus on large typography and negative space.",
-        "outcome1": "Perfect Lighthouse score (100)",
+        "intent": "Minimalist Portfolio System",
+        "description": "A structural and grid-based design system that reflects the precision of modern architecture. Focus on large typography, negative space, and mathematical rhythm.",
+        "outcome1": "Perfect Lighthouse score (100/100)",
         "outcome2": "Seamless page transitions"
       },
       "03": {
         "title": "Echo Sound",
-        "intent": "Audio-visual synthesis",
-        "description": "An experimental audio-visual platform where sound generates real-time WebGL graphics. A bridge between music and technology.",
+        "intent": "Audio-Visual Synthesis",
+        "description": "An experimental audio-visual platform where sound generates real-time WebGL graphics. A bridge between music and technology, reacting to user input instantly.",
         "outcome1": "Viral social media sharing",
         "outcome2": "Real-time audio analysis"
       }
     }
-  },"Deliverables": {
+  },
+  "Deliverables": {
     "title": "What We Deliver",
     "subtitle": "Digital craftsmanship defined by three core pillars.",
+    "sectionLabel": "DIGITAL ATELIER STANDARDS",
     "items": {
       "01": {
         "title": "Narrative Layouts",
@@ -61,7 +64,8 @@
         "description": "Luxury means never waiting. We engineer for Core Web Vitals, aiming for LCP under 2.5s and a perfect Lighthouse score."
       }
     }
-  },"Process": {
+  },
+  "Process": {
     "title": "The Method",
     "subtitle": "From abstract thought to pixel-perfect reality.",
     "steps": {
@@ -79,10 +83,31 @@
       },
       "04": {
         "title": "Refinement & Launch",
-        "desc": "Obsessive polishing. Performance tuning, accessibility checks, and the final deployment."
+        "desc": "Obsessive polishing. Performance tuning, accessibility checks, and the final deployment to the world."
       }
     }
-  },"Footer": {
+  },
+  "Contact": {
+    "title": "Start a Project",
+    "subtitle": "Tell us about your vision. We typically reply within 24 hours.",
+    "form": {
+      "name": "What's your name?",
+      "email": "Your email address",
+      "budget": "Budget range (USD)",
+      "message": "Tell us about the project",
+      "send": "Send Proposal"
+    },
+    "success": {
+      "title": "Received.",
+      "desc": "Your vision has been captured. We are reviewing your inquiry and will respond shortly.",
+      "return": "Return to Atelier"
+    },
+    "info": {
+      "email": "Email us",
+      "social": "Follow us"
+    }
+  },
+  "Footer": {
     "cta": "Have an idea?",
     "bigLink": "Let's Talk",
     "sitemap": "Sitemap",
@@ -90,19 +115,10 @@
     "legal": "Legal",
     "copyright": "© 2025 Atelier Shahrazad. All rights reserved."
   },
-  "Contact": {
-    "title": "Start a Project",
-    "subtitle": "Tell us about your vision. We reply within 24 hours.",
-    "form": {
-      "name": "What's your name?",
-      "email": "Your email address",
-      "budget": "Budget range",
-      "message": "Tell us about the project",
-      "send": "Send Proposal"
-    },
-    "info": {
-      "email": "Email us",
-      "social": "Follow us"
-    }
+  "NotFound": {
+    "code": "404",
+    "title": "Lost in the Void?",
+    "desc": "The page you are looking for does not exist within our atelier.",
+    "return": "Return to Light"
   }
 }

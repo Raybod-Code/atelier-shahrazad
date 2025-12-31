@@ -3,6 +3,11 @@ import { Inter, Playfair_Display } from "next/font/google";
 import Header from '../../components/layout/Header'; 
 import Footer from '../../components/layout/Footer'; // سیمیکالن اضافه شد
 import "../globals.css"; 
+import SmoothScroll from '../../components/ui/SmoothScroll'; // <-- جدید
+import CustomCursor from '../../components/ui/CustomCursor'; 
+import Preloader from '../../components/ui/Preloader';      // <-- جدید
+import SoundManager from '../../components/ui/SoundManager'; // <-- جدید
+import CookieConsent from '../../components/ui/CookieConsent'; // <-- جدید// <-- جدید
 import { NextIntlClientProvider } from 'next-intl';
 import { getMessages } from 'next-intl/server';
 
@@ -40,18 +45,28 @@ export default async function RootLayout({
         // اضافه کردن flex و min-h-screen برای چسبیدن فوتر به پایین
         className={`${sans.variable} ${serif.variable} font-sans bg-charcoal text-paper antialiased selection:bg-gold selection:text-charcoal flex flex-col min-h-screen`}
       >
-        <NextIntlClientProvider messages={messages}>
-          
-          <Header locale={locale} />
-          
-          {/* flex-grow باعث میشه این بخش تا جای ممکن فضا بگیره و فوتر رو بده پایین */}
-          <main className="pt-20 flex-grow relative"> 
-            {children}
-          </main>
-          
-          <Footer />
-          
-        </NextIntlClientProvider>
+       {/* رپر اسکرول نرم */}
+        <SmoothScroll>
+          <NextIntlClientProvider messages={messages}>
+            
+            <div className="noise-overlay" />
+            
+            {/* فیچرهای جدید */}
+            <Preloader />
+            <CustomCursor />
+            <SoundManager />
+            <CookieConsent />
+            
+            <Header locale={locale} />
+            
+            <main className="pt-20 flex-grow relative">
+              {children}
+            </main>
+            
+            <Footer />
+            
+          </NextIntlClientProvider>
+        </SmoothScroll>
       </body>
     </html>
   );

@@ -3,89 +3,84 @@
 import { useTranslations } from 'next-intl';
 import { Link, usePathname, useRouter } from '../../navigation';
 import { useState, useEffect } from 'react';
-import { cn } from '../../lib/utils'; // اگر این فایل رو نداری، نگران نباش (پایین میسازیمش)
 
 export default function Header({ locale }: { locale: string }) {
   const t = useTranslations('Navigation');
   const tHome = useTranslations('HomePage');
   
-  // برای تشخیص اسکرول
   const [isScrolled, setIsScrolled] = useState(false);
-  
-  // برای تغییر زبان
   const pathname = usePathname();
   const router = useRouter();
 
-  // لاجیک اسکرول
+  // لاجیک اسکرول ساده و بدون باگ
   useEffect(() => {
     const handleScroll = () => {
-      setIsScrolled(window.scrollY > 50);
+      setIsScrolled(window.scrollY > 20);
     };
     window.addEventListener('scroll', handleScroll);
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
-  // لاجیک تغییر زبان
   const switchLocale = () => {
     const nextLocale = locale === 'en' ? 'fr' : 'en';
     router.replace(pathname, { locale: nextLocale });
   };
 
   return (
+    // Z-Index بالا (100) برای اینکه حتماً روی همه چی باشه
     <header
-      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ease-in-out border-b border-transparent ${
+      className={`fixed top-0 left-0 right-0 z-[100] transition-all duration-300 ${
         isScrolled 
-          ? 'bg-charcoal/80 backdrop-blur-md py-4 border-white/5' 
-          : 'bg-transparent py-6'
+          ? 'bg-[#050505]/90 backdrop-blur-md py-4 border-b border-white/5' 
+          : 'bg-transparent py-8'
       }`}
     >
       <div className="container mx-auto px-6 flex items-center justify-between">
         
         {/* Logo */}
-        <Link href="/" className="font-serif text-2xl text-paper tracking-tight hover:opacity-80 transition-opacity">
-          Atelier <span className="text-gold italic">Shahrazad</span>
+        <Link href="/" className="relative z-[101] group">
+           <span className="font-serif text-2xl text-[#E0E0E0] tracking-tight group-hover:text-[#C7A56A] transition-colors">
+             Atelier <span className="text-[#C7A56A] italic">Shahrazad</span>
+           </span>
         </Link>
 
         {/* Desktop Nav */}
-    {/* Desktop Nav */}
         <nav className="hidden md:flex items-center gap-8">
           {[
-            // لینک‌های لنگری (Anchor) برای اسکرول به بخش‌ها
             { key: 'works', href: '/#works' },
             { key: 'process', href: '/#process' },
-            // صفحه جداگانه برای تماس
             { key: 'contact', href: '/contact' } 
           ].map((item) => (
             <Link 
               key={item.key} 
               href={item.href}
-              className="text-sm text-paper/70 hover:text-gold transition-colors font-sans tracking-wide"
+              className="text-xs font-sans font-medium tracking-widest text-[#E0E0E0]/70 hover:text-[#C7A56A] transition-colors uppercase"
             >
               {t(item.key)}
             </Link>
           ))}
         </nav>
 
-        {/* Right Actions */}
+        {/* Actions */}
         <div className="flex items-center gap-6">
-          {/* Language Switcher */}
           <button 
             onClick={switchLocale}
-            className="text-xs font-medium tracking-widest text-paper/60 hover:text-gold transition-colors uppercase"
+            className="text-[10px] font-mono font-bold tracking-widest text-[#E0E0E0]/50 hover:text-[#C7A56A] transition-colors uppercase cursor-pointer"
           >
             {locale === 'en' ? 'FR' : 'EN'}
           </button>
 
-          {/* CTA Button */}
           <Link 
             href="/contact" 
-            className={`hidden md:inline-flex items-center justify-center px-5 py-2 rounded-full text-xs font-medium transition-all duration-300 ${
+            className={`hidden md:inline-flex items-center justify-center px-6 py-2 rounded-full transition-all duration-300 border ${
                 isScrolled 
-                ? 'bg-gold text-charcoal hover:bg-paper' 
-                : 'border border-gold/30 text-gold hover:border-gold hover:text-paper'
+                ? 'bg-[#C7A56A] text-[#050505] border-[#C7A56A] hover:bg-white' 
+                : 'bg-transparent text-[#C7A56A] border-[#C7A56A]/30 hover:border-[#C7A56A]'
             }`}
           >
-            {tHome('cta')}
+            <span className="text-[10px] font-bold tracking-[0.2em] uppercase">
+                {tHome('cta')}
+            </span>
           </Link>
         </div>
       </div>

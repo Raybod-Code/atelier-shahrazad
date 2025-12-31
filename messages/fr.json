@@ -1,15 +1,15 @@
 {
   "HomePage": {
-    "title": "Là où le code rencontre l’art.",
-    "subtitle": "Expériences web immersives pour la mode et l’art.",
-    "cta": "Demander un concept"
+    "title": "Façonner l'Invisible",
+    "subtitle": "Atelier Shahrazad crée des expériences web immersives pour les marques de mode et d'art — là où le code rencontre l'âme.",
+    "cta": "Lancer un Projet",
+    "scroll": "Défiler pour Explorer"
   },
   "Navigation": {
-    "works": "Travaux",
-    "process": "Processus",
-    "pricing": "Tarifs",
-    "about": "À propos",
-    "contact": "Contact"
+    "works": "Sélection",
+    "process": "La Méthode",
+    "contact": "Contact",
+    "pricing": "Investir"
   },
   "Works": {
     "title": "Travaux Sélectionnés",
@@ -17,36 +17,39 @@
     "sectionLabel": "TRAVAUX SÉLECTIONNÉS",
     "badge": "QUALITÉ ATELIER",
     "caseLabel": "ÉTUDE DE CAS",
-    "view": "VOIR",
+    "view": "VOIR LE CAS",
     "keyOutcomes": "RÉSULTATS CLÉS",
     "technologies": "TECHNOLOGIES",
     "cta": "DEMANDER UN CONCEPT",
+    "close": "Fermer",
     "items": {
       "01": {
         "title": "Lumina Mode",
-        "intent": "Redéfinir le défilé numérique",
-        "description": "Une expérience de défilé de mode 3D entièrement immersive. Conçu pour la haute performance et la fidélité visuelle.",
+        "intent": "Redéfinir le Défilé Numérique",
+        "description": "Une expérience de défilé de mode 3D entièrement immersive permettant aux utilisateurs d'interagir avec les vêtements en temps réel. Conçu pour la haute performance.",
         "outcome1": "Augmentation de 40% de la durée de session",
-        "outcome2": "Design de mouvement primé"
+        "outcome2": "Design de mouvement primé (Awwwards)"
       },
       "02": {
         "title": "Apex Architecture",
-        "intent": "Système de portfolio minimaliste",
-        "description": "Un système de conception structurel basé sur une grille. Accent sur la grande typographie et l'espace négatif.",
-        "outcome1": "Score Lighthouse parfait (100)",
+        "intent": "Système de Portfolio Minimaliste",
+        "description": "Un système de conception structurel basé sur une grille qui reflète la précision de l'architecture moderne. Accent sur la grande typographie et l'espace négatif.",
+        "outcome1": "Score Lighthouse parfait (100/100)",
         "outcome2": "Transitions de page fluides"
       },
       "03": {
         "title": "Echo Son",
-        "intent": "Synthèse audiovisuelle",
-        "description": "Une plateforme audiovisuelle expérimentale où le son génère des graphiques WebGL en temps réel.",
+        "intent": "Synthèse Audiovisuelle",
+        "description": "Une plateforme audiovisuelle expérimentale où le son génère des graphiques WebGL en temps réel. Un pont entre musique et technologie.",
         "outcome1": "Partage viral sur les réseaux sociaux",
         "outcome2": "Analyse audio en temps réel"
       }
     }
-  },"Deliverables": {
+  },
+  "Deliverables": {
     "title": "Ce Que Nous Livrons",
     "subtitle": "Un artisanat numérique défini par trois piliers fondamentaux.",
+    "sectionLabel": "STANDARDS DE L'ATELIER",
     "items": {
       "01": {
         "title": "Mises en Page Narratives",
@@ -61,7 +64,8 @@
         "description": "Le luxe, c'est ne jamais attendre. Nous visons un score Lighthouse parfait et un LCP inférieur à 2,5s."
       }
     }
-  },"Process": {
+  },
+  "Process": {
     "title": "La Méthode",
     "subtitle": "De la pensée abstraite à la réalité pixel-perfect.",
     "steps": {
@@ -82,7 +86,28 @@
         "desc": "Polissage obsessionnel. Optimisation des performances, contrôles d'accessibilité et déploiement final."
       }
     }
-  },"Footer": {
+  },
+  "Contact": {
+    "title": "Lancer un Projet",
+    "subtitle": "Parlez-nous de votre vision. Nous répondons généralement sous 24h.",
+    "form": {
+      "name": "Quel est votre nom ?",
+      "email": "Votre adresse email",
+      "budget": "Budget estimé (EUR)",
+      "message": "Parlez-nous du projet",
+      "send": "Envoyer la proposition"
+    },
+    "success": {
+      "title": "Reçu.",
+      "desc": "Votre vision a été capturée. Nous examinons votre demande et vous répondrons sous peu.",
+      "return": "Retour à l'Atelier"
+    },
+    "info": {
+      "email": "Écrivez-nous",
+      "social": "Suivez-nous"
+    }
+  },
+  "Footer": {
     "cta": "Vous avez une idée ?",
     "bigLink": "Parlons-en",
     "sitemap": "Plan du site",
@@ -90,19 +115,10 @@
     "legal": "Légal",
     "copyright": "© 2025 Atelier Shahrazad. Tous droits réservés."
   },
-  "Contact": {
-    "title": "Lancer un Projet",
-    "subtitle": "Parlez-nous de votre vision. Nous répondons sous 24h.",
-    "form": {
-      "name": "Quel est votre nom ?",
-      "email": "Votre adresse email",
-      "budget": "Budget estimé",
-      "message": "Parlez-nous du projet",
-      "send": "Envoyer la proposition"
-    },
-    "info": {
-      "email": "Écrivez-nous",
-      "social": "Suivez-nous"
-    }
+  "NotFound": {
+    "code": "404",
+    "title": "Perdu dans le Vide ?",
+    "desc": "La page que vous cherchez n'existe pas au sein de notre atelier.",
+    "return": "Retour vers la Lumière"
   }
 }
