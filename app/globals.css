@@ -3,49 +3,24 @@
 @tailwind utilities;
 
 :root {
-  --c-bg: #0B0B0C;
-  --c-paper: #F5F1EA;
-  --c-gold: #C7A56A;
+  --background: #050505;
+  --foreground: #E0E0E0;
 }
 
-body {
-  background-color: var(--c-bg);
-  color: var(--c-paper);
-  /* جلوگیری از پرش اسکرول و رفتار نرم */
-  overflow-x: hidden;
-  -webkit-font-smoothing: antialiased;
-}
-
-/* استایل اسکرول بار (لوکس و مینیمال) */
+/* حذف اسکرول بار زشت مرورگر */
 ::-webkit-scrollbar {
-  width: 6px;
-}
-::-webkit-scrollbar-track {
-  background: var(--c-bg);
-}
-::-webkit-scrollbar-thumb {
-  background: #333;
-  border-radius: 4px;
-}
-::-webkit-scrollbar-thumb:hover {
-  background: var(--c-gold);
+  width: 0px;
+  background: transparent; 
 }
 
-::selection {
-  background: var(--c-gold);
-  color: var(--c-bg);
-}
-/* 1. مخفی کردن موس پیش‌فرض فقط در دسکتاپ */
-@media (min-width: 1024px) {
+@layer base {
   body {
-    cursor: none;
-  }
-  a, button, input, textarea {
-    cursor: none !important;
+    @apply bg-[#050505] text-[#E0E0E0];
+    /* نکته کلیدی: بادی رنگ داره، ولی بقیه چیزا باید شفاف باشن */
   }
 }
 
-/* 2. لایه نویز سینمایی */
+/* نویز سینمایی */
 .noise-overlay {
   position: fixed;
   top: 0;
@@ -53,7 +28,12 @@ body {
   width: 100%;
   height: 100%;
   pointer-events: none;
-  z-index: 50; /* باید روی همه چیز باشه ولی زیر مودال‌ها */
-  opacity: 0.04; /* مقدار شفافیت نویز */
+  z-index: 50;
+  opacity: 0.04;
   background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
+}
+
+/* کلاس‌های کمکی برای شفاف سازی سکشن‌ها */
+.section-transparent {
+  background-color: transparent !important; /* زورکی شفافش کن */
 }

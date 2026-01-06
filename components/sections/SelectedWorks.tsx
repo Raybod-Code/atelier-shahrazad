@@ -1,40 +1,45 @@
-'use client';
+"use client";
 
-import { useState } from 'react';
-import { useTranslations } from 'next-intl';
-import { motion, AnimatePresence } from 'framer-motion';
-import { X, ArrowUpRight, Sparkles } from 'lucide-react';
+import { useState } from "react";
+import { useTranslations } from "next-intl";
+import { motion, AnimatePresence } from "framer-motion";
+import { X, ArrowUpRight, Sparkles } from "lucide-react";
 
 const PROJECTS = [
   {
-    id: '01',
-    image: 'https://images.unsplash.com/photo-1539109136881-3be0616acf4b?q=80&w=1200&auto=format&fit=crop',
-    tags: ['Next.js', 'WebGL', 'Fashion'],
+    id: "01",
+    image:
+      "https://images.unsplash.com/photo-1539109136881-3be0616acf4b?q=80&w=1200&auto=format&fit=crop",
+    tags: ["Next.js", "WebGL", "Fashion"],
   },
   {
-    id: '02',
-    image: 'https://images.unsplash.com/photo-1486718448742-163732cd1544?q=80&w=1200&auto=format&fit=crop',
-    tags: ['Design System', 'Architecture', 'Clean'],
+    id: "02",
+    image:
+      "https://images.unsplash.com/photo-1486718448742-163732cd1544?q=80&w=1200&auto=format&fit=crop",
+    tags: ["Design System", "Architecture", "Clean"],
   },
   {
-    id: '03',
-    image: 'https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?q=80&w=1200&auto=format&fit=crop',
-    tags: ['Audio API', 'Interactive', 'Art'],
+    id: "03",
+    image:
+      "https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?q=80&w=1200&auto=format&fit=crop",
+    tags: ["Audio API", "Interactive", "Art"],
   },
 ];
 
 const easingLux = [0.22, 1, 0.36, 1] as const;
 
 export default function SelectedWorks() {
-  const t = useTranslations('Works');
+  const t = useTranslations("Works");
   const [selectedId, setSelectedId] = useState<string | null>(null);
 
   const handleClose = () => setSelectedId(null);
   const active = selectedId ? PROJECTS.find((p) => p.id === selectedId)! : null;
 
   return (
-    <section id="works" className="relative isolate overflow-hidden bg-charcoal py-32 md:py-40">
-      
+    <section
+      id="works"
+      className="relative isolate overflow-hidden bg-transparent py-32 md:py-40"
+    >
       {/* Cinematic Background */}
       <div className="pointer-events-none absolute inset-0">
         <div className="absolute left-[15%] top-[20%] h-[600px] w-[600px] rounded-full bg-gold/[0.15] blur-[120px]" />
@@ -42,7 +47,10 @@ export default function SelectedWorks() {
         <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,transparent_0%,rgba(0,0,0,0.4)_100%)]" />
         <div
           className="absolute inset-0 opacity-[0.08] mix-blend-overlay"
-          style={{ backgroundImage: 'url("https://grainy-gradients.vercel.app/noise.svg")' }}
+          style={{
+            backgroundImage:
+              'url("https://grainy-gradients.vercel.app/noise.svg")',
+          }}
         />
       </div>
 
@@ -51,7 +59,6 @@ export default function SelectedWorks() {
         <div className="mb-24 md:mb-32">
           <div className="mb-12 flex flex-col gap-12 border-b border-gold/20 pb-12 md:flex-row md:items-end md:justify-between">
             <div className="max-w-3xl space-y-6">
-              
               {/* Overline */}
               <div className="flex items-center gap-4">
                 <motion.div
@@ -62,7 +69,7 @@ export default function SelectedWorks() {
                   className="h-[1px] w-16 origin-left bg-gradient-to-r from-gold via-gold/60 to-transparent"
                 />
                 <span className="font-mono text-[9px] tracking-[0.35em] text-gold/70 uppercase">
-                  {t('sectionLabel')}
+                  {t("sectionLabel")}
                 </span>
               </div>
 
@@ -74,7 +81,7 @@ export default function SelectedWorks() {
                 transition={{ duration: 1, ease: easingLux }}
                 className="font-serif text-6xl leading-[0.95] tracking-[-0.02em] text-paper md:text-8xl"
               >
-                {t('title')}
+                {t("title")}
               </motion.h2>
             </div>
 
@@ -87,11 +94,13 @@ export default function SelectedWorks() {
               className="max-w-xs space-y-3 border-l border-gold/30 pl-6"
             >
               <p className="font-sans text-sm leading-relaxed tracking-wide text-paper/50">
-                {t('subtitle')}
+                {t("subtitle")}
               </p>
               <div className="flex items-center gap-2 text-gold/60">
                 <Sparkles className="h-3 w-3" />
-                <span className="font-mono text-[10px] tracking-widest uppercase">{t('badge')}</span>
+                <span className="font-mono text-[10px] tracking-widest uppercase">
+                  {t("badge")}
+                </span>
               </div>
             </motion.div>
           </div>
@@ -113,7 +122,12 @@ export default function SelectedWorks() {
 
       <AnimatePresence mode="wait">
         {selectedId && active ? (
-          <ProjectModal id={selectedId} onClose={handleClose} t={t} project={active} />
+          <ProjectModal
+            id={selectedId}
+            onClose={handleClose}
+            t={t}
+            project={active}
+          />
         ) : null}
       </AnimatePresence>
     </section>
@@ -126,7 +140,7 @@ function ProjectCard({ project, index, onClick, t }: any) {
       layoutId={`card-${project.id}`}
       initial={{ opacity: 0, y: 60 }}
       whileInView={{ opacity: 1, y: 0 }}
-      viewport={{ once: true, margin: '-12%' }}
+      viewport={{ once: true, margin: "-12%" }}
       transition={{ delay: index * 0.18, duration: 1.1, ease: easingLux }}
       className="group relative cursor-pointer"
       onClick={onClick}
@@ -145,7 +159,6 @@ function ProjectCard({ project, index, onClick, t }: any) {
 
         {/* Gold frame */}
         <div className="relative overflow-hidden rounded-2xl bg-gradient-to-br from-gold/30 via-gold/10 to-transparent p-[1px] transition-all duration-700 group-hover:from-gold/50 group-hover:via-gold/20">
-          
           <div className="relative overflow-hidden rounded-2xl bg-[#0A0A0B]">
             {/* Image */}
             <motion.div
@@ -162,31 +175,41 @@ function ProjectCard({ project, index, onClick, t }: any) {
                   group-hover:scale-[1.08] group-hover:brightness-100 group-hover:contrast-100 group-hover:grayscale-0
                 "
               />
-              
+
               {/* Overlays */}
               <div className="pointer-events-none absolute inset-0 bg-gradient-to-b from-black/10 via-transparent to-black/60" />
               <div className="absolute inset-0 bg-gradient-to-br from-gold/0 via-gold/20 to-gold/0 opacity-0 mix-blend-overlay transition-opacity duration-700 group-hover:opacity-100" />
-              
+
               {/* Light Sweep */}
               <motion.div
                 className="absolute inset-0 translate-x-[-100%] bg-gradient-to-r from-transparent via-white/10 to-transparent opacity-0 group-hover:opacity-100"
-                animate={{ translateX: ['100%', '100%'] }}
-                transition={{ duration: 1.5, repeat: Infinity, repeatDelay: 3, ease: 'easeInOut' }}
+                animate={{ translateX: ["100%", "100%"] }}
+                transition={{
+                  duration: 1.5,
+                  repeat: Infinity,
+                  repeatDelay: 3,
+                  ease: "easeInOut",
+                }}
               />
 
               {/* Noise */}
               <div
                 className="absolute inset-0 opacity-[0.15] mix-blend-overlay"
-                style={{ backgroundImage: 'url("https://grainy-gradients.vercel.app/noise.svg")' }}
+                style={{
+                  backgroundImage:
+                    'url("https://grainy-gradients.vercel.app/noise.svg")',
+                }}
               />
 
               {/* Index badge */}
               <div className="absolute left-5 top-5">
                 <div className="flex items-center gap-2 rounded-full border border-gold/20 bg-black/40 px-3 py-1.5 backdrop-blur-sm">
                   <span className="font-mono text-[9px] tracking-[0.3em] text-gold/80 uppercase">
-                    {t('caseLabel')}
+                    {t("caseLabel")}
                   </span>
-                  <span className="font-serif text-sm text-paper">{project.id}</span>
+                  <span className="font-serif text-sm text-paper">
+                    {project.id}
+                  </span>
                 </div>
               </div>
 
@@ -244,7 +267,6 @@ function ProjectModal({ id, onClose, t, project }: any) {
         className="relative z-10 w-full max-w-7xl overflow-hidden rounded-3xl bg-gradient-to-br from-gold/25 via-gold/10 to-transparent p-[1.5px] shadow-2xl"
       >
         <div className="relative flex h-[90vh] flex-col overflow-hidden rounded-3xl bg-[#0A0A0B] md:flex-row">
-          
           {/* Close Button */}
           <motion.button
             initial={{ opacity: 0, scale: 0.8 }}
@@ -261,10 +283,20 @@ function ProjectModal({ id, onClose, t, project }: any) {
             layoutId={`image-${id}`}
             className="relative h-[45%] w-full overflow-hidden md:h-full md:w-[55%]"
           >
-            <img src={project.image} alt="Project" className="h-full w-full object-cover" />
+            <img
+              src={project.image}
+              alt="Project"
+              className="h-full w-full object-cover"
+            />
             <div className="absolute inset-0 bg-gradient-to-t from-[#0A0A0B] via-black/30 to-transparent" />
             <div className="absolute inset-0 bg-gradient-to-r from-[#0A0A0B]/80 via-transparent to-transparent md:via-[#0A0A0B]/20" />
-            <div className="absolute inset-0 opacity-[0.12] mix-blend-overlay" style={{ backgroundImage: 'url("https://grainy-gradients.vercel.app/noise.svg")' }} />
+            <div
+              className="absolute inset-0 opacity-[0.12] mix-blend-overlay"
+              style={{
+                backgroundImage:
+                  'url("https://grainy-gradients.vercel.app/noise.svg")',
+              }}
+            />
 
             {/* Floating Label */}
             <motion.div
@@ -276,7 +308,7 @@ function ProjectModal({ id, onClose, t, project }: any) {
               <div className="flex items-center gap-2">
                 <div className="h-[1px] w-8 bg-gold" />
                 <span className="font-mono text-[9px] tracking-[0.3em] text-gold/80 uppercase">
-                  {t('caseLabel')} {id}
+                  {t("caseLabel")} {id}
                 </span>
               </div>
               <h2 className="font-serif text-5xl leading-none tracking-tight text-paper md:text-6xl">
@@ -297,7 +329,6 @@ function ProjectModal({ id, onClose, t, project }: any) {
             className="w-full overflow-y-auto p-8 md:w-[45%] md:p-12 lg:p-16"
           >
             <div className="space-y-10">
-              
               {/* Description */}
               <div className="space-y-6">
                 <div className="h-[1px] w-full bg-gradient-to-r from-gold/40 via-gold/10 to-transparent" />
@@ -309,7 +340,7 @@ function ProjectModal({ id, onClose, t, project }: any) {
               {/* Outcomes */}
               <div className="space-y-5">
                 <h4 className="font-mono text-[10px] tracking-[0.3em] text-gold/70 uppercase">
-                  {t('keyOutcomes')}
+                  {t("keyOutcomes")}
                 </h4>
                 <OutcomeItem text={t(`items.${id}.outcome1`)} delay={0.5} />
                 <OutcomeItem text={t(`items.${id}.outcome2`)} delay={0.6} />
@@ -318,7 +349,7 @@ function ProjectModal({ id, onClose, t, project }: any) {
               {/* Technologies */}
               <div className="space-y-4 border-t border-white/5 pt-8">
                 <h4 className="font-mono text-[10px] tracking-[0.3em] text-gold/70 uppercase">
-                  {t('technologies')}
+                  {t("technologies")}
                 </h4>
                 <div className="flex flex-wrap gap-2">
                   {project.tags.map((tag: string, i: number) => (
@@ -344,7 +375,7 @@ function ProjectModal({ id, onClose, t, project }: any) {
               >
                 <div className="h-[1px] flex-1 bg-gradient-to-r from-gold/60 to-transparent" />
                 <span className="font-mono text-[9px] tracking-[0.3em] text-paper/40 uppercase">
-                  {t('cta')}
+                  {t("cta")}
                 </span>
                 <ArrowUpRight className="h-3 w-3 text-gold/60" />
               </motion.div>
