@@ -1,0 +1,57 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    /* Colors - Luxury Palette */
+    --color-paper: #F5F5DC;
+    --color-gold: #C7A56A;
+    --color-charcoal: #2D2D2D;
+    --color-bg: #050505;
+    
+    /* Typography Scale */
+    --font-sans: var(--font-sans-family);
+    --font-serif: var(--font-serif-family);
+    --font-size-xs: clamp(0.75rem, 1vw, 0.875rem);
+    --font-size-sm: clamp(0.875rem, 1.2vw, 1rem);
+    --font-size-base: clamp(1rem, 1.5vw, 1.125rem);
+    --font-size-lg: clamp(1.125rem, 2vw, 1.5rem);
+    --font-size-xl: clamp(1.5rem, 3vw, 2rem);
+    --font-size-hero: clamp(3rem, 8vw, 8rem);
+    
+    /* Spacing */
+    --space-section: clamp(4rem, 10vh, 12rem);
+    --space-component: clamp(2rem, 5vh, 4rem);
+    
+    /* Easing (Luxury Curves) */
+    --ease-luxury: cubic-bezier(0.4, 0, 0.2, 1);
+    --ease-elastic: cubic-bezier(0.68, -0.55, 0.265, 1.55);
+    --ease-smooth: cubic-bezier(0.25, 0.1, 0.25, 1);
+    
+    /* Z-index Scale */
+    --z-canvas: 0;
+    --z-noise: 1;
+    --z-content: 10;
+    --z-header: 50;
+    --z-modal: 100;
+  }
+  
+  /* Dark Mode Override (optional for future) */
+  [data-theme="dark"] {
+    --color-paper: #1a1a1a;
+    --color-gold: #d4af37;
+  }
+}
+
+@layer utilities {
+  .text-fluid-hero {
+    font-size: var(--font-size-hero);
+    line-height: 0.9;
+    letter-spacing: -0.02em;
+  }
+  
+  .section-padding {
+    padding-block: var(--space-section);
+  }
+}

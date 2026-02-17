@@ -2,7 +2,7 @@
 
 import { useTranslations } from "next-intl";
 import { motion } from "framer-motion";
-import { Link } from "../../navigation";
+import { Link } from "@/navigation";
 // FluidBackground حذف شد ❌
 
 export default function Hero() {
@@ -11,7 +11,6 @@ export default function Hero() {
   return (
     // تغییر مهم: bg-transparent اضافه شد تا نخ طلایی پشتش دیده بشه
     <section className="relative h-screen w-full flex items-center justify-center overflow-hidden bg-transparent">
-      
       {/* لایه FluidBackground حذف شد چون الان Scene سراسری داریم */}
 
       {/* Content Layer */}

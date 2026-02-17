@@ -2,20 +2,23 @@ import type { Config } from "tailwindcss";
 
 const config: Config = {
   content: [
-    "./pages/**/*.{js,ts,jsx,tsx,mdx}",
-    "./components/**/*.{js,ts,jsx,tsx,mdx}",
-    "./app/**/*.{js,ts,jsx,tsx,mdx}",
+    "./src/app/**/*.{js,ts,jsx,tsx,mdx}",
+    "./src/components/**/*.{js,ts,jsx,tsx,mdx}",
   ],
   theme: {
     extend: {
       colors: {
-        paper: "#F5F5DC",        // کرم روشن
-        gold: "#C7A56A",         // طلایی
-        charcoal: "#2D2D2D",     // تیره
+        paper: "var(--color-paper)",
+        gold: "var(--color-gold)",
+        charcoal: "var(--color-charcoal)",
       },
       fontFamily: {
         sans: ["var(--font-sans)"],
         serif: ["var(--font-serif)"],
+      },
+      transitionTimingFunction: {
+        'luxury': 'var(--ease-luxury)',
+        'elastic': 'var(--ease-elastic)',
       },
     },
   },
