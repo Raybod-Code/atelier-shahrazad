@@ -1,14 +1,22 @@
 import createMiddleware from 'next-intl/middleware';
- 
-export default createMiddleware({
-  // لیست زبان‌های ما
+import { NextRequest } from 'next/server';
+
+const handleI18nRouting = createMiddleware({
   locales: ['en', 'fr'],
- 
-  // زبان پیش‌فرض اگر کاربر زبانی نداشت
   defaultLocale: 'en'
 });
- 
+
+export default function middleware(request: NextRequest) {
+  const { pathname } = request.nextUrl;
+  
+  // 🔍 این در TERMINAL (نه browser) چاپ می‌شود
+  console.log('🔵 Middleware:', pathname);
+  
+  return handleI18nRouting(request);
+}
+
 export const config = {
-  // این خط میگه میدل‌ور روی چه آدرس‌هایی فعال باشه
-  matcher: ['/', '/(fr|en)/:path*']
+  matcher: [
+    '/((?!api|_next|_vercel|.*\\..*).*)'
+  ]
 };
