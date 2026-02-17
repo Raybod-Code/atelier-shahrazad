@@ -1,20 +1,20 @@
 {
   "HomePage": {
-    "title": "Designing the Invisible",
+    "title": "Weaving Light into Logic",
     "subtitle": "Atelier Shahrazad crafts immersive web experiences for fashion & art brands—where code meets soul.",
     "cta": "Start a Project",
     "scroll": "Scroll to Explore"
   },
   "Navigation": {
-    "works": "Selected Works",
-    "process": "The Method",
+    "works": "The Artifacts",
+    "process": "The Alchemy",
     "contact": "Contact",
     "pricing": "Invest"
   },
   "Works": {
-    "title": "Selected Works",
+    "title": "The Artifacts",
     "subtitle": "Curated selection of digital experiences crafted with precision and obsessive attention to detail.",
-    "sectionLabel": "SELECTED WORKS",
+    "sectionLabel": "THE ARTIFACTS",
     "badge": "ATELIER QUALITY",
     "caseLabel": "CASE STUDY",
     "view": "VIEW CASE",
@@ -66,7 +66,7 @@
     }
   },
   "Process": {
-    "title": "The Method",
+    "title": "The Alchemy",
     "subtitle": "From abstract thought to pixel-perfect reality.",
     "steps": {
       "01": {

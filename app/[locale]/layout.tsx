@@ -8,10 +8,11 @@ import CustomCursor from '../../components/ui/CustomCursor';
 import Preloader from '../../components/ui/Preloader';
 import SoundManager from '../../components/ui/SoundManager';
 import CookieConsent from '../../components/ui/CookieConsent';
-// 👇 ایمپورت موتور جدید
-import Scene from '../../components/canvas/Scene'; 
 import { NextIntlClientProvider } from 'next-intl';
 import { getMessages } from 'next-intl/server';
+
+// ایمپورت رپر جدید
+import SceneWrapper from '../../components/canvas/SceneWrapper'; 
 
 const sans = Inter({ subsets: ["latin"], variable: "--font-sans", display: "swap" });
 const serif = Playfair_Display({ subsets: ["latin"], variable: "--font-serif", display: "swap" });
@@ -37,18 +38,28 @@ export default async function RootLayout({
 
   return (
     <html lang={locale} className="scroll-smooth">
-      <body className={`${sans.variable} ${serif.variable} font-sans bg-transparent text-paper antialiased selection:bg-gold selection:text-charcoal flex flex-col min-h-screen`}>
-    <SmoothScroll>
+      <body 
+        className={`${sans.variable} ${serif.variable} font-sans text-paper antialiased selection:bg-gold selection:text-charcoal flex flex-col min-h-screen bg-[#050505]`}
+      >
+        <SmoothScroll>
           <NextIntlClientProvider messages={messages}>
             
-            <Scene /> {/* موتور سه‌بعدی */}
-            <div className="noise-overlay" />
-            <Preloader />
-            <CustomCursor />
-            <SoundManager />
-            <Header locale={locale} />
+            {/* لایه ۰: موتور سه‌بعدی (همیشه کف) */}
+            <SceneWrapper />
             
-            {/* فضای اسکرول بسیار بلند */}
+            {/* لایه ۱: نویز و افکت‌ها */}
+            <div className="noise-overlay" style={{ zIndex: 1 }} />
+            
+            {/* لایه ۱۰: المان‌های UI ثابت */}
+            <div style={{ position: 'relative', zIndex: 50 }}>
+                <Preloader />
+                <CustomCursor />
+                <SoundManager />
+                <CookieConsent />
+                <Header locale={locale} />
+            </div>
+            
+            {/* لایه ۵: محتوای اصلی */}
             <div className="relative z-10 w-full min-h-[500vh]">
                 <main className="w-full">
                   {children}

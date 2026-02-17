@@ -1,20 +1,20 @@
 {
   "HomePage": {
-    "title": "Façonner l'Invisible",
-    "subtitle": "Atelier Shahrazad crée des expériences web immersives pour les marques de mode et d'art — là où le code rencontre l'âme.",
-    "cta": "Lancer un Projet",
+    "title": "Tisser la Lumière dans la Logique",
+    "subtitle": "Atelier Shahrazad crée des expériences web immersives pour les marques de mode et d'art—où le code rencontre l'âme.",
+    "cta": "Démarrer un Projet",
     "scroll": "Défiler pour Explorer"
   },
   "Navigation": {
-    "works": "Sélection",
-    "process": "La Méthode",
+    "works": "Les Artefacts",
+    "process": "L'Alchimie",
     "contact": "Contact",
     "pricing": "Investir"
   },
   "Works": {
-    "title": "Travaux Sélectionnés",
-    "subtitle": "Une sélection soignée d'expériences numériques conçues avec précision et une attention obsessionnelle aux détails.",
-    "sectionLabel": "TRAVAUX SÉLECTIONNÉS",
+    "title": "Les Artefacts",
+    "subtitle": "Sélection soignée d'expériences numériques créées avec précision et attention obsessionnelle aux détails.",
+    "sectionLabel": "LES ARTEFACTS",
     "badge": "QUALITÉ ATELIER",
     "caseLabel": "ÉTUDE DE CAS",
     "view": "VOIR LE CAS",
@@ -24,101 +24,101 @@
     "close": "Fermer",
     "items": {
       "01": {
-        "title": "Lumina Mode",
+        "title": "Lumina Fashion",
         "intent": "Redéfinir le Défilé Numérique",
-        "description": "Une expérience de défilé de mode 3D entièrement immersive permettant aux utilisateurs d'interagir avec les vêtements en temps réel. Conçu pour la haute performance.",
+        "description": "Une expérience de défilé de mode 3D entièrement immersive qui permet aux utilisateurs d'interagir avec les vêtements en temps réel. Conçu pour la haute performance et la fidélité visuelle, brouillant la ligne entre physique et numérique.",
         "outcome1": "Augmentation de 40% de la durée de session",
         "outcome2": "Design de mouvement primé (Awwwards)"
       },
       "02": {
         "title": "Apex Architecture",
         "intent": "Système de Portfolio Minimaliste",
-        "description": "Un système de conception structurel basé sur une grille qui reflète la précision de l'architecture moderne. Accent sur la grande typographie et l'espace négatif.",
+        "description": "Un système de design structurel et basé sur une grille qui reflète la précision de l'architecture moderne. Accent mis sur la grande typographie, l'espace négatif et le rythme mathématique.",
         "outcome1": "Score Lighthouse parfait (100/100)",
         "outcome2": "Transitions de page fluides"
       },
       "03": {
-        "title": "Echo Son",
-        "intent": "Synthèse Audiovisuelle",
-        "description": "Une plateforme audiovisuelle expérimentale où le son génère des graphiques WebGL en temps réel. Un pont entre musique et technologie.",
-        "outcome1": "Partage viral sur les réseaux sociaux",
+        "title": "Echo Sound",
+        "intent": "Synthèse Audio-Visuelle",
+        "description": "Une plateforme audio-visuelle expérimentale où le son génère des graphiques WebGL en temps réel. Un pont entre la musique et la technologie, réagissant instantanément aux entrées de l'utilisateur.",
+        "outcome1": "Partage viral sur les médias sociaux",
         "outcome2": "Analyse audio en temps réel"
       }
     }
   },
   "Deliverables": {
     "title": "Ce Que Nous Livrons",
-    "subtitle": "Un artisanat numérique défini par trois piliers fondamentaux.",
-    "sectionLabel": "STANDARDS DE L'ATELIER",
+    "subtitle": "Artisanat numérique défini par trois piliers fondamentaux.",
+    "sectionLabel": "STANDARDS DE L'ATELIER NUMÉRIQUE",
     "items": {
       "01": {
         "title": "Mises en Page Narratives",
-        "description": "Nous ne créons pas juste des pages; nous structurons des histoires. Chaque défilement est un chapitre guidant l'utilisateur."
+        "description": "Nous ne construisons pas simplement des pages; nous structurons des histoires linéaires. Chaque défilement est un chapitre, guidant l'utilisateur à travers le parcours de votre marque."
       },
       "02": {
-        "title": "Mouvement Maîtrisé",
-        "description": "L'animation doit être invisible. Nous utilisons des micro-interactions qui chuchotent le luxe, sans jamais crier pour attirer l'attention."
+        "title": "Mouvement avec Retenue",
+        "description": "L'animation doit sembler invisible. Nous utilisons des micro-interactions et un mouvement basé sur la physique qui murmure le luxe, sans jamais crier pour attirer l'attention."
       },
       "03": {
-        "title": "Performance Avant Tout",
-        "description": "Le luxe, c'est ne jamais attendre. Nous visons un score Lighthouse parfait et un LCP inférieur à 2,5s."
+        "title": "Performance d'Abord",
+        "description": "Le luxe signifie ne jamais attendre. Nous concevons pour les Core Web Vitals, visant un LCP inférieur à 2,5s et un score Lighthouse parfait."
       }
     }
   },
   "Process": {
-    "title": "La Méthode",
+    "title": "L'Alchimie",
     "subtitle": "De la pensée abstraite à la réalité pixel-perfect.",
     "steps": {
       "01": {
-        "title": "Découverte et Stratégie",
-        "desc": "Nous commençons par décoder l'ADN de votre marque. Aucun code n'est écrit avant de comprendre la philosophie."
+        "title": "Découverte & Stratégie",
+        "desc": "Nous commençons par décoder l'ADN de votre marque. Aucun code n'est écrit avant que la philosophie centrale ne soit comprise."
       },
       "02": {
         "title": "Direction Artistique",
-        "desc": "Définition du langage visuel. Moodboards, typographie et prototypes de mouvement pour donner le ton."
+        "desc": "Définir le langage visuel. Planches d'ambiance, sélection typographique et prototypes de mouvement pour définir le ton."
       },
       "03": {
         "title": "Développement",
         "desc": "Là où la magie opère. Code propre et sémantique utilisant Next.js et WebGL pour donner vie à la vision."
       },
       "04": {
-        "title": "Raffinement et Lancement",
-        "desc": "Polissage obsessionnel. Optimisation des performances, contrôles d'accessibilité et déploiement final."
+        "title": "Raffinement & Lancement",
+        "desc": "Polissage obsessionnel. Réglage des performances, vérifications d'accessibilité et déploiement final dans le monde."
       }
     }
   },
   "Contact": {
-    "title": "Lancer un Projet",
-    "subtitle": "Parlez-nous de votre vision. Nous répondons généralement sous 24h.",
+    "title": "Démarrer un Projet",
+    "subtitle": "Parlez-nous de votre vision. Nous répondons généralement dans les 24 heures.",
     "form": {
-      "name": "Quel est votre nom ?",
-      "email": "Votre adresse email",
-      "budget": "Budget estimé (EUR)",
+      "name": "Quel est votre nom?",
+      "email": "Votre adresse e-mail",
+      "budget": "Fourchette budgétaire (USD)",
       "message": "Parlez-nous du projet",
-      "send": "Envoyer la proposition"
+      "send": "Envoyer la Proposition"
     },
     "success": {
       "title": "Reçu.",
-      "desc": "Votre vision a été capturée. Nous examinons votre demande et vous répondrons sous peu.",
+      "desc": "Votre vision a été capturée. Nous examinons votre demande et répondrons sous peu.",
       "return": "Retour à l'Atelier"
     },
     "info": {
-      "email": "Écrivez-nous",
+      "email": "Envoyez-nous un e-mail",
       "social": "Suivez-nous"
     }
   },
   "Footer": {
-    "cta": "Vous avez une idée ?",
+    "cta": "Vous avez une idée?",
     "bigLink": "Parlons-en",
-    "sitemap": "Plan du site",
-    "socials": "Réseaux",
-    "legal": "Légal",
+    "sitemap": "Plan du Site",
+    "socials": "Réseaux Sociaux",
+    "legal": "Mentions Légales",
     "copyright": "© 2025 Atelier Shahrazad. Tous droits réservés."
   },
   "NotFound": {
     "code": "404",
-    "title": "Perdu dans le Vide ?",
-    "desc": "La page que vous cherchez n'existe pas au sein de notre atelier.",
-    "return": "Retour vers la Lumière"
+    "title": "Perdu dans le Vide?",
+    "desc": "La page que vous recherchez n'existe pas dans notre atelier.",
+    "return": "Retour à la Lumière"
   }
 }
