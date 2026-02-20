@@ -3,7 +3,7 @@
 import Link from "next/link";
 import { motion } from "framer-motion";
 // ایمپورت کامپوننت بک‌گراند ما
-import FluidBackground from "../components/canvas/FluidBackground";
+import FluidBackground from "@/components/canvas/FluidBackground";
 import { Playfair_Display, Inter } from "next/font/google";
 
 const serif = Playfair_Display({ subsets: ["latin"] });

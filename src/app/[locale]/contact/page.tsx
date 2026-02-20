@@ -3,7 +3,7 @@
 import { useTranslations } from "next-intl";
 import { motion } from "framer-motion";
 import { useForm, ValidationError } from "@formspree/react";
-import FluidBackground from "../@components/canvas/FluidBackground";
+import FluidBackground from "@/components/canvas/FluidBackground";
 
 export default function Contact() {
   const t = useTranslations("Contact");

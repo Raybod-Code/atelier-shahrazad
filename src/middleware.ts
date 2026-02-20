@@ -1,11 +1,10 @@
 import createMiddleware from 'next-intl/middleware';
+import { routing } from './i18n/routing';
 
-export default createMiddleware({
-  locales: ['en', 'fr'],
-  defaultLocale: 'en',
-  localePrefix: 'as-needed'
-});
+// ✅ استفاده از config یکپارچه از routing.ts
+export default createMiddleware(routing);
 
 export const config = {
-  matcher: ['/((?!api|_next|_vercel|.*\\..*).*)'  ]
+  // ✅ تمام route ها به جز فایل‌های استاتیک
+  matcher: ['/((?!api|_next|_vercel|.*\\..*).*)']
 };

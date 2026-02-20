@@ -1,18 +1,18 @@
 import type { Metadata, Viewport } from "next";
 import { Inter, Playfair_Display } from "next/font/google";
-import Header from "../components/layout/Header";
-import Footer from "../../components/layout/Footer";
+import Header from "@/components/layout/Header";
+import Footer from "@/components/layout/Footer";
 import "../globals.css";
-import SmoothScroll from "../../components/ui/SmoothScroll";
-import CustomCursor from "../../components/ui/CustomCursor";
-import Preloader from "../../components/ui/Preloader";
-import SoundManager from "../../components/ui/SoundManager";
-import CookieConsent from "../../components/ui/CookieConsent";
+import SmoothScroll from "@/components/ui/SmoothScroll";
+import CustomCursor from "@/components/ui/CustomCursor";
+import Preloader from "@/components/ui/Preloader";
+import SoundManager from "@/components/ui/SoundManager";
+import CookieConsent from "@/components/ui/CookieConsent";
 import { NextIntlClientProvider } from "next-intl";
 import { getMessages } from "next-intl/server";
 
 // ایمپورت رپر جدید
-import SceneWrapper from "../../components/canvas/SceneWrapper";
+import SceneWrapper from "@/components/canvas/SceneWrapper";
 
 const sans = Inter({
   subsets: ["latin"],
