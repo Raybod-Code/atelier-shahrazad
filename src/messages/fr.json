@@ -89,13 +89,19 @@
   },
   "Contact": {
     "title": "Démarrer un Projet",
+    "overline": "Nouveau Projet",
     "subtitle": "Parlez-nous de votre vision. Nous répondons généralement dans les 24 heures.",
+    "quote": "Chaque fil raconte une histoire qui mérite d'être racontée.",
     "form": {
+      "heading": "Partagez votre vision",
+      "subheading": "Chaque grand projet commence par une conversation.",
       "name": "Quel est votre nom?",
       "email": "Votre adresse e-mail",
       "budget": "Fourchette budgétaire (USD)",
       "message": "Parlez-nous du projet",
-      "send": "Envoyer la Proposition"
+      "send": "Envoyer la Proposition",
+      "sending": "Envoi en cours...",
+      "privacy": "Vos données sont en sécurité"
     },
     "success": {
       "title": "Reçu.",
@@ -104,7 +110,11 @@
     },
     "info": {
       "email": "Envoyez-nous un e-mail",
-      "social": "Suivez-nous"
+      "social": "Suivez-nous",
+      "response": "Délai de Réponse",
+      "responseTime": "Sous 24 heures",
+      "location": "Basé À",
+      "locationValue": "Paris & À Distance"
     }
   },
   "Footer": {

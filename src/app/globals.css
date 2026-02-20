@@ -7,126 +7,119 @@
     /* ═══════════════════════════════════════════
        Color Palette - Luxury Theme
        ═══════════════════════════════════════════ */
-    
-    /* Primary Colors */
-    --color-paper: 245 245 220; /* #F5F5DC - Warm cream */
-    --color-gold: 199 165 106;  /* #C7A56A - Luxurious gold */
-    --color-charcoal: 45 45 45; /* #2D2D2D - Deep charcoal */
-    --color-bg: 5 5 5;          /* #050505 - Pure black */
-    
-    /* Accent Colors */
-    --color-gold-light: 212 184 135;  /* Lighter gold for hover */
-    --color-gold-dark: 170 140 80;    /* Darker gold for active */
-    
-    /* Semantic Colors */
+
+    --color-paper: 245 245 220;
+    --color-gold: 199 165 106;
+    --color-charcoal: 45 45 45;
+    --color-bg: 5 5 5;
+
+    --color-gold-light: 212 184 135;
+    --color-gold-dark: 170 140 80;
+
+    /* ✅ مشکل Header — این‌ها گم بودن */
+    --color-muted: 120 113 108;
+    --color-border: 255 255 255;
+
     --color-success: 72 187 120;
     --color-error: 239 68 68;
     --color-warning: 251 191 36;
-    
+
     /* ═══════════════════════════════════════════
        Typography System
        ═══════════════════════════════════════════ */
-    
-    /* Font Families (injected by next/font) */
+
     --font-sans: var(--font-sans-family, 'Inter', sans-serif);
     --font-serif: var(--font-serif-family, 'Playfair Display', serif);
-    
-    /* Fluid Typography Scale (clamp for responsive) */
-    --font-size-xs: clamp(0.75rem, 0.9vw, 0.875rem);
-    --font-size-sm: clamp(0.875rem, 1.1vw, 1rem);
-    --font-size-base: clamp(1rem, 1.25vw, 1.125rem);
-    --font-size-lg: clamp(1.125rem, 1.5vw, 1.5rem);
-    --font-size-xl: clamp(1.5rem, 2.5vw, 2rem);
-    --font-size-2xl: clamp(2rem, 3.5vw, 3rem);
-    --font-size-3xl: clamp(2.5rem, 4.5vw, 4rem);
-    --font-size-hero: clamp(3rem, 8vw, 8rem);
-    
-    /* Line Heights */
-    --leading-tight: 1.1;
-    --leading-normal: 1.5;
+
+    --font-size-xs:   clamp(0.75rem,  0.9vw,  0.875rem);
+    --font-size-sm:   clamp(0.875rem, 1.1vw,  1rem);
+    --font-size-base: clamp(1rem,     1.25vw, 1.125rem);
+    --font-size-lg:   clamp(1.125rem, 1.5vw,  1.5rem);
+    --font-size-xl:   clamp(1.5rem,   2.5vw,  2rem);
+    --font-size-2xl:  clamp(2rem,     3.5vw,  3rem);
+    --font-size-3xl:  clamp(2.5rem,   4.5vw,  4rem);
+    --font-size-hero: clamp(3rem,     8vw,    8rem);
+
+    --leading-tight:   1.1;
+    --leading-normal:  1.5;
     --leading-relaxed: 1.75;
-    
-    /* Letter Spacing */
-    --tracking-tight: -0.02em;
-    --tracking-normal: 0;
-    --tracking-wide: 0.05em;
-    --tracking-wider: 0.1em;
-    --tracking-widest: 0.2em;
-    
+
+    --tracking-tight:   -0.02em;
+    --tracking-normal:  0;
+    --tracking-wide:    0.05em;
+    --tracking-wider:   0.1em;
+    --tracking-widest:  0.2em;
+
     /* ═══════════════════════════════════════════
        Spacing System
        ═══════════════════════════════════════════ */
-    
-    --space-xs: clamp(0.5rem, 1vw, 1rem);
-    --space-sm: clamp(1rem, 2vw, 2rem);
-    --space-md: clamp(2rem, 4vw, 4rem);
-    --space-lg: clamp(3rem, 6vw, 6rem);
-    --space-xl: clamp(4rem, 8vw, 8rem);
-    --space-2xl: clamp(6rem, 12vw, 12rem);
-    
-    /* Section Spacing */
-    --space-section: clamp(4rem, 10vh, 12rem);
-    --space-component: clamp(2rem, 5vh, 4rem);
-    
+
+    --space-xs:  clamp(0.5rem, 1vw,   1rem);
+    --space-sm:  clamp(1rem,   2vw,   2rem);
+    --space-md:  clamp(2rem,   4vw,   4rem);
+    --space-lg:  clamp(3rem,   6vw,   6rem);
+    --space-xl:  clamp(4rem,   8vw,   8rem);
+    --space-2xl: clamp(6rem,   12vw, 12rem);
+
+    --space-section:   clamp(4rem, 10vh, 12rem);
+    --space-component: clamp(2rem, 5vh,   4rem);
+
     /* ═══════════════════════════════════════════
-       Animation System - Luxury Easing
+       Animation System
        ═══════════════════════════════════════════ */
-    
-    /* Easing Functions */
-    --ease-luxury: cubic-bezier(0.4, 0, 0.2, 1);
-    --ease-elastic: cubic-bezier(0.68, -0.55, 0.265, 1.55);
-    --ease-smooth: cubic-bezier(0.25, 0.1, 0.25, 1);
-    --ease-in-out: cubic-bezier(0.645, 0.045, 0.355, 1);
+
+    --ease-luxury:   cubic-bezier(0.4,  0,    0.2, 1);
+    --ease-elastic:  cubic-bezier(0.68, -0.55, 0.265, 1.55);
+    --ease-smooth:   cubic-bezier(0.25, 0.1,  0.25, 1);
+    --ease-in-out:   cubic-bezier(0.645, 0.045, 0.355, 1);
     --ease-out-back: cubic-bezier(0.34, 1.56, 0.64, 1);
-    
-    /* Durations */
-    --duration-fast: 200ms;
+
+    --duration-fast:   200ms;
     --duration-normal: 300ms;
-    --duration-slow: 500ms;
+    --duration-slow:   500ms;
     --duration-slower: 800ms;
-    
+
     /* ═══════════════════════════════════════════
        Z-Index Scale
        ═══════════════════════════════════════════ */
-    
-    --z-canvas: 0;
-    --z-noise: 1;
+
+    --z-canvas:  0;
+    --z-noise:   2;
     --z-content: 10;
-    --z-header: 50;
-    --z-modal: 100;
+    --z-header:  50;
+    --z-modal:   100;
     --z-tooltip: 200;
-    
+
     /* ═══════════════════════════════════════════
        Borders & Shadows
        ═══════════════════════════════════════════ */
-    
-    --border-radius-sm: 0.25rem;
-    --border-radius-md: 0.5rem;
-    --border-radius-lg: 1rem;
+
+    --border-radius-sm:   0.25rem;
+    --border-radius-md:   0.5rem;
+    --border-radius-lg:   1rem;
     --border-radius-full: 9999px;
-    
-    /* Luxury Shadows */
-    --shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.1);
-    --shadow-md: 0 4px 16px rgba(0, 0, 0, 0.15);
-    --shadow-lg: 0 8px 32px rgba(0, 0, 0, 0.2);
-    --shadow-gold: 0 0 20px rgba(199, 165, 106, 0.3);
+
+    --shadow-sm:   0 2px 8px  rgba(0,0,0,0.1);
+    --shadow-md:   0 4px 16px rgba(0,0,0,0.15);
+    --shadow-lg:   0 8px 32px rgba(0,0,0,0.2);
+    --shadow-gold: 0 0 20px   rgba(199,165,106,0.3);
   }
-  
-  /* ═══════════════════════════════════════════
-     Dark Theme (optional - for future)
-     ═══════════════════════════════════════════ */
-  
+
   [data-theme="dark"] {
-    --color-paper: 26 26 26;
-    --color-gold: 212 184 135;
+    --color-paper:    26  26  26;
+    --color-gold:     212 184 135;
     --color-charcoal: 245 245 245;
-    --color-bg: 0 0 0;
+    --color-bg:       0   0   0;
   }
-  
+
   /* ═══════════════════════════════════════════
      Base Styles
      ═══════════════════════════════════════════ */
-  
+
+  * {
+    box-sizing: border-box;
+  }
+
   body {
     @apply bg-[rgb(var(--color-bg))] text-[rgb(var(--color-paper))];
     font-family: var(--font-sans);
@@ -134,29 +127,21 @@
     text-rendering: optimizeLegibility;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
+    overflow-x: hidden;
   }
-  
-  /* Selection */
+
   ::selection {
     background-color: rgb(var(--color-gold) / 0.3);
     color: rgb(var(--color-paper));
   }
-  
-  /* Smooth Scrolling */
-  html {
-    scroll-behavior: smooth;
-  }
-  
-  /* Remove scroll behavior if user prefers reduced motion */
+
+  /* ✅ scroll-behavior رو حذف کردیم — Lenis مدیریت می‌کنه */
+
   @media (prefers-reduced-motion: reduce) {
-    html {
-      scroll-behavior: auto;
-    }
-    
     * {
-      animation-duration: 0.01ms !important;
-      animation-iteration-count: 1 !important;
-      transition-duration: 0.01ms !important;
+      animation-duration:       0.01ms !important;
+      animation-iteration-count: 1     !important;
+      transition-duration:      0.01ms !important;
     }
   }
 }
@@ -166,31 +151,23 @@
    ═══════════════════════════════════════════ */
 
 @layer utilities {
-  /* Fluid Typography */
-  .text-fluid-xs { font-size: var(--font-size-xs); }
-  .text-fluid-sm { font-size: var(--font-size-sm); }
-  .text-fluid-base { font-size: var(--font-size-base); }
-  .text-fluid-lg { font-size: var(--font-size-lg); }
-  .text-fluid-xl { font-size: var(--font-size-xl); }
-  .text-fluid-2xl { font-size: var(--font-size-2xl); }
-  .text-fluid-3xl { font-size: var(--font-size-3xl); }
-  
+  .text-fluid-xs    { font-size: var(--font-size-xs); }
+  .text-fluid-sm    { font-size: var(--font-size-sm); }
+  .text-fluid-base  { font-size: var(--font-size-base); }
+  .text-fluid-lg    { font-size: var(--font-size-lg); }
+  .text-fluid-xl    { font-size: var(--font-size-xl); }
+  .text-fluid-2xl   { font-size: var(--font-size-2xl); }
+  .text-fluid-3xl   { font-size: var(--font-size-3xl); }
+
   .text-fluid-hero {
-    font-size: var(--font-size-hero);
-    line-height: var(--leading-tight);
+    font-size:      var(--font-size-hero);
+    line-height:    var(--leading-tight);
     letter-spacing: var(--tracking-tight);
   }
-  
-  /* Spacing Utilities */
-  .section-padding {
-    padding-block: var(--space-section);
-  }
-  
-  .component-padding {
-    padding-block: var(--space-component);
-  }
-  
-  /* Gradient Text */
+
+  .section-padding   { padding-block: var(--space-section); }
+  .component-padding { padding-block: var(--space-component); }
+
   .text-gradient-gold {
     @apply bg-clip-text text-transparent;
     background-image: linear-gradient(
@@ -199,34 +176,33 @@
       rgb(var(--color-gold-light))
     );
   }
-  
-  /* Glass Effect */
+
   .glass {
-    background: rgba(255, 255, 255, 0.05);
+    background:     rgba(255,255,255,0.05);
     backdrop-filter: blur(10px);
-    border: 1px solid rgba(255, 255, 255, 0.1);
+    border:         1px solid rgba(255,255,255,0.1);
   }
-  
-  /* Noise Overlay */
+
+  /* ✅ noise از SVG خارجی نیست — local inline */
   .noise-overlay {
-    position: fixed;
-    inset: 0;
+    position:       fixed;
+    inset:          0;
     pointer-events: none;
-    opacity: 0.03;
-    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
-    animation: noise 8s steps(10) infinite;
+    opacity:        0.03;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+    animation:      noise 8s steps(10) infinite;
   }
-  
+
   @keyframes noise {
-    0%, 100% { transform: translate(0, 0); }
-    10% { transform: translate(-5%, -5%); }
-    20% { transform: translate(-10%, 5%); }
-    30% { transform: translate(5%, -10%); }
-    40% { transform: translate(-5%, 15%); }
-    50% { transform: translate(-10%, 5%); }
-    60% { transform: translate(15%, 0); }
-    70% { transform: translate(0, 10%); }
-    80% { transform: translate(-15%, 0); }
-    90% { transform: translate(10%, 5%); }
+    0%,100% { transform: translate(0,0); }
+    10%     { transform: translate(-5%,-5%); }
+    20%     { transform: translate(-10%,5%); }
+    30%     { transform: translate(5%,-10%); }
+    40%     { transform: translate(-5%,15%); }
+    50%     { transform: translate(-10%,5%); }
+    60%     { transform: translate(15%,0); }
+    70%     { transform: translate(0,10%); }
+    80%     { transform: translate(-15%,0); }
+    90%     { transform: translate(10%,5%); }
   }
 }

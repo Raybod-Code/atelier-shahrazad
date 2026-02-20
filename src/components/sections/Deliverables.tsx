@@ -1,61 +1,110 @@
 "use client";
 
 import { useTranslations } from "next-intl";
-import { motion } from "framer-motion";
-import { ScrollText, Zap, Move3d } from "lucide-react";
+import { motion, useScroll, useTransform } from "framer-motion";
+import { ScrollText, Zap, Move3d, type LucideIcon } from "lucide-react";
+import { useRef } from "react";
 
-const FEATURES = [
-  {
-    id: "01",
-    icon: ScrollText, // آیکون داستان/نوشته
-  },
-  {
-    id: "02",
-    icon: Move3d, // آیکون موشن
-  },
-  {
-    id: "03",
-    icon: Zap, // آیکون سرعت/پرفورمنس
-  },
+// ─────────────────────────────────────────────
+// Types
+// ─────────────────────────────────────────────
+
+interface Feature {
+  id:   string;
+  icon: LucideIcon;
+}
+
+interface FeatureCardProps {
+  feature: Feature;
+  index:   number;
+  t:       (key: string) => string;
+}
+
+const FEATURES: Feature[] = [
+  { id: "01", icon: ScrollText },
+  { id: "02", icon: Move3d     },
+  { id: "03", icon: Zap        },
 ];
 
+const easingLux = [0.22, 1, 0.36, 1] as const;
+
+// ─────────────────────────────────────────────
+// Main Section
+// ─────────────────────────────────────────────
+
 export default function Deliverables() {
-  const t = useTranslations("Deliverables");
+  const t            = useTranslations("Deliverables");
+  const sectionRef   = useRef<HTMLDivElement>(null);
+
+  const { scrollYProgress } = useScroll({
+    target:  sectionRef,
+    offset:  ["start end", "end start"],
+  });
+
+  // parallax روی background glow
+  const glowY = useTransform(scrollYProgress, [0, 1], ["-20%", "20%"]);
 
   return (
-    <section className="relative bg-transparent py-32 overflow-hidden">
+    <section
+      ref={sectionRef}
+      className="relative bg-transparent py-32 overflow-hidden"
+    >
       <div className="container px-6 mx-auto relative z-10">
+
         {/* Section Header */}
         <div className="mb-20 md:mb-28 text-center max-w-2xl mx-auto">
-          <motion.span
-            initial={{ opacity: 0, y: 10 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            className="block font-mono text-[10px] tracking-[0.3em] text-gold/60 uppercase mb-4"
-          >
-            Digital Atelier Standards
-          </motion.span>
-          <motion.h2
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ delay: 0.1 }}
-            className="font-serif text-4xl md:text-5xl text-paper mb-6"
-          >
-            {t("title")}
-          </motion.h2>
+
+          {/* Overline */}
+          <div className="flex items-center justify-center gap-4 mb-6">
+            <motion.div
+              initial={{ scaleX: 0 }}
+              whileInView={{ scaleX: 1 }}
+              viewport={{ once: true }}
+              transition={{ duration: 1, ease: easingLux }}
+              className="h-[1px] w-12 origin-right bg-gradient-to-l from-gold/60 to-transparent"
+            />
+            <motion.span
+              initial={{ opacity: 0, y: 8 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.6, delay: 0.2 }}
+              className="font-mono text-[10px] tracking-[0.35em] text-gold/60 uppercase"
+            >
+              Digital Atelier Standards
+            </motion.span>
+            <motion.div
+              initial={{ scaleX: 0 }}
+              whileInView={{ scaleX: 1 }}
+              viewport={{ once: true }}
+              transition={{ duration: 1, ease: easingLux }}
+              className="h-[1px] w-12 origin-left bg-gradient-to-r from-gold/60 to-transparent"
+            />
+          </div>
+
+          <div className="overflow-hidden mb-6">
+            <motion.h2
+              initial={{ y: "100%", opacity: 0 }}
+              whileInView={{ y: "0%", opacity: 1 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.9, ease: easingLux }}
+              className="font-serif text-4xl md:text-5xl text-paper"
+            >
+              {t("title")}
+            </motion.h2>
+          </div>
+
           <motion.p
-            initial={{ opacity: 0 }}
-            whileInView={{ opacity: 1 }}
+            initial={{ opacity: 0, y: 12 }}
+            whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            transition={{ delay: 0.2 }}
-            className="font-sans text-paper/50 text-sm md:text-base"
+            transition={{ delay: 0.3, duration: 0.8 }}
+            className="font-sans text-paper/50 text-sm md:text-base leading-relaxed"
           >
             {t("subtitle")}
           </motion.p>
         </div>
 
-        {/* The Grid */}
+        {/* Grid */}
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
           {FEATURES.map((feature, index) => (
             <FeatureCard
@@ -68,46 +117,58 @@ export default function Deliverables() {
         </div>
       </div>
 
-      {/* Decorative Background Elements */}
-      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[120%] h-[500px] bg-gradient-to-r from-transparent via-gold/[0.03] to-transparent rotate-12 blur-3xl pointer-events-none" />
+      {/* Parallax background glow */}
+      <motion.div
+        style={{ y: glowY }}
+        className="pointer-events-none absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[120%] h-[500px] bg-gradient-to-r from-transparent via-gold/[0.04] to-transparent rotate-12 blur-3xl"
+      />
     </section>
   );
 }
 
-function FeatureCard({ feature, index, t }: any) {
+// ─────────────────────────────────────────────
+// Feature Card
+// ─────────────────────────────────────────────
+
+function FeatureCard({ feature, index, t }: FeatureCardProps) {
   const Icon = feature.icon;
 
   return (
     <motion.div
-      initial={{ opacity: 0, y: 40 }}
+      initial={{ opacity: 0, y: 50 }}
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true, margin: "-10%" }}
       transition={{
-        delay: index * 0.2,
-        duration: 0.8,
-        ease: [0.22, 1, 0.36, 1],
+        delay:    index * 0.15,
+        duration: 0.9,
+        ease:     easingLux,
       }}
+      whileHover={{ y: -6 }}
       className="group relative p-10 bg-[#0F0F11] border border-white/5 hover:border-gold/30 transition-colors duration-500 rounded-sm overflow-hidden"
     >
-      {/* Background Hover Effect */}
+      {/* Hover gradient */}
       <div className="absolute inset-0 bg-gradient-to-b from-gold/[0.08] to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-700" />
 
-      {/* Large Number Background */}
+      {/* شماره دکوراتیو */}
       <div className="absolute -right-4 -top-8 font-serif text-9xl text-white/[0.02] group-hover:text-gold/[0.05] transition-colors duration-500 select-none">
         {feature.id}
       </div>
 
       {/* Content */}
       <div className="relative z-10 flex flex-col items-center text-center">
-        {/* Icon Container */}
+
+        {/* Icon */}
         <div className="mb-8 relative">
-          <div className="w-16 h-16 rounded-full border border-white/10 flex items-center justify-center group-hover:border-gold/50 group-hover:scale-110 transition-all duration-500 bg-[#0F0F11]">
+          <motion.div
+            whileHover={{ scale: 1.1, rotate: 5 }}
+            transition={{ type: "spring", stiffness: 300, damping: 15 }}
+            className="w-16 h-16 rounded-full border border-white/10 flex items-center justify-center group-hover:border-gold/50 transition-all duration-500 bg-[#0F0F11]"
+          >
             <Icon
               className="w-6 h-6 text-paper/70 group-hover:text-gold transition-colors duration-300"
               strokeWidth={1.5}
             />
-          </div>
-          {/* Glow behind icon */}
+          </motion.div>
           <div className="absolute inset-0 bg-gold/20 blur-xl rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
         </div>
 
@@ -115,7 +176,14 @@ function FeatureCard({ feature, index, t }: any) {
           {t(`items.${feature.id}.title`)}
         </h3>
 
-        <div className="h-px w-12 bg-white/10 my-4 group-hover:w-full group-hover:bg-gold/20 transition-all duration-700" />
+        {/* خط expand */}
+        <motion.div
+          className="h-px bg-gold/20 my-4"
+          initial={{ width: "3rem" }}
+          whileInView={{ width: "3rem" }}
+          whileHover={{ width: "100%" }}
+          transition={{ duration: 0.5, ease: easingLux }}
+        />
 
         <p className="font-sans text-sm leading-relaxed text-paper/60 group-hover:text-paper/80 transition-colors duration-300">
           {t(`items.${feature.id}.description`)}

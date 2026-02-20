@@ -4,6 +4,10 @@ import { Canvas, useFrame, useThree } from '@react-three/fiber';
 import { useEffect, useMemo, useRef, useState } from 'react';
 import * as THREE from 'three';
 
+// ─────────────────────────────────────────────
+// Shaders — بدون تغییر (خودته)
+// ─────────────────────────────────────────────
+
 const vertexShader = `
 varying vec2 vUv;
 void main() {
@@ -14,9 +18,9 @@ void main() {
 
 const fragmentShader = `
 uniform float uTime;
-uniform vec3 uBase;     // charcoal
-uniform vec3 uNoise;    // dark warm
-uniform vec3 uGold;     // highlight gold
+uniform vec3 uBase;
+uniform vec3 uNoise;
+uniform vec3 uGold;
 varying vec2 vUv;
 
 vec3 mod289(vec3 x) { return x - floor(x * (1.0 / 289.0)) * 289.0; }
@@ -39,7 +43,7 @@ float snoise(vec2 v) {
   vec3 a0 = x - ox;
   m *= 1.79284291400159 - 0.85373472095314 * (a0*a0 + h*h);
   vec3 g;
-  g.x  = a0.x * x0.x + h.x * x0.y;
+  g.x  = a0.x * x0.x  + h.x  * x0.y;
   g.yz = a0.yz * x12.xz + h.yz * x12.yw;
   return 130.0 * dot(m, g);
 }
@@ -47,57 +51,47 @@ float snoise(vec2 v) {
 void main() {
   float t = uTime * 0.22;
 
-  // Base noise field
-  float n1 = snoise(vUv * 2.6 + vec2(t));
-  float m1 = clamp(n1 * 0.5 + 0.5, 0.0, 1.0);
+  float n1  = snoise(vUv * 2.6 + vec2(t));
+  float m1  = clamp(n1 * 0.5 + 0.5, 0.0, 1.0);
   m1 = smoothstep(0.25, 0.85, m1);
 
-  // Base blend (charcoal -> warm dark)
   vec3 color = mix(uBase, uNoise, m1);
 
-  // ---- Gold shimmer (fake specular / shine) ----
-  // 1) high-frequency noise for sparkly areas
-  float n2 = snoise(vUv * 9.0 + vec2(t * 1.4, -t * 1.1));
+  float n2          = snoise(vUv * 9.0 + vec2(t * 1.4, -t * 1.1));
   float sparkleMask = smoothstep(0.62, 0.92, n2 * 0.5 + 0.5);
-
-  // 2) moving band to feel like "shining sweep"
-  float band = sin((vUv.x * 1.2 + vUv.y * 0.8 + t) * 6.2831);
+  float band        = sin((vUv.x * 1.2 + vUv.y * 0.8 + t) * 6.2831);
   band = smoothstep(0.55, 0.95, band);
-
-  // 3) tighten highlight (smaller = shinier)
   float shine = pow(sparkleMask * band, 3.0);
 
-  // Add highlight last so it pops [web:252]
   color += uGold * shine * 0.55;
 
-  // Soft vignette
   float d = distance(vUv, vec2(0.5));
   color *= smoothstep(0.95, 0.30, d);
 
   gl_FragColor = vec4(color, 1.0);
-
-  // Correct output colorspace for ShaderMaterial [web:179][web:184]
   #include <colorspace_fragment>
 }
 `;
 
+// ─────────────────────────────────────────────
+// Gradient Plane
+// ─────────────────────────────────────────────
+
 function GradientPlane() {
-  const mesh = useRef<THREE.Mesh>(null!);
+  const mesh    = useRef<THREE.Mesh>(null!);
   const { viewport } = useThree();
 
-  const uniforms = useMemo(
-    () => ({
-      uTime: { value: 0 },
-      uBase: { value: new THREE.Color('#0B0B0C') },   // charcoal
-      uNoise:{ value: new THREE.Color('#1F1C15') },   // muted dark gold (یا '#1A1A1E')
-      uGold: { value: new THREE.Color('#C7A56A') },   // سایت: gold
-    }),
-    []
-  );
+  // ✅ فقط یه بار ساخته می‌شه
+  const uniforms = useMemo(() => ({
+    uTime:  { value: 0 },
+    uBase:  { value: new THREE.Color('#0B0B0C') },
+    uNoise: { value: new THREE.Color('#1F1C15') },
+    uGold:  { value: new THREE.Color('#C7A56A') },
+  }), []);
 
-  useFrame((state) => {
-    (mesh.current.material as THREE.ShaderMaterial).uniforms.uTime.value =
-      state.clock.getElapsedTime();
+  // ✅ فقط uTime آپدیت می‌شه — بقیه ثابتن
+  useFrame(({ clock }) => {
+    uniforms.uTime.value = clock.getElapsedTime();
   });
 
   return (
@@ -114,25 +108,63 @@ function GradientPlane() {
   );
 }
 
+// ─────────────────────────────────────────────
+// Export
+// ─────────────────────────────────────────────
+
 export default function FluidBackground() {
   const [mounted, setMounted] = useState(false);
-  useEffect(() => setMounted(true), []);
 
+  // ✅ فقط بعد از mount نشون بده — جلوگیری از SSR مشکل
+  useEffect(() => { setMounted(true); }, []);
+
+  // ✅ موبایل → canvas نداریم، فقط gradient ساده CSS
+  const [isTouch, setIsTouch] = useState(false);
+  useEffect(() => {
+    setIsTouch(window.matchMedia('(pointer: coarse)').matches);
+  }, []);
+
+  if (!mounted) return null;
+
+  // ─── موبایل: CSS fallback ──────────────────
+  if (isTouch) {
+    return (
+      <div
+        className="absolute inset-0 -z-10"
+        style={{
+          background:
+            'radial-gradient(ellipse at 30% 50%, rgba(199,165,106,0.07) 0%, transparent 60%), radial-gradient(ellipse at 70% 30%, rgba(199,165,106,0.04) 0%, transparent 50%), #0B0B0C',
+        }}
+      />
+    );
+  }
+
+  // ─── Desktop: WebGL ────────────────────────
   return (
-    <div className="w-full h-full">
-      {mounted ? (
-        <Canvas
-          camera={{ position: [0, 0, 1] }}
-          dpr={[1, 2]}
-          gl={{ antialias: true, alpha: false }}
-          style={{ position: 'absolute', inset: 0, width: '100%', height: '100%' }}
-          onCreated={({ gl }) => {
-            gl.setClearColor('#0B0B0C', 1);
-          }}
-        >
-          <GradientPlane />
-        </Canvas>
-      ) : null}
-    </div>
+    <Canvas
+      camera={{ position: [0, 0, 1] }}
+      // ✅ dpr حداکثر 1.5 — قبلاً 2 بود
+      dpr={[1, 1.5]}
+      // ✅ antialias: false روی background لازم نیست
+      gl={{
+        antialias:        false,
+        alpha:            false,
+        powerPreference:  'high-performance',
+        // ✅ وقتی تب فعال نیست، render متوقف می‌شه
+      }}
+      frameloop="always"
+      style={{
+        position: 'absolute',
+        inset:     0,
+        width:    '100%',
+        height:   '100%',
+        zIndex:   -1,
+      }}
+      onCreated={({ gl }) => {
+        gl.setClearColor('#0B0B0C', 1);
+      }}
+    >
+      <GradientPlane />
+    </Canvas>
   );
 }

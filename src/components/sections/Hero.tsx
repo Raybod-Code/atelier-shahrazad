@@ -1,79 +1,156 @@
 "use client";
 
-import { useTranslations } from "next-intl";
-import { motion } from "framer-motion";
-import { Link } from "@/navigation";
+import { useTranslations }  from "next-intl";
+import { motion }           from "framer-motion";
+import { Link }             from "@/navigation";
+import { ArrowDown }        from "lucide-react";
+
+const easingLux = [0.22, 1, 0.36, 1] as const;
+
+// ─────────────────────────────────────────────
+// کلمه به کلمه — بدون useScroll
+// ─────────────────────────────────────────────
+function AnimatedTitle({ text }: { text: string }) {
+  const words = text.split(" ");
+  return (
+    <span className="inline-flex flex-wrap justify-center gap-x-[0.25em]">
+      {words.map((word, i) => (
+        <span key={i} className="overflow-hidden inline-block">
+          <motion.span
+            className="inline-block"
+            initial={{ y: "110%" }}
+            animate={{ y: "0%"   }}
+            transition={{
+              delay:    0.4 + i * 0.1,
+              duration: 0.8,
+              ease:     easingLux,
+            }}
+          >
+            {word}
+          </motion.span>
+        </span>
+      ))}
+    </span>
+  );
+}
+
+// ─────────────────────────────────────────────
+// Main
+// ─────────────────────────────────────────────
 
 export default function Hero() {
   const t = useTranslations("HomePage");
-  
+
   return (
-    <section className="relative h-screen w-full flex items-center justify-center overflow-hidden bg-transparent">
-      <div className="container px-6 relative z-content text-center">
-        <motion.h1
-          initial={{ opacity: 0, y: 30 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ 
-            duration: 1, 
-            ease: [0.22, 1, 0.36, 1] 
-          }}
-          className="font-serif text-fluid-hero font-medium tracking-tight text-paper mb-6 mix-blend-difference"
+    <section className="relative flex h-screen w-full items-center justify-center overflow-hidden bg-transparent">
+
+      {/* ─── Background — فقط CSS، بدون motion ── */}
+      <div className="pointer-events-none absolute inset-0">
+        {/* فقط یه orb کوچیک‌تر */}
+        <div className="absolute left-[10%] top-[25%] h-[500px] w-[500px] rounded-full bg-gold/[0.06] blur-[100px]" />
+        <div className="absolute right-[8%] bottom-[20%] h-[350px] w-[350px] rounded-full bg-gold/[0.04] blur-[80px]" />
+        {/* Vignette */}
+        <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,transparent_50%,rgba(0,0,0,0.5)_100%)]" />
+      </div>
+
+      {/* ─── Content ──────────────────────────── */}
+      <div className="container relative z-10 px-6 text-center">
+
+        {/* Overline */}
+        <motion.div
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ delay: 0.2, duration: 0.8 }}
+          className="mb-10 flex items-center justify-center gap-4"
         >
-          {t("title")}
-        </motion.h1>
-        
+          <div className="h-[1px] w-10 bg-gradient-to-l from-gold/50 to-transparent" />
+          <span className="font-mono text-[9px] tracking-[0.45em] text-gold/55 uppercase">
+            Digital Atelier
+          </span>
+          <div className="h-[1px] w-10 bg-gradient-to-r from-gold/50 to-transparent" />
+        </motion.div>
+
+        {/* Title */}
+        <h1 className="mb-8 font-serif text-fluid-hero font-light leading-[0.9] tracking-tight text-paper">
+          <AnimatedTitle text={t("title")} />
+        </h1>
+
+        {/* Subtitle */}
         <motion.p
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ 
-            duration: 1, 
-            delay: 0.2, 
-            ease: "easeOut" 
-          }}
-          className="font-sans text-fluid-lg text-paper/80 max-w-2xl mx-auto mb-10 leading-relaxed font-light"
+          initial={{ opacity: 0, y: 16 }}
+          animate={{ opacity: 1, y: 0  }}
+          transition={{ delay: 0.85, duration: 0.8, ease: easingLux }}
+          className="mx-auto mb-12 max-w-2xl font-sans text-fluid-lg font-light leading-relaxed text-paper/55"
         >
           {t("subtitle")}
         </motion.p>
-        
+
+        {/* CTAs */}
         <motion.div
-          initial={{ opacity: 0, scale: 0.95 }}
-          animate={{ opacity: 1, scale: 1 }}
-          transition={{ 
-            duration: 0.8, 
-            delay: 0.4 
-          }}
-          className="flex flex-col md:flex-row items-center justify-center gap-6"
+          initial={{ opacity: 0, y: 16 }}
+          animate={{ opacity: 1, y: 0  }}
+          transition={{ delay: 1, duration: 0.7, ease: easingLux }}
+          className="flex flex-col items-center justify-center gap-6 md:flex-row"
         >
-          {/* ✅ استفاده از Design System Colors */}
+          {/* Primary */}
           <Link
             href="/contact"
-            className="group relative px-8 py-4 bg-transparent overflow-hidden rounded-full border border-gold/50 hover:border-gold transition-colors duration-normal"
+            className="group relative overflow-hidden rounded-full border border-gold/40 px-10 py-4 transition-all duration-500 hover:border-gold hover:shadow-gold"
           >
-            <span className="absolute inset-0 w-full h-full bg-gold/10 scale-x-0 group-hover:scale-x-100 transition-transform origin-left duration-slow ease-luxury" />
-            <span className="relative font-sans text-xs tracking-widest uppercase text-gold group-hover:text-paper font-bold">
+            <span className="absolute inset-0 origin-left scale-x-0 bg-gold/10 transition-transform duration-500 group-hover:scale-x-100" />
+            <span className="relative font-mono text-[10px] font-bold uppercase tracking-[0.3em] text-gold">
               {t("cta")}
             </span>
           </Link>
-          
+
+          {/* Secondary */}
           <Link
             href="/#works"
-            className="text-xs font-sans tracking-widest uppercase text-paper/50 hover:text-gold transition-colors duration-normal border-b border-transparent hover:border-gold pb-1"
+            className="group flex items-center gap-3 font-mono text-[10px] uppercase tracking-[0.25em] text-paper/40 transition-colors duration-300 hover:text-gold"
           >
-            View selected works
+            <span className="h-[1px] w-5 bg-paper/20 transition-all duration-300 group-hover:w-8 group-hover:bg-gold" />
+            {t("scroll")}
           </Link>
         </motion.div>
+
+        {/* Stats */}
+        <motion.div
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ delay: 1.2, duration: 0.8 }}
+          className="mx-auto mt-16 flex max-w-lg items-center justify-center gap-10 border-t border-white/5 pt-8"
+        >
+          {[
+            { num: "12+", label: "Projects"    },
+            { num: "100", label: "Lighthouse"  },
+            { num: "3",   label: "Awwwards"    },
+          ].map((stat, i) => (
+            <div key={i} className="flex flex-col items-center gap-1">
+              <span className="font-serif text-xl text-gold">{stat.num}</span>
+              <span className="font-mono text-[8px] tracking-widest text-paper/25 uppercase">
+                {stat.label}
+              </span>
+            </div>
+          ))}
+        </motion.div>
       </div>
-      
-      {/* ✅ استفاده از CSS Variable برای gradient */}
+
+      {/* ─── Scroll line — فقط CSS animation ── */}
+      <div className="absolute bottom-0 left-1/2 -translate-x-1/2 w-[1px] h-20 bg-gradient-to-b from-transparent to-gold opacity-60" />
+
+      {/* ─── Arrow bounce ──────────────────── */}
       <motion.div
-        initial={{ height: 0, opacity: 0 }}
-        animate={{ height: 80, opacity: 1 }}
-        transition={{ 
-          duration: 1.5, 
-          delay: 1 
-        }}
-        className="absolute bottom-0 left-1/2 -translate-x-1/2 w-[1px] bg-gradient-to-b from-transparent to-gold"
-      />
+        animate={{ y: [0, 6, 0] }}
+        transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }}
+        className="absolute bottom-6 left-1/2 -translate-x-1/2"
+      >
+        <ArrowDown className="h-4 w-4 text-gold/35" />
+      </motion.div>
+
+      {/* ─── Corner text ───────────────────── */}
+      <span className="absolute bottom-8 right-8 hidden font-mono text-[9px] tracking-widest text-paper/12 uppercase md:block">
+        Est. 2024 — Paris
+      </span>
     </section>
   );
 }

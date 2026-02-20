@@ -1,29 +1,35 @@
-"use client";
+'use client';
 
-import { useState, useEffect } from "react";
-import dynamic from "next/dynamic";
+import { useState, useEffect } from 'react';
+import dynamic from 'next/dynamic';
 
-// ایمپورت داینامیک برای حذف SSR
-const Scene = dynamic(() => import("./Scene"), {
+// ✅ SSR کاملاً غیرفعال - Three.js نیاز به window داره
+const Scene = dynamic(() => import('./Scene'), {
   ssr: false,
+  loading: () => null,
 });
 
 export default function SceneWrapper() {
   const [isMounted, setIsMounted] = useState(false);
 
   useEffect(() => {
-    // این خط فقط وقتی اجرا میشه که صفحه کامل تو مرورگر لود شده باشه
     setIsMounted(true);
   }, []);
 
-  // تا وقتی لود نشده، هیچی نشون نده (یا یه دیو خالی)
-  if (!isMounted) return <div className="fixed inset-0 bg-[#050505] -z-10" />;
+  // قبل از mount یه پس‌زمینه تاریک نشون بده
+  if (!isMounted) {
+    return (
+      <div
+        className="fixed inset-0 bg-[#050505]"
+        style={{ zIndex: 0, pointerEvents: 'none' }}
+      />
+    );
+  }
 
   return (
-    // یک کانتینر ثابت و قطعی
     <div
       className="fixed inset-0 w-full h-full"
-      style={{ zIndex: 0, pointerEvents: "none" }}
+      style={{ zIndex: 0, pointerEvents: 'none' }}
     >
       <Scene />
     </div>

@@ -1,30 +1,12 @@
 "use client";
 
 import { useState } from "react";
+import Image from "next/image";
 import { useTranslations } from "next-intl";
 import { motion, AnimatePresence } from "framer-motion";
 import { X, ArrowUpRight, Sparkles } from "lucide-react";
-
-const PROJECTS = [
-  {
-    id: "01",
-    image:
-      "https://images.unsplash.com/photo-1539109136881-3be0616acf4b?q=80&w=1200&auto=format&fit=crop",
-    tags: ["Next.js", "WebGL", "Fashion"],
-  },
-  {
-    id: "02",
-    image:
-      "https://images.unsplash.com/photo-1486718448742-163732cd1544?q=80&w=1200&auto=format&fit=crop",
-    tags: ["Design System", "Architecture", "Clean"],
-  },
-  {
-    id: "03",
-    image:
-      "https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?q=80&w=1200&auto=format&fit=crop",
-    tags: ["Audio API", "Interactive", "Art"],
-  },
-];
+import { PROJECTS } from "@/constants/projects";
+import type { ProjectCardProps, ProjectModalProps, OutcomeItemProps } from "@/types";
 
 const easingLux = [0.22, 1, 0.36, 1] as const;
 
@@ -134,7 +116,11 @@ export default function SelectedWorks() {
   );
 }
 
-function ProjectCard({ project, index, onClick, t }: any) {
+// ─────────────────────────────────────────────
+// Project Card
+// ─────────────────────────────────────────────
+
+function ProjectCard({ project, index, onClick, t }: ProjectCardProps) {
   return (
     <motion.div
       layoutId={`card-${project.id}`}
@@ -146,6 +132,7 @@ function ProjectCard({ project, index, onClick, t }: any) {
       onClick={onClick}
       role="button"
       tabIndex={0}
+      onKeyDown={(e) => e.key === "Enter" && onClick()}
     >
       {/* Decorative large number */}
       <div className="absolute -left-4 -top-6 font-serif text-[140px] font-light leading-none text-paper/[0.03] md:-left-8 md:-top-10 md:text-[180px]">
@@ -165,11 +152,14 @@ function ProjectCard({ project, index, onClick, t }: any) {
               layoutId={`image-${project.id}`}
               className="relative aspect-[3/4] overflow-hidden"
             >
-              <img
+              {/* ✅ next/image به جای <img> */}
+              <Image
                 src={project.image}
                 alt={t(`items.${project.id}.title`)}
+                fill
+                sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
                 className="
-                  h-full w-full object-cover
+                  object-cover
                   brightness-[0.85] contrast-[1.15] grayscale
                   transition-all duration-[900ms] ease-out
                   group-hover:scale-[1.08] group-hover:brightness-100 group-hover:contrast-100 group-hover:grayscale-0
@@ -250,7 +240,11 @@ function ProjectCard({ project, index, onClick, t }: any) {
   );
 }
 
-function ProjectModal({ id, onClose, t, project }: any) {
+// ─────────────────────────────────────────────
+// Project Modal
+// ─────────────────────────────────────────────
+
+function ProjectModal({ id, onClose, t, project }: ProjectModalProps) {
   return (
     <div className="fixed inset-0 z-[100] flex items-center justify-center p-6 md:p-10">
       <motion.div
@@ -283,10 +277,13 @@ function ProjectModal({ id, onClose, t, project }: any) {
             layoutId={`image-${id}`}
             className="relative h-[45%] w-full overflow-hidden md:h-full md:w-[55%]"
           >
-            <img
+            {/* ✅ next/image به جای <img> */}
+            <Image
               src={project.image}
-              alt="Project"
-              className="h-full w-full object-cover"
+              alt={t(`items.${id}.title`)}
+              fill
+              sizes="(max-width: 768px) 100vw, 55vw"
+              className="object-cover"
             />
             <div className="absolute inset-0 bg-gradient-to-t from-[#0A0A0B] via-black/30 to-transparent" />
             <div className="absolute inset-0 bg-gradient-to-r from-[#0A0A0B]/80 via-transparent to-transparent md:via-[#0A0A0B]/20" />
@@ -366,7 +363,7 @@ function ProjectModal({ id, onClose, t, project }: any) {
                 </div>
               </div>
 
-              {/* CTA Link */}
+              {/* CTA */}
               <motion.div
                 initial={{ opacity: 0 }}
                 animate={{ opacity: 1 }}
@@ -387,7 +384,11 @@ function ProjectModal({ id, onClose, t, project }: any) {
   );
 }
 
-function OutcomeItem({ text, delay }: { text: string; delay: number }) {
+// ─────────────────────────────────────────────
+// Outcome Item
+// ─────────────────────────────────────────────
+
+function OutcomeItem({ text, delay }: OutcomeItemProps) {
   return (
     <motion.div
       initial={{ opacity: 0, x: -10 }}

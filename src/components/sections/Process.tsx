@@ -4,55 +4,80 @@ import { useRef } from "react";
 import { useTranslations } from "next-intl";
 import { motion, useScroll, useTransform } from "framer-motion";
 
+// ─────────────────────────────────────────────
+// Types
+// ─────────────────────────────────────────────
+
+interface StepItemProps {
+  step:  string;
+  index: number;
+  t:     (key: string) => string;
+}
+
 const STEPS = ["01", "02", "03", "04"];
+const easingLux = [0.22, 1, 0.36, 1] as const;
+
+// ─────────────────────────────────────────────
+// Main Section
+// ─────────────────────────────────────────────
 
 export default function Process() {
-  const t = useTranslations("Process");
+  const t            = useTranslations("Process");
   const containerRef = useRef<HTMLDivElement>(null);
 
-  // اتصال اسکرول به انیمیشن خط
   const { scrollYProgress } = useScroll({
     target: containerRef,
     offset: ["start center", "end center"],
   });
 
-  // ارتفاع خط طلایی (از 0% تا 100%)
   const lineHeight = useTransform(scrollYProgress, [0, 1], ["0%", "100%"]);
 
+  // parallax روی header
+  const headerY = useTransform(scrollYProgress, [0, 0.3], ["0px", "-30px"]);
+  const headerO = useTransform(scrollYProgress, [0, 0.3], [1, 0.6]);
+
   return (
-    // ✅ فیکس: اضافه کردن id="process" برای اینکه لینک هدر کار کنه
     <section
       id="process"
       ref={containerRef}
       className="py-32 bg-transparent relative overflow-hidden"
     >
       <div className="container px-6 mx-auto relative z-10 max-w-5xl">
+
         {/* Header */}
-        <div className="flex flex-col md:flex-row md:items-end justify-between mb-24 gap-8">
-          <motion.h2
-            initial={{ opacity: 0, x: -20 }}
-            whileInView={{ opacity: 1, x: 0 }}
-            viewport={{ once: true }}
-            className="font-serif text-5xl md:text-6xl text-paper"
-          >
-            {t("title")}
-          </motion.h2>
+        <motion.div
+          style={{ y: headerY, opacity: headerO }}
+          className="flex flex-col md:flex-row md:items-end justify-between mb-24 gap-8"
+        >
+          <div className="overflow-hidden">
+            <motion.h2
+              initial={{ y: "100%", opacity: 0 }}
+              whileInView={{ y: "0%", opacity: 1 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.9, ease: easingLux }}
+              className="font-serif text-5xl md:text-6xl text-paper"
+            >
+              {t("title")}
+            </motion.h2>
+          </div>
+
           <motion.p
             initial={{ opacity: 0, x: 20 }}
             whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true }}
+            transition={{ delay: 0.3, duration: 0.8 }}
             className="font-sans text-paper/50 text-sm max-w-xs text-left md:text-right"
           >
             {t("subtitle")}
           </motion.p>
-        </div>
+        </motion.div>
 
-        {/* Timeline Layout */}
+        {/* Timeline */}
         <div className="relative">
-          {/* The Vertical Line (Background - Grey) */}
+          {/* خط خاکستری پس‌زمینه */}
           <div className="absolute left-[15px] md:left-1/2 top-0 bottom-0 w-[1px] bg-white/10 md:-translate-x-1/2" />
 
-          {/* The Vertical Line (Foreground - Gold Progress) */}
+          {/* خط طلایی پیشرفت */}
           <motion.div
             style={{ height: lineHeight }}
             className="absolute left-[15px] md:left-1/2 top-0 w-[1px] bg-gold shadow-[0_0_15px_rgba(199,165,106,0.6)] md:-translate-x-1/2 origin-top"
@@ -70,46 +95,81 @@ export default function Process() {
   );
 }
 
-function StepItem({ step, index, t }: any) {
-  const isEven = index % 2 === 0;
+// ─────────────────────────────────────────────
+// Step Item
+// ─────────────────────────────────────────────
+
+function StepItem({ step, index, t }: StepItemProps) {
+  const isEven  = index % 2 === 0;
+  const ref     = useRef<HTMLDivElement>(null);
+
+  const { scrollYProgress } = useScroll({
+    target: ref,
+    offset: ["start 90%", "start 40%"],
+  });
+
+  // dot از خاکستری به طلایی تبدیل می‌شه
+  const dotScale  = useTransform(scrollYProgress, [0, 1], [0.6, 1.4]);
+  const dotOpacity = useTransform(scrollYProgress, [0, 0.5], [0.3, 1]);
 
   return (
     <motion.div
+      ref={ref}
       initial={{ opacity: 0, y: 50 }}
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true, margin: "-20%" }}
-      transition={{ duration: 0.8, ease: "easeOut" }}
+      transition={{ duration: 0.9, ease: easingLux }}
       className={`relative flex flex-col md:flex-row items-start ${
         isEven ? "md:flex-row" : "md:flex-row-reverse"
       } gap-8 md:gap-0`}
     >
-      {/* Center Dot (The Anchor) */}
-      <div className="absolute left-[11px] md:left-1/2 top-0 w-2 h-2 rounded-full bg-transparent border border-gold z-10 md:-translate-x-1/2 translate-y-2.5 shadow-[0_0_0_4px_#0B0B0C]" />
+      {/* Dot */}
+      <motion.div
+        style={{ scale: dotScale, opacity: dotOpacity }}
+        className="absolute left-[11px] md:left-1/2 top-0 w-2 h-2 rounded-full bg-gold z-10 md:-translate-x-1/2 translate-y-2.5 shadow-[0_0_12px_rgba(199,165,106,0.8)]"
+      />
 
-      {/* Content Side */}
+      {/* محتوا */}
       <div
         className={`pl-12 md:pl-0 md:w-1/2 ${
           isEven ? "md:pr-16 md:text-right" : "md:pl-16 md:text-left"
         }`}
       >
-        <span className="font-mono text-xs text-gold/60 tracking-widest uppercase mb-2 block">
+        <motion.span
+          initial={{ opacity: 0, y: 8 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ delay: 0.1, duration: 0.6 }}
+          className="font-mono text-xs text-gold/60 tracking-widest uppercase mb-2 block"
+        >
           Step {step}
-        </span>
-        <h3 className="font-serif text-3xl text-paper mb-4">
-          {t(`steps.${step}.title`)}
-        </h3>
-        <p className="font-sans text-paper/60 text-sm leading-relaxed max-w-sm ml-0 md:ml-auto">
-          {isEven ? (
-            // راست چین برای دسکتاپ (اگر زوج بود، باید مارجین چپش اتومات باشه)
-            <span className="block md:ml-auto">{t(`steps.${step}.desc`)}</span>
-          ) : (
-            // چپ چین برای دسکتاپ
-            <span className="block mr-auto">{t(`steps.${step}.desc`)}</span>
-          )}
-        </p>
+        </motion.span>
+
+        <div className="overflow-hidden mb-4">
+          <motion.h3
+            initial={{ y: "100%", opacity: 0 }}
+            whileInView={{ y: "0%", opacity: 1 }}
+            viewport={{ once: true }}
+            transition={{ delay: 0.2, duration: 0.8, ease: easingLux }}
+            className="font-serif text-3xl text-paper"
+          >
+            {t(`steps.${step}.title`)}
+          </motion.h3>
+        </div>
+
+        <motion.p
+          initial={{ opacity: 0 }}
+          whileInView={{ opacity: 1 }}
+          viewport={{ once: true }}
+          transition={{ delay: 0.35, duration: 0.8 }}
+          className="font-sans text-paper/60 text-sm leading-relaxed max-w-sm"
+          style={{ marginLeft: isEven ? "auto" : undefined }}
+        >
+          {t(`steps.${step}.desc`)}
+        </motion.p>
       </div>
 
-      {/* Empty Side (For Balance) */}
+      {/* فضای خالی */}
       <div className="hidden md:block md:w-1/2" />
     </motion.div>
   );

@@ -89,13 +89,19 @@
   },
   "Contact": {
     "title": "Start a Project",
+    "overline": "New Project",
     "subtitle": "Tell us about your vision. We typically reply within 24 hours.",
+    "quote": "Every thread tells a story worth telling.",
     "form": {
+      "heading": "Tell us your vision",
+      "subheading": "Every great project starts with a conversation.",
       "name": "What's your name?",
       "email": "Your email address",
       "budget": "Budget range (USD)",
       "message": "Tell us about the project",
-      "send": "Send Proposal"
+      "send": "Send Proposal",
+      "sending": "Sending...",
+      "privacy": "Your data is safe with us"
     },
     "success": {
       "title": "Received.",
@@ -104,7 +110,11 @@
     },
     "info": {
       "email": "Email us",
-      "social": "Follow us"
+      "social": "Follow us",
+      "response": "Response Time",
+      "responseTime": "Within 24 hours",
+      "location": "Based In",
+      "locationValue": "Paris & Remote"
     }
   },
   "Footer": {
