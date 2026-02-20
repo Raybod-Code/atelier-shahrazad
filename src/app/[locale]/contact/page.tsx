@@ -3,7 +3,7 @@
 import { useTranslations } from "next-intl";
 import { motion } from "framer-motion";
 import { useForm, ValidationError } from "@formspree/react";
-import FluidBackground from "../../../components/canvas/FluidBackground";
+import FluidBackground from "../@components/canvas/FluidBackground";
 
 export default function Contact() {
   const t = useTranslations("Contact");
@@ -17,7 +17,6 @@ export default function Contact() {
 
       <div className="container px-6 mx-auto relative z-10">
         <div className="flex flex-col lg:flex-row gap-16 lg:gap-32">
-          
           {/* Left: Info */}
           <motion.div
             initial={{ opacity: 0, y: 20 }}
@@ -89,7 +88,8 @@ export default function Contact() {
                   className="text-paper/60 max-w-sm font-sans text-sm leading-relaxed mb-12 tracking-wide"
                 >
                   Your vision has been captured. <br />
-                  We are reviewing your inquiry and will respond within 24 hours.
+                  We are reviewing your inquiry and will respond within 24
+                  hours.
                 </motion.p>
 
                 {/* دکمه بازگشت */}

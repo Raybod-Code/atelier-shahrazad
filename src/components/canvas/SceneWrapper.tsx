@@ -21,7 +21,10 @@ export default function SceneWrapper() {
 
   return (
     // یک کانتینر ثابت و قطعی
-    <div className="fixed inset-0 w-full h-full" style={{ zIndex: 0, pointerEvents: 'none' }}>
+    <div
+      className="fixed inset-0 w-full h-full"
+      style={{ zIndex: 0, pointerEvents: "none" }}
+    >
       <Scene />
     </div>
   );

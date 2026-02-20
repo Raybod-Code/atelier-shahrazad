@@ -1,18 +1,18 @@
 import type { Metadata, Viewport } from "next";
 import { Inter, Playfair_Display } from "next/font/google";
-import Header from "@/components/layout/Header";
-import Footer from "@/components/layout/Footer";
-import "@/app/globals.css";
-import SmoothScroll from "@/components/ui/SmoothScroll";
-import CustomCursor from "@/components/ui/CustomCursor";
-import Preloader from "@/components/ui/Preloader";
-import SoundManager from "@/components/ui/SoundManager";
-import CookieConsent from "@/components/ui/CookieConsent";
+import Header from "../components/layout/Header";
+import Footer from "../../components/layout/Footer";
+import "../globals.css";
+import SmoothScroll from "../../components/ui/SmoothScroll";
+import CustomCursor from "../../components/ui/CustomCursor";
+import Preloader from "../../components/ui/Preloader";
+import SoundManager from "../../components/ui/SoundManager";
+import CookieConsent from "../../components/ui/CookieConsent";
 import { NextIntlClientProvider } from "next-intl";
 import { getMessages } from "next-intl/server";
 
 // ایمپورت رپر جدید
-import SceneWrapper from "@/components/canvas/SceneWrapper";
+import SceneWrapper from "../../components/canvas/SceneWrapper";
 
 const sans = Inter({
   subsets: ["latin"],
@@ -47,7 +47,7 @@ export default async function RootLayout({
   return (
     <html lang={locale} className="scroll-smooth">
       <body
-        className={`${sans.variable} ${serif.variable} font-sans text-paper antialiased selection:bg-gold selection:text-charcoal flex flex-col min-h-screen bg-[#050505]`}
+        className={`${sans.variable} ${serif.variable} font-sans text-paper antialiased selection:bg-gold selection:text-charcoal flex flex-col min-h-screen bg-bg`}
       >
         <SmoothScroll>
           <NextIntlClientProvider messages={messages}>
