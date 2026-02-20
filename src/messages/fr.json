@@ -117,6 +117,50 @@
       "locationValue": "Paris & À Distance"
     }
   },
+  "Pricing": {
+  "overline": "Investissement",
+  "title": "Choisissez Votre Vision",
+  "subtitle": "Chaque projet est une collaboration unique. Les prix sont des points de départ — pas des limites.",
+  "popular": "Le Plus Populaire",
+  "cta": "Démarrer le Projet",
+  "note": "Tous les prix en EUR · TVA non incluse · Délai: 6–12 semaines",
+  "plans": {
+    "essential": {
+      "name": "Essentiel",
+      "price": "8 000",
+      "desc": "Parfait pour les petites marques de luxe qui entrent dans l'espace numérique.",
+      "f1": "Jusqu'à 5 pages",
+      "f2": "Design de mouvement personnalisé",
+      "f3": "Responsive mobile",
+      "f4": "Optimisé SEO",
+      "f5": "2 tours de révisions",
+      "f6": "1 mois de support"
+    },
+    "atelier": {
+      "name": "Atelier",
+      "price": "18 000",
+      "desc": "Notre offre signature. Expérience WebGL entièrement immersive.",
+      "f1": "Pages illimitées",
+      "f2": "Scènes WebGL / Three.js",
+      "f3": "Curseur & interactions personnalisés",
+      "f4": "Support multilingue",
+      "f5": "Build axé performance",
+      "f6": "3 mois de support"
+    },
+    "bespoke": {
+      "name": "Sur Mesure",
+      "price": "Personnalisé",
+      "desc": "Pour les marques établies avec des exigences complexes et uniques.",
+      "f1": "Tout dans Atelier",
+      "f2": "Direction artistique dédiée",
+      "f3": "Intégration CMS personnalisée",
+      "f4": "Analytics & tests A/B",
+      "f5": "Support prioritaire",
+      "f6": "Option retainer continue"
+    }
+  }
+},
+
   "Footer": {
     "cta": "Vous avez une idée?",
     "bigLink": "Parlons-en",

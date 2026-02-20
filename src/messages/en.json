@@ -117,6 +117,49 @@
       "locationValue": "Paris & Remote"
     }
   },
+  "Pricing": {
+  "overline": "Investment",
+  "title": "Choose Your Vision",
+  "subtitle": "Every project is a unique collaboration. Prices are starting points — not limits.",
+  "popular": "Most Popular",
+  "cta": "Start Project",
+  "note": "All prices in EUR · VAT not included · Timeline: 6–12 weeks",
+  "plans": {
+    "essential": {
+      "name": "Essential",
+      "price": "8,000",
+      "desc": "Perfect for small luxury brands entering the digital space.",
+      "f1": "Up to 5 pages",
+      "f2": "Custom motion design",
+      "f3": "Mobile responsive",
+      "f4": "SEO optimized",
+      "f5": "2 rounds of revisions",
+      "f6": "1 month support"
+    },
+    "atelier": {
+      "name": "Atelier",
+      "price": "18,000",
+      "desc": "Our signature offering. Full immersive WebGL experience.",
+      "f1": "Unlimited pages",
+      "f2": "WebGL / Three.js scenes",
+      "f3": "Custom cursor & interactions",
+      "f4": "Multi-language support",
+      "f5": "Performance-first build",
+      "f6": "3 months support"
+    },
+    "bespoke": {
+      "name": "Bespoke",
+      "price": "Custom",
+      "desc": "For established brands with complex, unique requirements.",
+      "f1": "Everything in Atelier",
+      "f2": "Dedicated art direction",
+      "f3": "Custom CMS integration",
+      "f4": "Analytics & A/B testing",
+      "f5": "Priority support",
+      "f6": "Ongoing retainer option"
+    }
+  }
+},
   "Footer": {
     "cta": "Have an idea?",
     "bigLink": "Let's Talk",
