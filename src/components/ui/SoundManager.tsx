@@ -1,55 +1,48 @@
 'use client';
+
 import { useState, useRef, useEffect } from "react";
-import { Volume2, VolumeX } from "lucide-react"; 
+import { Volume2, VolumeX }            from "lucide-react";
+import { motion }                       from "framer-motion";
 
 export default function SoundManager() {
-  const [isPlaying, setIsPlaying] = useState(false);
-  const audioRef = useRef<HTMLAudioElement | null>(null);
-  const hasInteracted = useRef(false);
+  const [isPlaying, setIsPlaying]   = useState(false);
+  const audioRef                    = useRef<HTMLAudioElement | null>(null);
+  const hasInteracted               = useRef(false);
 
   useEffect(() => {
-    // 1. ساخت آبجکت صدا
-    audioRef.current = new Audio("/sounds/ambient.mp3");
-    audioRef.current.loop = true;
-    audioRef.current.volume = 0.2; // صدای ملایم
+    audioRef.current        = new Audio("/sounds/ambient.mp3");
+    audioRef.current.loop   = true;
+    audioRef.current.volume = 0.2;
 
-    // 2. تلاش برای پخش (ممکنه فیل بشه اگه کاربر کلیک نکرده باشه)
     const tryPlay = () => {
-        if(audioRef.current) {
-            audioRef.current.play()
-                .then(() => {
-                    setIsPlaying(true);
-                    hasInteracted.current = true;
-                })
-                .catch((e) => {
-                    console.log("Waiting for user interaction...");
-                });
-        }
+      audioRef.current?.play()
+        .then(() => {
+          setIsPlaying(true);
+          hasInteracted.current = true;
+        })
+        .catch(() => {});
     };
 
-    // 3. اگر اتوپلی بلاک شد، منتظر اولین کلیک کاربر میمونیم
     const handleFirstClick = () => {
-        if (!hasInteracted.current && audioRef.current) {
-            audioRef.current.play();
-            setIsPlaying(true);
-            hasInteracted.current = true;
-            // حذف لیسنر بعد از اولین اجرا
-            window.removeEventListener('click', handleFirstClick);
-        }
+      if (!hasInteracted.current && audioRef.current) {
+        audioRef.current.play();
+        setIsPlaying(true);
+        hasInteracted.current = true;
+        window.removeEventListener("click", handleFirstClick);
+      }
     };
 
     tryPlay();
-    window.addEventListener('click', handleFirstClick);
+    window.addEventListener("click", handleFirstClick);
 
     return () => {
-        window.removeEventListener('click', handleFirstClick);
-        if(audioRef.current) audioRef.current.pause();
+      window.removeEventListener("click", handleFirstClick);
+      audioRef.current?.pause();
     };
   }, []);
 
   const toggleSound = () => {
     if (!audioRef.current) return;
-
     if (isPlaying) {
       audioRef.current.pause();
     } else {
@@ -59,11 +52,20 @@ export default function SoundManager() {
   };
 
   return (
-    <button
+    <motion.button
       onClick={toggleSound}
-      className="fixed bottom-8 left-8 z-[100] p-3 rounded-full border border-white/5 bg-black/40 backdrop-blur-md text-[#E0E0E0] hover:text-[#C7A56A] hover:border-[#C7A56A] transition-all duration-300"
+      whileHover={{ scale: 1.05 }}
+      whileTap={{ scale: 0.95 }}
+      // ✅ aria-label + aria-pressed
+      aria-label={isPlaying ? "Mute ambient sound" : "Play ambient sound"}
+      aria-pressed={isPlaying}
+      title={isPlaying ? "Mute sound" : "Play sound"}
+      className="fixed bottom-8 left-8 z-[100] rounded-full border border-white/5 bg-black/40 p-3 text-paper/60 backdrop-blur-md transition-colors duration-300 hover:border-gold/50 hover:text-gold"
     >
-      {isPlaying ? <Volume2 size={18} /> : <VolumeX size={18} />}
-    </button>
+      {isPlaying
+        ? <Volume2 size={18} aria-hidden="true" />
+        : <VolumeX size={18} aria-hidden="true" />
+      }
+    </motion.button>
   );
 }
