@@ -50,7 +50,6 @@ export default async function RootLayout({
         className={`
           ${sans.variable} ${serif.variable}
           font-sans text-paper antialiased
-          bg-[#050505]
           flex flex-col min-h-screen
           overflow-x-hidden
         `}
