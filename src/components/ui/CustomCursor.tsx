@@ -1,194 +1,116 @@
-'use client';
+"use client";
 
-import { useEffect, useState, useRef, useCallback } from 'react';
-import { motion, useSpring, useMotionValue } from 'framer-motion';
-
-// ─────────────────────────────────────────────
-// انواع حالت cursor
-// ─────────────────────────────────────────────
-type CursorState = 'default' | 'hover' | 'click' | 'text' | 'hidden';
+import { useEffect, useState } from "react";
+import { motion, useMotionValue, useSpring } from "framer-motion";
 
 export default function CustomCursor() {
-  const [cursorState, setCursorState] = useState<CursorState>('default');
-  const [label,       setLabel]       = useState('');
-  const [isVisible,   setIsVisible]   = useState(false);
+  // استفاده از MotionValue به جای State برای جلوگیری از رندر مجدد و افت فریم (پرفورمنس بالا)
+  const cursorX = useMotionValue(-100);
+  const cursorY = useMotionValue(-100);
 
-  // ─── موقعیت raw ماوس ──────────────────────
-  const rawX = useMotionValue(0);
-  const rawY = useMotionValue(0);
+  // تنظیمات فیزیک فنر برای حلقه دور موس (سنگین و لوکس)
+  const springConfig = { damping: 25, stiffness: 250, mass: 0.1 };
+  const cursorXSpring = useSpring(cursorX, springConfig);
+  const cursorYSpring = useSpring(cursorY, springConfig);
 
-  // ─── dot: سریع و دقیق ─────────────────────
-  const dotX = useSpring(rawX, { stiffness: 800, damping: 35, mass: 0.1 });
-  const dotY = useSpring(rawY, { stiffness: 800, damping: 35, mass: 0.1 });
-
-  // ─── ring: کند و لوکس ─────────────────────
-  const ringX = useSpring(rawX, { stiffness: 120, damping: 18, mass: 0.5 });
-  const ringY = useSpring(rawY, { stiffness: 120, damping: 18, mass: 0.5 });
-
-  const rafRef = useRef<number>(0);
-
-  // ─── به‌روزرسانی موقعیت با rAF ────────────
-  const onMouseMove = useCallback((e: MouseEvent) => {
-    cancelAnimationFrame(rafRef.current);
-    rafRef.current = requestAnimationFrame(() => {
-      rawX.set(e.clientX);
-      rawY.set(e.clientY);
-    });
-  }, [rawX, rawY]);
+  const [isHovering, setIsHovering] = useState(false);
+  const [isVisible, setIsVisible] = useState(false);
 
   useEffect(() => {
-    // موبایل / لمسی → هیچی نشون نده
-    if (window.matchMedia('(pointer: coarse)').matches) return;
+    // فقط در سمت کلاینت (مرورگر) اجرا میشه
+    if (typeof window === "undefined") return;
 
-    setIsVisible(true);
-
-    // ─── تشخیص نوع المان ────────────────────
-    const onMouseOver = (e: MouseEvent) => {
-      const target = e.target as HTMLElement;
-      const el     = target.closest(
-        'a, button, [role="button"], input, textarea, select, [data-cursor]'
-      ) as HTMLElement | null;
-
-      if (!el) {
-        setCursorState('default');
-        setLabel('');
-        return;
-      }
-
-      // data-cursor-label برای label سفارشی
-      const customLabel = el.getAttribute('data-cursor-label') ?? '';
-      setLabel(customLabel);
-
-      const tag  = el.tagName;
-      const type = (el as HTMLInputElement).type;
-
-      if (tag === 'INPUT' || tag === 'TEXTAREA' || tag === 'SELECT') {
-        setCursorState('text');
-      } else {
-        setCursorState('hover');
-      }
-
-      // ─── Magnetic Effect ──────────────────
-      const applyMagnetic = () => {
-        if (!el.hasAttribute('data-magnetic')) return;
-        const rect   = el.getBoundingClientRect();
-        const cx     = rect.left + rect.width  / 2;
-        const cy     = rect.top  + rect.height / 2;
-        const strength = parseFloat(el.getAttribute('data-magnetic') ?? '0.4');
-        const dx     = rawX.get() - cx;
-        const dy     = rawY.get() - cy;
-        el.style.transform = `translate(${dx * strength}px, ${dy * strength}px)`;
-      };
-
-      el.addEventListener('mousemove', applyMagnetic);
-      el.addEventListener('mouseleave', () => {
-        el.style.transform = '';
-        el.removeEventListener('mousemove', applyMagnetic);
-        setCursorState('default');
-        setLabel('');
-      }, { once: true });
+    const moveCursor = (e: MouseEvent) => {
+      cursorX.set(e.clientX);
+      cursorY.set(e.clientY);
+      if (!isVisible) setIsVisible(true); // وقتی موس تکون خورد ظاهرش کن
     };
 
-    const onMouseDown = () => setCursorState('click');
-    const onMouseUp   = () => setCursorState('default');
-    const onMouseLeave = () => setCursorState('hidden');
-    const onMouseEnter = () => setCursorState('default');
+    const handleMouseOver = (e: MouseEvent) => {
+      const target = e.target as HTMLElement;
+      // تشخیص اینکه موس روی لینک، دکمه یا عناصر کلیک‌پذیر رفته یا نه
+      const isClickable = 
+        target.tagName.toLowerCase() === 'a' ||
+        target.tagName.toLowerCase() === 'button' ||
+        target.closest('a') ||
+        target.closest('button') ||
+        target.classList.contains('cursor-pointer');
 
-    window.addEventListener('mousemove',  onMouseMove,  { passive: true });
-    window.addEventListener('mouseover',  onMouseOver,  { passive: true });
-    window.addEventListener('mousedown',  onMouseDown);
-    window.addEventListener('mouseup',    onMouseUp);
-    document.addEventListener('mouseleave', onMouseLeave);
-    document.addEventListener('mouseenter', onMouseEnter);
+      setIsHovering(isClickable);
+    };
+
+    const handleMouseLeave = () => setIsVisible(false);
+    const handleMouseEnter = () => setIsVisible(true);
+
+    window.addEventListener("mousemove", moveCursor);
+    window.addEventListener("mouseover", handleMouseOver);
+    document.addEventListener("mouseleave", handleMouseLeave);
+    document.addEventListener("mouseenter", handleMouseEnter);
 
     return () => {
-      window.removeEventListener('mousemove',  onMouseMove);
-      window.removeEventListener('mouseover',  onMouseOver);
-      window.removeEventListener('mousedown',  onMouseDown);
-      window.removeEventListener('mouseup',    onMouseUp);
-      document.removeEventListener('mouseleave', onMouseLeave);
-      document.removeEventListener('mouseenter', onMouseEnter);
-      cancelAnimationFrame(rafRef.current);
+      window.removeEventListener("mousemove", moveCursor);
+      window.removeEventListener("mouseover", handleMouseOver);
+      document.removeEventListener("mouseleave", handleMouseLeave);
+      document.removeEventListener("mouseenter", handleMouseEnter);
     };
-  }, [onMouseMove, rawX, rawY]);
+  }, [cursorX, cursorY, isVisible]);
 
-  if (!isVisible) return null;
-
-  // ─────────────────────────────────────────
-  // استایل‌های هر حالت
-  // ─────────────────────────────────────────
-  const ringStyles: Record<CursorState, object> = {
-    default: { scale: 1,    opacity: 0.6,  borderColor: 'rgb(199 165 106 / 0.5)' },
-    hover:   { scale: 2.2,  opacity: 1,    borderColor: 'rgb(199 165 106 / 0.9)' },
-    click:   { scale: 0.8,  opacity: 1,    borderColor: 'rgb(199 165 106 / 1)'   },
-    text:    { scale: 1,    opacity: 0.5,  borderColor: 'rgb(245 245 220 / 0.4)' },
-    hidden:  { scale: 0,    opacity: 0,    borderColor: 'transparent'            },
-  };
-
-  const dotStyles: Record<CursorState, object> = {
-    default: { scale: 1,   opacity: 1    },
-    hover:   { scale: 0,   opacity: 0    },
-    click:   { scale: 3,   opacity: 0.6  },
-    text:    { scale: 0.3, opacity: 0.8  },
-    hidden:  { scale: 0,   opacity: 0    },
-  };
-
-  const RING_SIZE = 36;
-  const DOT_SIZE  = 6;
+  // اگر تو گوشی موبایل هستیم، اصلا موس رو رندر نکن تا سبک بمونه
+  if (typeof window !== "undefined" && window.matchMedia("(pointer: coarse)").matches) {
+    return null;
+  }
 
   return (
     <>
-      {/* ─── Ring (کند) ─────────────────────── */}
+      {/* ── نقطه مرکزی (سریع و دقیق) ── */}
       <motion.div
-        className="pointer-events-none fixed z-[9999]"
+        className="fixed top-0 left-0 w-2 h-2 bg-gold rounded-full pointer-events-none z-[9999] mix-blend-difference"
         style={{
-          x:         ringX,
-          y:         ringY,
-          translateX: -(RING_SIZE / 2),
-          translateY: -(RING_SIZE / 2),
-          width:      RING_SIZE,
-          height:     RING_SIZE,
+          x: cursorX,
+          y: cursorY,
+          translateX: "-50%",
+          translateY: "-50%",
+          opacity: isVisible ? 1 : 0,
         }}
-      >
-        <motion.div
-          className="relative h-full w-full rounded-full border"
-          animate={ringStyles[cursorState]}
-          transition={{ type: 'spring', stiffness: 200, damping: 20 }}
-          style={{ borderColor: 'rgb(199 165 106 / 0.5)' }}
-        >
-          {/* label داخل ring (مثلاً "View") */}
-          {label && cursorState === 'hover' && (
-            <motion.span
-              initial={{ opacity: 0, scale: 0.8 }}
-              animate={{ opacity: 1, scale: 1 }}
-              exit={{ opacity: 0 }}
-              className="absolute inset-0 flex items-center justify-center font-mono text-[7px] tracking-widest text-gold uppercase"
-            >
-              {label}
-            </motion.span>
-          )}
-        </motion.div>
-      </motion.div>
-
-      {/* ─── Dot (سریع) ─────────────────────── */}
-      <motion.div
-        className="pointer-events-none fixed z-[9999] rounded-full bg-gold"
-        style={{
-          x:          dotX,
-          y:          dotY,
-          translateX: -(DOT_SIZE / 2),
-          translateY: -(DOT_SIZE / 2),
-          width:       DOT_SIZE,
-          height:      DOT_SIZE,
-        }}
-        animate={dotStyles[cursorState]}
-        transition={{ type: 'spring', stiffness: 500, damping: 25 }}
       />
 
-      {/* ─── cursor پیش‌فرض رو مخفی کن ─────── */}
-      <style>{`
-        * { cursor: none !important; }
-        @media (pointer: coarse) { * { cursor: auto !important; } }
+      {/* ── حلقه فنری (نرم و واکنشی) ── */}
+      <motion.div
+        className="fixed top-0 left-0 pointer-events-none z-[9998] rounded-full border border-gold/50 flex items-center justify-center"
+        style={{
+          x: cursorXSpring,
+          y: cursorYSpring,
+          translateX: "-50%",
+          translateY: "-50%",
+          width: 32,
+          height: 32,
+          opacity: isVisible ? 1 : 0,
+        }}
+        animate={{
+          scale: isHovering ? 1.8 : 1, // بزرگ شدن موقع هاور
+          backgroundColor: isHovering ? "rgba(199, 165, 106, 0.1)" : "transparent",
+          borderColor: isHovering ? "rgba(199, 165, 106, 0)" : "rgba(199, 165, 106, 0.5)",
+        }}
+        transition={{ duration: 0.3, ease: "easeOut" }}
+      >
+        {/* یک متن ظریف "VIEW" که فقط روی پروژه‌ها یا دکمه‌ها دیده میشه */}
+        <motion.span 
+          className="text-[5px] font-mono tracking-widest text-gold opacity-0 uppercase"
+          animate={{ opacity: isHovering ? 1 : 0 }}
+          transition={{ duration: 0.2 }}
+        >
+          View
+        </motion.span>
+      </motion.div>
+
+      {/* ── مخفی کردن نشانگر دیفالت ویندوز/مک ── */}
+      <style jsx global>{`
+        body {
+          cursor: none !important;
+        }
+        a, button, [role="button"] {
+          cursor: none !important;
+        }
       `}</style>
     </>
   );

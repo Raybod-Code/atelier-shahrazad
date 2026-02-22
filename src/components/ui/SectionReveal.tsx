@@ -1,13 +1,12 @@
 "use client";
 
-import { useRef }                              from "react";
-import { motion, useScroll, useTransform }     from "framer-motion";
+import { motion } from "framer-motion";
+import { ReactNode } from "react";
 
 interface Props {
-  children:   React.ReactNode;
+  children: ReactNode;
   className?: string;
-  /** ۰=Hero  ۱=Works  ۲=Deliverables  ۳=Process */
-  depth?:     0 | 1 | 2 | 3;
+  depth?: 0 | 1 | 2 | 3;
 }
 
 export default function SectionReveal({
@@ -15,41 +14,37 @@ export default function SectionReveal({
   className = "",
   depth = 0,
 }: Props) {
-  const ref = useRef<HTMLDivElement>(null);
-
-  const { scrollYProgress } = useScroll({
-    target: ref,
-    offset: ["start end", "end start"],
-  });
-
-  // هر چی depth بیشتر → parallax بیشتر → حس عمق بیشتر
-  const yEnter = 50 + depth * 15;
-  const yExit  = -(20 + depth * 8);
-
-  const y = useTransform(
-    scrollYProgress,
-    [0, 0.2, 0.8, 1],
-    [`${yEnter}px`, "0px", "0px", `${yExit}px`]
-  );
-
-  const opacity = useTransform(
-    scrollYProgress,
-    [0, 0.18, 0.82, 1],
-    [0, 1, 1, depth === 0 ? 1 : 0.5]  // Hero هیچوقت fade out نمی‌شه
-  );
-
-  // scale — حس نزدیک شدن دوربین
-  const scale = useTransform(
-    scrollYProgress,
-    [0, 0.2, 0.8, 1],
-    [0.97, 1, 1, 1.01]
-  );
+  // بخش هیرو (depth = 0) نیازی نداره منتظر اسکرول بمونه
+  const isHero = depth === 0;
 
   return (
     <motion.div
-      ref={ref}
-      style={{ y, opacity, scale }}
       className={className}
+      // ۱. حالت اولیه (قبل از دیده شدن): نامرئی، کمی پایین‌تر، تار (Blur) و کمی کوچکتر
+      initial={{ 
+        opacity: 0, 
+        y: isHero ? 30 : 60 + depth * 15, 
+        filter: "blur(10px)",
+        scale: 0.96
+      }}
+      // ۲. وقتی وارد صفحه شد: شفاف میشه، میاد سر جاش و فوکوس میشه
+      whileInView={{ 
+        opacity: 1, 
+        y: 0, 
+        filter: "blur(0px)",
+        scale: 1
+      }}
+      // ۳. تنظیمات تریگر (ماشه)
+      viewport={{ 
+        once: true, // فقط یک بار اجرا بشه (اگر کاربر رفت بالا دوباره اجرا نشه)
+        margin: isHero ? "50px" : "-15%", // بقیه سکشن‌ها باید ۱۵٪ بیان تو صفحه تا انیمیشن شروع شه
+      }}
+      // ۴. زمان‌بندیِ به‌شدت نرم و لوکس (Custom Easing)
+      transition={{
+        duration: 1.4, // طولانی‌تر برای حس سنگینی و لوکس بودن
+        delay: isHero ? 0.2 : 0.1, 
+        ease: [0.22, 1, 0.36, 1], // Apple-style easing
+      }}
     >
       {children}
     </motion.div>
