@@ -1,14 +1,16 @@
 "use client";
 
-import { useTranslations }  from "next-intl";
-import { motion }           from "framer-motion";
-import { Link }             from "@/navigation";
-import { ArrowDown }        from "lucide-react";
+import { useTranslations }            from "next-intl";
+import { motion }                      from "framer-motion";
+import { Link }                        from "@/navigation";
+import { ArrowDown }                   from "lucide-react";
+import { HERO_STATS, HERO_META }       from "@/constants/hero";
+import { useCountUp }                  from "@/hooks/useCountUp";
 
 const easingLux = [0.22, 1, 0.36, 1] as const;
 
 // ─────────────────────────────────────────────
-// کلمه به کلمه — بدون useScroll
+// کلمه به کلمه انیمیشن
 // ─────────────────────────────────────────────
 function AnimatedTitle({ text }: { text: string }) {
   const words = text.split(" ");
@@ -35,28 +37,47 @@ function AnimatedTitle({ text }: { text: string }) {
 }
 
 // ─────────────────────────────────────────────
-// Main
+// Animated Counter — هر عدد یه instance جداست
 // ─────────────────────────────────────────────
+function StatCounter({ num, suffix, label }: {
+  num:    number;
+  suffix: string;
+  label:  string;
+}) {
+  const { count, ref } = useCountUp({ end: num, duration: 1800 });
 
+  return (
+    <div ref={ref} className="flex flex-col items-center gap-1">
+      <span className="font-serif text-xl text-gold tabular-nums">
+        {count}{suffix}
+      </span>
+      <span className="font-mono text-[8px] tracking-widest text-paper/25 uppercase">
+        {label}
+      </span>
+    </div>
+  );
+}
+
+// ─────────────────────────────────────────────
+// Main Hero
+// ─────────────────────────────────────────────
 export default function Hero() {
   const t = useTranslations("HomePage");
 
   return (
     <section className="relative flex h-screen w-full items-center justify-center overflow-hidden bg-transparent">
 
-      {/* ─── Background — فقط CSS، بدون motion ── */}
+      {/* ─── Background ── */}
       <div className="pointer-events-none absolute inset-0">
-        {/* فقط یه orb کوچیک‌تر */}
         <div className="absolute left-[10%] top-[25%] h-[500px] w-[500px] rounded-full bg-gold/[0.06] blur-[100px]" />
         <div className="absolute right-[8%] bottom-[20%] h-[350px] w-[350px] rounded-full bg-gold/[0.04] blur-[80px]" />
-        {/* Vignette */}
         <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,transparent_50%,rgba(0,0,0,0.5)_100%)]" />
       </div>
 
-      {/* ─── Content ──────────────────────────── */}
+      {/* ─── Content ── */}
       <div className="container relative z-10 px-6 text-center">
 
-        {/* Overline */}
+        {/* Overline — badge از constants */}
         <motion.div
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
@@ -65,7 +86,7 @@ export default function Hero() {
         >
           <div className="h-[1px] w-10 bg-gradient-to-l from-gold/50 to-transparent" />
           <span className="font-mono text-[9px] tracking-[0.45em] text-gold/55 uppercase">
-            Digital Atelier
+            {HERO_META.badge}
           </span>
           <div className="h-[1px] w-10 bg-gradient-to-r from-gold/50 to-transparent" />
         </motion.div>
@@ -92,7 +113,6 @@ export default function Hero() {
           transition={{ delay: 1, duration: 0.7, ease: easingLux }}
           className="flex flex-col items-center justify-center gap-6 md:flex-row"
         >
-          {/* Primary */}
           <Link
             href="/contact"
             className="group relative overflow-hidden rounded-full border border-gold/40 px-10 py-4 transition-all duration-500 hover:border-gold hover:shadow-gold"
@@ -103,7 +123,6 @@ export default function Hero() {
             </span>
           </Link>
 
-          {/* Secondary */}
           <Link
             href="/#works"
             className="group flex items-center gap-3 font-mono text-[10px] uppercase tracking-[0.25em] text-paper/40 transition-colors duration-300 hover:text-gold"
@@ -113,32 +132,28 @@ export default function Hero() {
           </Link>
         </motion.div>
 
-        {/* Stats */}
+        {/* Stats — Animated Counters از constants */}
         <motion.div
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ delay: 1.2, duration: 0.8 }}
           className="mx-auto mt-16 flex max-w-lg items-center justify-center gap-10 border-t border-white/5 pt-8"
         >
-          {[
-            { num: "12+", label: "Projects"    },
-            { num: "100", label: "Lighthouse"  },
-            { num: "3",   label: "Awwwards"    },
-          ].map((stat, i) => (
-            <div key={i} className="flex flex-col items-center gap-1">
-              <span className="font-serif text-xl text-gold">{stat.num}</span>
-              <span className="font-mono text-[8px] tracking-widest text-paper/25 uppercase">
-                {stat.label}
-              </span>
-            </div>
+          {HERO_STATS.map((stat) => (
+            <StatCounter
+              key={stat.label}
+              num={stat.num}
+              suffix={stat.suffix}
+              label={stat.label}
+            />
           ))}
         </motion.div>
       </div>
 
-      {/* ─── Scroll line — فقط CSS animation ── */}
+      {/* ─── Scroll line ── */}
       <div className="absolute bottom-0 left-1/2 -translate-x-1/2 w-[1px] h-20 bg-gradient-to-b from-transparent to-gold opacity-60" />
 
-      {/* ─── Arrow bounce ──────────────────── */}
+      {/* ─── Arrow bounce ── */}
       <motion.div
         animate={{ y: [0, 6, 0] }}
         transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }}
@@ -147,9 +162,9 @@ export default function Hero() {
         <ArrowDown className="h-4 w-4 text-gold/35" />
       </motion.div>
 
-      {/* ─── Corner text ───────────────────── */}
+      {/* ─── Corner text — از constants ── */}
       <span className="absolute bottom-8 right-8 hidden font-mono text-[9px] tracking-widest text-paper/12 uppercase md:block">
-        Est. 2024 — Paris
+        Est. {HERO_META.established} — {HERO_META.location}
       </span>
     </section>
   );

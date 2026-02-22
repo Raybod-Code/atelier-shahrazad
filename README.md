@@ -31,3 +31,14 @@ npm run dev
 - Three.js + R3F (3D)
 - GSAP + Lenis (Animations)
 - next-intl (i18n)
+// دکمه‌های بستن:
+data-cursor="close"
+
+// کارت‌های پروژه (اگه خواستی صریح باشه):
+data-cursor="view"
+
+// دکمه‌های play/media:
+data-cursor="play"
+
+// لینک‌های back:
+data-cursor="back"

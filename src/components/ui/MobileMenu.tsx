@@ -4,6 +4,7 @@ import { useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Link } from "@/navigation";
 import { NAV_ITEMS } from "@/constants/navigation";
+import { useLenis } from 'lenis/react'; // 👈 اضافه شد
 
 interface MobileMenuProps {
   isOpen:       boolean;
@@ -67,17 +68,27 @@ export default function MobileMenu({
   locale,
   onLangSwitch,
 }: MobileMenuProps) {
-  // ✅ جلوگیری از scroll وقتی منو بازه
+  
+  // 👈 دسترسی به نمونه (instance) موتور Lenis
+  const lenis = useLenis();
+
+  // ✅ متوقف کردن اصولی اسکرول در موتور Lenis
   useEffect(() => {
+    if (!lenis) return;
+
     if (isOpen) {
-      document.body.style.overflow = "hidden";
+      lenis.stop(); // 👈 ترمز دستی Lenis کشیده میشه
+      document.body.style.overflow = "hidden"; // برای احتیاط (Native)
     } else {
+      lenis.start(); // 👈 حرکت مجدد Lenis
       document.body.style.overflow = "";
     }
+
     return () => {
+      lenis.start();
       document.body.style.overflow = "";
     };
-  }, [isOpen]);
+  }, [isOpen, lenis]);
 
   // ✅ بستن با Escape
   useEffect(() => {
