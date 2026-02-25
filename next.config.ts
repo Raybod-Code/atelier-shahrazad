@@ -1,20 +1,20 @@
 import createNextIntlPlugin from 'next-intl/plugin';
+import type { NextConfig } from 'next'; // 👈 اضافه کردن تایپ استاندارد Next.js
 
 const withNextIntl = createNextIntlPlugin('./src/i18n/request.ts');
 
-/** @type {import('next').NextConfig} */
-const nextConfig = {
+const nextConfig: NextConfig = { // 👈 اعمال تایپ روی متغیر
   images: {
     remotePatterns: [
       {
-        // ✅ Unsplash برای تصاویر پروژه‌ها
         protocol: 'https',
         hostname: 'images.unsplash.com',
+        pathname: '/**', // 👈 اضافه کردن این خط که تایپ‌اسکریپت بهش گیر داده بود
       },
       {
-        // ✅ برای بعد اگه از پلتفرم دیگه‌ای استفاده کردی
         protocol: 'https',
         hostname: '*.unsplash.com',
+        pathname: '/**', // 👈 اضافه کردن این خط
       },
     ],
   },
