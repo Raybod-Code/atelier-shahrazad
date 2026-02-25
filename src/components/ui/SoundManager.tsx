@@ -1,4 +1,4 @@
-'use client';
+"use client";
 
 import { useState, useRef, useEffect } from "react";
 import { Volume2, VolumeX }            from "lucide-react";
@@ -8,6 +8,7 @@ export default function SoundManager() {
   const [isPlaying, setIsPlaying]   = useState(false);
   const audioRef                    = useRef<HTMLAudioElement | null>(null);
   const buttonRef                   = useRef<HTMLButtonElement>(null);
+  const hasInteracted               = useRef(false);
 
   // ─── فیزیک آهنربایی (Magnetic Hover) ────────────────
   const x = useMotionValue(0);
@@ -30,34 +31,55 @@ export default function SoundManager() {
     y.set(0);
   };
 
-  // ─── منطق پخش صدا (کاملاً ارادی و بهینه) ───────────────
+  // ─── منطق پخش صدا (پخش با اولین تعامل در کل صفحه) ─────────
   useEffect(() => {
-    // فقط فایل صوتی رو آماده می‌کنیم، اما پخشش نمی‌کنیم
     audioRef.current        = new Audio("/sounds/ambient.mp3");
     audioRef.current.loop   = true;
     audioRef.current.volume = 0.2;
 
+    const handleFirstInteraction = () => {
+      if (!hasInteracted.current && audioRef.current) {
+        audioRef.current.play().then(() => {
+          setIsPlaying(true);
+          hasInteracted.current = true;
+        }).catch((err) => {
+          console.warn("Autoplay was prevented by browser", err);
+        });
+        
+        // پاک کردن لیسنرها برای سبک موندن سایت
+        window.removeEventListener("click", handleFirstInteraction);
+        window.removeEventListener("touchstart", handleFirstInteraction);
+        window.removeEventListener("keydown", handleFirstInteraction);
+      }
+    };
+
+    // آماده‌باش برای اولین لمس یا کلیک
+    window.addEventListener("click", handleFirstInteraction);
+    window.addEventListener("touchstart", handleFirstInteraction);
+    window.addEventListener("keydown", handleFirstInteraction);
+
     return () => {
-      // وقتی کامپوننت از بین رفت (مثلاً کاربر سایت رو بست)، صدا رو قطع کن
       if (audioRef.current) {
         audioRef.current.pause();
         audioRef.current = null;
       }
+      window.removeEventListener("click", handleFirstInteraction);
+      window.removeEventListener("touchstart", handleFirstInteraction);
+      window.removeEventListener("keydown", handleFirstInteraction);
     };
   }, []);
 
-  const toggleSound = () => {
+  const toggleSound = (e: React.MouseEvent) => {
+    e.stopPropagation(); // جلوگیری از تداخل با رویداد کلیک سراسری
     if (!audioRef.current) return;
     
     if (isPlaying) {
       audioRef.current.pause();
     } else {
-      audioRef.current.play().catch(() => {
-        // مدیریت ارور احتمالی مرورگر
-        console.warn("Audio playback was prevented by the browser.");
-      });
+      audioRef.current.play().catch(console.warn);
     }
     setIsPlaying(!isPlaying);
+    hasInteracted.current = true;
   };
 
   return (
