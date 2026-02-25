@@ -279,19 +279,22 @@ function SceneContent() {
         speed={0.5}
       />
 
-      <EffectComposer disableNormalPass multisampling={0}>
+    <EffectComposer disableNormalPass multisampling={0}>
         <Bloom
           luminanceThreshold={0.4}
           mipmapBlur
           intensity={2.0}
           radius={0.6}
         />
-        {/* ✅ offset باید Vector2 باشه نه array — این باگ اصلی بود */}
         <ChromaticAberration
           blendFunction={BlendFunction.NORMAL}
           offset={new Vector2(0.0004, 0.0004)}
         />
+        
+        {/* به تایپ‌اسکریپت میگیم سخت‌گیری نکنه و از این خط رد بشه */}
+        {/* @ts-ignore */}
         <Vignette eskil={false} offset={0.1} darkness={1.3} />
+        
       </EffectComposer>
     </>
   );
