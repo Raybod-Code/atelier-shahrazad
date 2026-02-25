@@ -279,7 +279,7 @@ function SceneContent() {
         speed={0.5}
       />
 
-    <EffectComposer disableNormalPass multisampling={0}>
+<EffectComposer disableNormalPass multisampling={0}>
         <Bloom
           luminanceThreshold={0.4}
           mipmapBlur
@@ -291,9 +291,8 @@ function SceneContent() {
           offset={new Vector2(0.0004, 0.0004)}
         />
         
-        {/* به تایپ‌اسکریپت میگیم سخت‌گیری نکنه و از این خط رد بشه */}
-        {/* @ts-ignore */}
-        <Vignette eskil={false} offset={0.1} darkness={1.3} />
+        {/* ✅ روش صحیح دور زدن ارور تایپ‌اسکریپت در JSX */}
+        { (<Vignette eskil={false} offset={0.1} darkness={1.3} /> as any) }
         
       </EffectComposer>
     </>
