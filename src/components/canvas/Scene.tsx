@@ -36,7 +36,7 @@ gsap.registerPlugin(ScrollTrigger);
 // ─────────────────────────────────────────────
 // 1. شیدرهای نخ طلایی
 // ─────────────────────────────────────────────
-
+const VignetteEffect = Vignette as any;
 const goldenThreadVertex = /* glsl */ `
   uniform float uTime;
   uniform float uSpeed;
@@ -291,8 +291,8 @@ function SceneContent() {
           offset={new Vector2(0.0004, 0.0004)}
         />
         
-        {/* ✅ تیر خلاص: به تایپ‌اسکریپت تضمین میدیم که این یک المان معتبر ریکت است */}
-        { (<Vignette eskil={false} offset={0.1} darkness={1.3} /> as unknown as JSX.Element) }
+        {/* از همون متغیر جدیدی که ساختیم بدون هیچ براکتی استفاده می‌کنیم */}
+        <VignetteEffect eskil={false} offset={0.1} darkness={1.3} />
         
       </EffectComposer>
     </>
