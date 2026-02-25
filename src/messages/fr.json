@@ -1,7 +1,7 @@
 {
   "HomePage": {
-    "title": "Tisser la Lumière dans la Logique",
-    "subtitle": "Atelier Shahrazad crée des expériences web immersives pour les marques de mode et d'art—où le code rencontre l'âme.",
+    "title": "Tisser la Lumière dans la Logique.",
+    "subtitle": "Atelier Shahrazad est un laboratoire numérique d'avant-garde. Nous créons des artefacts web immersifs et sur mesure pour les marques qui refusent de se fondre dans la masse.",
     "cta": "Démarrer un Projet",
     "scroll": "Défiler pour Explorer"
   },
@@ -24,25 +24,25 @@
     "close": "Fermer",
     "items": {
       "01": {
-        "title": "Lumina Fashion",
-        "intent": "Redéfinir le Défilé Numérique",
-        "description": "Une expérience de défilé de mode 3D entièrement immersive qui permet aux utilisateurs d'interagir avec les vêtements en temps réel. Conçu pour la haute performance et la fidélité visuelle, brouillant la ligne entre physique et numérique.",
-        "outcome1": "Augmentation de 40% de la durée de session",
-        "outcome2": "Design de mouvement primé (Awwwards)"
+        "title": "Maison Obsidian",
+        "intent": "Boutique Phare Immersive",
+        "description": "Un chef-d'œuvre d'architecture numérique pour une marque de mode haut de gamme. Nous avons abandonné la grille traditionnelle, la remplaçant par une expérience spatiale fluide pilotée par WebGL où les vêtements respirent et réagissent à la présence de l'utilisateur.",
+        "outcome1": "Expérience spatiale WebGL fluide",
+        "outcome2": "Simulation physique en temps réel"
       },
       "02": {
-        "title": "Apex Architecture",
-        "intent": "Système de Portfolio Minimaliste",
-        "description": "Un système de design structurel et basé sur une grille qui reflète la précision de l'architecture moderne. Accent mis sur la grande typographie, l'espace négatif et le rythme mathématique.",
-        "outcome1": "Score Lighthouse parfait (100/100)",
-        "outcome2": "Transitions de page fluides"
+        "title": "Aethel Immobilier",
+        "intent": "Voyage Spatial Interactif",
+        "description": "Vendre non seulement des espaces, mais des atmosphères. Nous avons traduit le poids physique du béton et la légèreté du verre dans un défilement numérique, en utilisant un éclairage volumétrique et une chorégraphie de caméra cinématique.",
+        "outcome1": "Intégration d'éclairage volumétrique",
+        "outcome2": "Chorégraphie de caméra cinématique"
       },
       "03": {
-        "title": "Echo Sound",
-        "intent": "Synthèse Audio-Visuelle",
-        "description": "Une plateforme audio-visuelle expérimentale où le son génère des graphiques WebGL en temps réel. Un pont entre la musique et la technologie, réagissant instantanément aux entrées de l'utilisateur.",
-        "outcome1": "Partage viral sur les médias sociaux",
-        "outcome2": "Analyse audio en temps réel"
+        "title": "L'Artefact Lumina",
+        "intent": "Exposition Numérique Conceptuelle",
+        "description": "Une exploration de la lumière et de la logique. Cette pièce conceptuelle courbe la typographie et la géométrie à travers des portails de réfraction en verre, prouvant qu'un site web peut être une installation d'art vivante et respirante.",
+        "outcome1": "Courbure de la typographie et de la géométrie",
+        "outcome2": "Portails de réfraction en verre interactifs"
       }
     }
   },
@@ -52,16 +52,16 @@
     "sectionLabel": "STANDARDS DE L'ATELIER NUMÉRIQUE",
     "items": {
       "01": {
-        "title": "Mises en Page Narratives",
-        "description": "Nous ne construisons pas simplement des pages; nous structurons des histoires linéaires. Chaque défilement est un chapitre, guidant l'utilisateur à travers le parcours de votre marque."
+        "title": "Mondes Web Immersifs",
+        "description": "Création d'environnements spatiaux tridimensionnels qui transcendent la navigation traditionnelle, transformant chaque visite en un voyage architectural inoubliable."
       },
       "02": {
-        "title": "Mouvement avec Retenue",
-        "description": "L'animation doit sembler invisible. Nous utilisons des micro-interactions et un mouvement basé sur la physique qui murmure le luxe, sans jamais crier pour attirer l'attention."
+        "title": "Direction Artistique Numérique Sur Mesure",
+        "description": "Création d'un vocabulaire visuel distinct. Nous orchestrons la typographie, la théorie des couleurs et la mise en page pour murmurer le vrai luxe."
       },
       "03": {
-        "title": "Performance d'Abord",
-        "description": "Le luxe signifie ne jamais attendre. Nous concevons pour les Core Web Vitals, visant un LCP inférieur à 2,5s et un score Lighthouse parfait."
+        "title": "Ingénierie Créative & WebGL",
+        "description": "Repousser les limites du navigateur. Nous tirons parti de la précision mathématique et des shaders personnalisés pour créer des expériences fluides et cinématiques."
       }
     }
   },
@@ -70,20 +70,20 @@
     "subtitle": "De la pensée abstraite à la réalité pixel-perfect.",
     "steps": {
       "01": {
-        "title": "Découverte & Stratégie",
-        "desc": "Nous commençons par décoder l'ADN de votre marque. Aucun code n'est écrit avant que la philosophie centrale ne soit comprise."
+        "title": "Extraction",
+        "desc": "Nous ne lisons pas les briefs ; nous extrayons l'ADN de votre marque. Découverte de la narration cachée qui dicte le langage visuel."
       },
       "02": {
-        "title": "Direction Artistique",
-        "desc": "Définir le langage visuel. Planches d'ambiance, sélection typographique et prototypes de mouvement pour définir le ton."
+        "title": "Distillation",
+        "desc": "Éliminer le superflu. Nous raffinons les interfaces utilisateur dans leurs formes les plus pures et les plus élégantes. Le vrai luxe respire dans l'espace vide."
       },
       "03": {
-        "title": "Développement",
-        "desc": "Là où la magie opère. Code propre et sémantique utilisant Next.js et WebGL pour donner vie à la vision."
+        "title": "Incantation",
+        "desc": "Là où la logique rencontre la magie. Tisser des shaders WebGL sur mesure et des mathématiques complexes pour insuffler une vie cinétique aux designs statiques."
       },
       "04": {
-        "title": "Raffinement & Lancement",
-        "desc": "Polissage obsessionnel. Réglage des performances, vérifications d'accessibilité et déploiement final dans le monde."
+        "title": "Manifestation",
+        "desc": "L'artefact est né. Un monde numérique fluide et ultra-performant, prêt à captiver et à convertir."
       }
     }
   },
@@ -118,49 +118,48 @@
     }
   },
   "Pricing": {
-  "overline": "Investissement",
-  "title": "Choisissez Votre Vision",
-  "subtitle": "Chaque projet est une collaboration unique. Les prix sont des points de départ — pas des limites.",
-  "popular": "Le Plus Populaire",
-  "cta": "Démarrer le Projet",
-  "note": "Tous les prix en EUR · TVA non incluse · Délai: 6–12 semaines",
-  "plans": {
-    "essential": {
-      "name": "Essentiel",
-      "price": "8 000",
-      "desc": "Parfait pour les petites marques de luxe qui entrent dans l'espace numérique.",
-      "f1": "Jusqu'à 5 pages",
-      "f2": "Design de mouvement personnalisé",
-      "f3": "Responsive mobile",
-      "f4": "Optimisé SEO",
-      "f5": "2 tours de révisions",
-      "f6": "1 mois de support"
-    },
-    "atelier": {
-      "name": "Atelier",
-      "price": "18 000",
-      "desc": "Notre offre signature. Expérience WebGL entièrement immersive.",
-      "f1": "Pages illimitées",
-      "f2": "Scènes WebGL / Three.js",
-      "f3": "Curseur & interactions personnalisés",
-      "f4": "Support multilingue",
-      "f5": "Build axé performance",
-      "f6": "3 mois de support"
-    },
-    "bespoke": {
-      "name": "Sur Mesure",
-      "price": "Personnalisé",
-      "desc": "Pour les marques établies avec des exigences complexes et uniques.",
-      "f1": "Tout dans Atelier",
-      "f2": "Direction artistique dédiée",
-      "f3": "Intégration CMS personnalisée",
-      "f4": "Analytics & tests A/B",
-      "f5": "Support prioritaire",
-      "f6": "Option retainer continue"
+    "overline": "Investissement",
+    "title": "Choisissez Votre Vision",
+    "subtitle": "Chaque projet est une collaboration unique. Les prix sont des points de départ — pas des limites.",
+    "popular": "Le Plus Populaire",
+    "cta": "Démarrer le Projet",
+    "note": "Tous les prix en EUR · TVA non incluse · Délai: 6–12 semaines",
+    "plans": {
+      "essential": {
+        "name": "Essentiel",
+        "price": "8 000",
+        "desc": "Parfait pour les petites marques de luxe qui entrent dans l'espace numérique.",
+        "f1": "Jusqu'à 5 pages",
+        "f2": "Design de mouvement personnalisé",
+        "f3": "Responsive mobile",
+        "f4": "Optimisé SEO",
+        "f5": "2 tours de révisions",
+        "f6": "1 mois de support"
+      },
+      "atelier": {
+        "name": "Atelier",
+        "price": "18 000",
+        "desc": "Notre offre signature. Expérience WebGL entièrement immersive.",
+        "f1": "Pages illimitées",
+        "f2": "Scènes WebGL / Three.js",
+        "f3": "Curseur & interactions personnalisés",
+        "f4": "Support multilingue",
+        "f5": "Build axé performance",
+        "f6": "3 mois de support"
+      },
+      "bespoke": {
+        "name": "Sur Mesure",
+        "price": "Personnalisé",
+        "desc": "Pour les marques établies avec des exigences complexes et uniques.",
+        "f1": "Tout dans Atelier",
+        "f2": "Direction artistique dédiée",
+        "f3": "Intégration CMS personnalisée",
+        "f4": "Analytics & tests A/B",
+        "f5": "Support prioritaire",
+        "f6": "Option retainer continue"
+      }
     }
-  }
-},
-
+  },
   "Footer": {
     "cta": "Vous avez une idée?",
     "bigLink": "Parlons-en",

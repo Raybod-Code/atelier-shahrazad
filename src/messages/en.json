@@ -1,7 +1,7 @@
 {
   "HomePage": {
-    "title": "Weaving Light into Logic",
-    "subtitle": "Atelier Shahrazad crafts immersive web experiences for fashion & art brands—where code meets soul.",
+    "title": "Weaving Light into Logic.",
+    "subtitle": "Atelier Shahrazad is an avant-garde digital laboratory. We craft bespoke, immersive web artifacts for brands that refuse to blend in.",
     "cta": "Start a Project",
     "scroll": "Scroll to Explore"
   },
@@ -11,9 +11,15 @@
     "contact": "Contact",
     "pricing": "Invest"
   },
+  "Manifesto": {
+    "headline": "A Thousand and One Digital Realities.",
+    "storyP1": "Legend has it that Shahrazad wove a thousand and one tales to cheat death and rewrite a king’s destiny.",
+    "storyP2": "At Atelier Shahrazad, we believe brands face their own mortality in the noise of the digital age. Survival requires more than just logic; it requires a masterpiece. We are the modern storytellers. But instead of words, we weave our narratives using light, motion, and code.",
+    "storyP3": "We do not build websites. We engineer immersive digital artifacts—spatial experiences that pull the user down a golden thread of interaction. For those who refuse to be forgotten, we craft the unforgettable."
+  },
   "Works": {
     "title": "The Artifacts",
-    "subtitle": "Curated selection of digital experiences crafted with precision and obsessive attention to detail.",
+    "subtitle": "Where logic ends, our storytelling begins.",
     "sectionLabel": "THE ARTIFACTS",
     "badge": "ATELIER QUALITY",
     "caseLabel": "CASE STUDY",
@@ -24,25 +30,25 @@
     "close": "Close",
     "items": {
       "01": {
-        "title": "Lumina Fashion",
-        "intent": "Redefining the Digital Runway",
-        "description": "A fully immersive 3D fashion show experience that allows users to interact with garments in real-time. Built for high-performance and visual fidelity, blurring the line between physical and digital.",
-        "outcome1": "40% increase in session duration",
-        "outcome2": "Award-winning motion design (Awwwards)"
+        "title": "Maison Obsidian",
+        "intent": "Immersive Flagship Store",
+        "description": "A digital architecture masterpiece for a high-end fashion label. We discarded the traditional grid, replacing it with a fluid, WebGL-driven spatial experience where garments breathe and react to the user's presence.",
+        "outcome1": "Fluid WebGL spatial experience",
+        "outcome2": "Real-time physics and cloth simulation"
       },
       "02": {
-        "title": "Apex Architecture",
-        "intent": "Minimalist Portfolio System",
-        "description": "A structural and grid-based design system that reflects the precision of modern architecture. Focus on large typography, negative space, and mathematical rhythm.",
-        "outcome1": "Perfect Lighthouse score (100/100)",
-        "outcome2": "Seamless page transitions"
+        "title": "Aethel Real Estate",
+        "intent": "Interactive Spatial Journey",
+        "description": "Selling not just spaces, but atmospheres. We translated the physical weight of concrete and the lightness of glass into a digital scroll, using volumetric lighting and cinematic camera choreography.",
+        "outcome1": "Volumetric lighting integration",
+        "outcome2": "Cinematic camera choreography"
       },
       "03": {
-        "title": "Echo Sound",
-        "intent": "Audio-Visual Synthesis",
-        "description": "An experimental audio-visual platform where sound generates real-time WebGL graphics. A bridge between music and technology, reacting to user input instantly.",
-        "outcome1": "Viral social media sharing",
-        "outcome2": "Real-time audio analysis"
+        "title": "The Lumina Artifact",
+        "intent": "Concept Digital Exhibition",
+        "description": "An exploration of light and logic. This conceptual piece bends typography and geometry through glass refraction portals, proving that a website can be a living, breathing art installation.",
+        "outcome1": "Bending typography and geometry",
+        "outcome2": "Interactive glass refraction portals"
       }
     }
   },
@@ -52,16 +58,16 @@
     "sectionLabel": "DIGITAL ATELIER STANDARDS",
     "items": {
       "01": {
-        "title": "Narrative Layouts",
-        "description": "We don't just build pages; we structure linear stories. Every scroll is a chapter, guiding the user through your brand's journey."
+        "title": "Immersive Web Worlds",
+        "description": "Crafting spatial, three-dimensional environments that transcend traditional browsing, turning every visit into an unforgettable architectural journey."
       },
       "02": {
-        "title": "Motion with Restraint",
-        "description": "Animation should feel invisible. We use micro-interactions and physics-based motion that whisper luxury, never shouting for attention."
+        "title": "Bespoke Digital Art Direction",
+        "description": "Curating a distinct visual vocabulary. We orchestrate typography, color theory, and layout to whisper true luxury."
       },
       "03": {
-        "title": "Performance First",
-        "description": "Luxury means never waiting. We engineer for Core Web Vitals, aiming for LCP under 2.5s and a perfect Lighthouse score."
+        "title": "Creative Engineering & WebGL",
+        "description": "Pushing the boundaries of the browser. We leverage mathematical precision and custom shaders to build fluid, cinematic experiences."
       }
     }
   },
@@ -70,20 +76,20 @@
     "subtitle": "From abstract thought to pixel-perfect reality.",
     "steps": {
       "01": {
-        "title": "Discovery & Strategy",
-        "desc": "We begin by decoding your brand's DNA. No code is written until the core philosophy is understood."
+        "title": "Extraction",
+        "desc": "We don't read briefs; we extract the DNA of your brand. Discovering the hidden narrative that dictates the visual language."
       },
       "02": {
-        "title": "Art Direction",
-        "desc": "Defining the visual language. Moodboards, typography selection, and motion prototypes to set the tone."
+        "title": "Distillation",
+        "desc": "Stripping away the noise. We refine user interfaces into their purest, most elegant forms. True luxury breathes in empty space."
       },
       "03": {
-        "title": "Development",
-        "desc": "Where the magic happens. Clean, semantic code using Next.js and WebGL to bring the vision to life."
+        "title": "Incantation",
+        "desc": "Where logic meets magic. Weaving custom WebGL shaders and complex mathematics to breathe kinetic life into static designs."
       },
       "04": {
-        "title": "Refinement & Launch",
-        "desc": "Obsessive polishing. Performance tuning, accessibility checks, and the final deployment to the world."
+        "title": "Manifestation",
+        "desc": "The artifact is born. A seamless, high-performance digital world ready to captivate and convert."
       }
     }
   },
@@ -91,7 +97,7 @@
     "title": "Start a Project",
     "overline": "New Project",
     "subtitle": "Tell us about your vision. We typically reply within 24 hours.",
-    "quote": "Every thread tells a story worth telling.",
+    "quote": "Let’s weave your next reality. Start the narrative.",
     "form": {
       "heading": "Tell us your vision",
       "subheading": "Every great project starts with a conversation.",
@@ -118,51 +124,52 @@
     }
   },
   "Pricing": {
-  "overline": "Investment",
-  "title": "Choose Your Vision",
-  "subtitle": "Every project is a unique collaboration. Prices are starting points — not limits.",
-  "popular": "Most Popular",
-  "cta": "Start Project",
-  "note": "All prices in EUR · VAT not included · Timeline: 6–12 weeks",
-  "plans": {
-    "essential": {
-      "name": "Essential",
-      "price": "8,000",
-      "desc": "Perfect for small luxury brands entering the digital space.",
-      "f1": "Up to 5 pages",
-      "f2": "Custom motion design",
-      "f3": "Mobile responsive",
-      "f4": "SEO optimized",
-      "f5": "2 rounds of revisions",
-      "f6": "1 month support"
-    },
-    "atelier": {
-      "name": "Atelier",
-      "price": "18,000",
-      "desc": "Our signature offering. Full immersive WebGL experience.",
-      "f1": "Unlimited pages",
-      "f2": "WebGL / Three.js scenes",
-      "f3": "Custom cursor & interactions",
-      "f4": "Multi-language support",
-      "f5": "Performance-first build",
-      "f6": "3 months support"
-    },
-    "bespoke": {
-      "name": "Bespoke",
-      "price": "Custom",
-      "desc": "For established brands with complex, unique requirements.",
-      "f1": "Everything in Atelier",
-      "f2": "Dedicated art direction",
-      "f3": "Custom CMS integration",
-      "f4": "Analytics & A/B testing",
-      "f5": "Priority support",
-      "f6": "Ongoing retainer option"
+    "overline": "Investment",
+    "title": "Choose Your Vision",
+    "subtitle": "Every project is a unique collaboration. Prices are starting points — not limits.",
+    "popular": "Most Popular",
+    "cta": "Start Project",
+    "note": "All prices in EUR · VAT not included · Timeline: 6–12 weeks",
+    "plans": {
+      "essential": {
+        "name": "Essential",
+        "price": "8,000",
+        "desc": "Perfect for small luxury brands entering the digital space.",
+        "f1": "Up to 5 pages",
+        "f2": "Custom motion design",
+        "f3": "Mobile responsive",
+        "f4": "SEO optimized",
+        "f5": "2 rounds of revisions",
+        "f6": "1 month support"
+      },
+      "atelier": {
+        "name": "Atelier",
+        "price": "18,000",
+        "desc": "Our signature offering. Full immersive WebGL experience.",
+        "f1": "Unlimited pages",
+        "f2": "WebGL / Three.js scenes",
+        "f3": "Custom cursor & interactions",
+        "f4": "Multi-language support",
+        "f5": "Performance-first build",
+        "f6": "3 months support"
+      },
+      "bespoke": {
+        "name": "Bespoke",
+        "price": "Custom",
+        "desc": "For established brands with complex, unique requirements.",
+        "f1": "Everything in Atelier",
+        "f2": "Dedicated art direction",
+        "f3": "Custom CMS integration",
+        "f4": "Analytics & A/B testing",
+        "f5": "Priority support",
+        "f6": "Ongoing retainer option"
+      }
     }
-  }
-},
+  },
   "Footer": {
     "cta": "Have an idea?",
     "bigLink": "Let's Talk",
+    "hook": "Weaving digital artifacts for brands that refuse to die in obscurity.",
     "sitemap": "Sitemap",
     "socials": "Socials",
     "legal": "Legal",
