@@ -24,17 +24,23 @@ const easingLux = [0.22, 1, 0.36, 1] as const;
 export default function Process() {
   const t            = useTranslations("Process");
   const containerRef = useRef<HTMLDivElement>(null);
+  const timelineRef  = useRef<HTMLDivElement>(null); 
 
-  const { scrollYProgress } = useScroll({
+  // اسکرول برای Parallax هدر
+  const { scrollYProgress: sectionProgress } = useScroll({
     target: containerRef,
+    offset: ["start end", "end start"],
+  });
+
+  // اسکرول اختصاصی برای پر شدن خط طلایی (دقیق و به‌موقع)
+  const { scrollYProgress: lineProgress } = useScroll({
+    target: timelineRef,
     offset: ["start center", "end center"],
   });
 
-  const lineHeight = useTransform(scrollYProgress, [0, 1], ["0%", "100%"]);
-
-  // parallax روی header
-  const headerY = useTransform(scrollYProgress, [0, 0.3], ["0px", "-30px"]);
-  const headerO = useTransform(scrollYProgress, [0, 0.3], [1, 0.6]);
+  const lineHeight = useTransform(lineProgress, [0, 1], ["0%", "100%"]);
+  const headerY = useTransform(sectionProgress, [0, 0.3], ["0px", "-30px"]);
+  const headerO = useTransform(sectionProgress, [0, 0.3], [1, 0.6]);
 
   return (
     <section
@@ -73,14 +79,14 @@ export default function Process() {
         </motion.div>
 
         {/* Timeline */}
-        <div className="relative">
-          {/* خط خاکستری پس‌زمینه */}
-          <div className="absolute left-[15px] md:left-1/2 top-0 bottom-0 w-[1px] bg-white/10 md:-translate-x-1/2" />
+        <div className="relative" ref={timelineRef}>
+          {/* ✅ خط خاکستری (محاسبه دقیق با calc) */}
+          <div className="absolute left-[15px] md:left-[calc(50%_-_0.5px)] top-0 bottom-0 w-[1px] bg-white/10" />
 
-          {/* خط طلایی پیشرفت */}
+          {/* ✅ خط طلایی پیشرفت (محاسبه دقیق با calc) */}
           <motion.div
             style={{ height: lineHeight }}
-            className="absolute left-[15px] md:left-1/2 top-0 w-[1px] bg-gold shadow-[0_0_15px_rgba(199,165,106,0.6)] md:-translate-x-1/2 origin-top"
+            className="absolute left-[15px] md:left-[calc(50%_-_0.5px)] top-0 w-[1px] bg-gold shadow-[0_0_15px_rgba(199,165,106,0.6)] origin-top"
           />
 
           {/* Steps */}
@@ -105,12 +111,11 @@ function StepItem({ step, index, t }: StepItemProps) {
 
   const { scrollYProgress } = useScroll({
     target: ref,
-    offset: ["start 90%", "start 40%"],
+    offset: ["start 80%", "start 40%"],
   });
 
-  // dot از خاکستری به طلایی تبدیل می‌شه
   const dotScale  = useTransform(scrollYProgress, [0, 1], [0.6, 1.4]);
-  const dotOpacity = useTransform(scrollYProgress, [0, 0.5], [0.3, 1]);
+  const dotColor  = useTransform(scrollYProgress, [0, 0.8], ["rgba(255, 255, 255, 0.2)", "rgba(199, 165, 106, 1)"]);
 
   return (
     <motion.div
@@ -123,10 +128,10 @@ function StepItem({ step, index, t }: StepItemProps) {
         isEven ? "md:flex-row" : "md:flex-row-reverse"
       } gap-8 md:gap-0`}
     >
-      {/* Dot */}
+      {/* ✅ Dot (محاسبه دقیق با calc و حذف translate-x-1/2) */}
       <motion.div
-        style={{ scale: dotScale, opacity: dotOpacity }}
-        className="absolute left-[11px] md:left-1/2 top-0 w-2 h-2 rounded-full bg-gold z-10 md:-translate-x-1/2 translate-y-2.5 shadow-[0_0_12px_rgba(199,165,106,0.8)]"
+        style={{ scale: dotScale, backgroundColor: dotColor }}
+        className="absolute left-[11px] md:left-[calc(50%_-_4px)] top-0 w-2 h-2 rounded-full z-10 translate-y-2.5 shadow-[0_0_12px_rgba(199,165,106,0.8)]"
       />
 
       {/* محتوا */}
@@ -169,7 +174,6 @@ function StepItem({ step, index, t }: StepItemProps) {
         </motion.p>
       </div>
 
-      {/* فضای خالی */}
       <div className="hidden md:block md:w-1/2" />
     </motion.div>
   );

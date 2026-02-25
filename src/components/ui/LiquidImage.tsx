@@ -1,12 +1,15 @@
 "use client";
 
-import { useRef, useState } from "react";
-import { Canvas, useFrame } from "@react-three/fiber";
+import { useRef, useState, Suspense } from "react";
+import { Canvas, useFrame, useThree } from "@react-three/fiber";
 import { useTexture, shaderMaterial } from "@react-three/drei";
 import * as THREE from "three";
 import { extend } from "@react-three/fiber";
+import { useInView } from "framer-motion"; // 👈 ایمپورت هوش ناظرِ فریم‌ورک
 
-// تعریف شیدر "مایع خالص" (بدون گلیچ)
+// ─────────────────────────────────────────────
+// شیدر مایع
+// ─────────────────────────────────────────────
 const LiquidShaderMaterial = shaderMaterial(
   {
     uTime: 0,
@@ -15,7 +18,6 @@ const LiquidShaderMaterial = shaderMaterial(
     uMouse: new THREE.Vector2(0, 0),
     uResolution: new THREE.Vector2(1, 1),
   },
-  // Vertex Shader: فقط هندسه رو کمی موج میده (برای عمق)
   `
     varying vec2 vUv;
     uniform float uTime;
@@ -24,15 +26,11 @@ const LiquidShaderMaterial = shaderMaterial(
     void main() {
       vUv = uv;
       vec3 pos = position;
-      
-      // موج سینوسی بسیار نرم (مثل پارچه ابریشم)
       float wave = sin(uv.y * 5.0 + uTime * 0.5) * 0.02 * uHover;
       pos.z += wave;
-      
       gl_Position = projectionMatrix * modelViewMatrix * vec4(pos, 1.0);
     }
   `,
-  // Fragment Shader: تصویر رو مثل آب زلال نشون میده
   `
     uniform float uTime;
     uniform sampler2D uTexture;
@@ -42,24 +40,14 @@ const LiquidShaderMaterial = shaderMaterial(
 
     void main() {
       vec2 uv = vUv;
-
-      // محاسبه فاصله موس برای ایجاد موج نرم
-      // به جای نویز رندوم، از یک موج تمیز استفاده میکنیم
       float dist = distance(uv, uMouse);
       float decay = smoothstep(0.8, 0.0, dist);
       
-      // اعوجاج خیلی نرم (مثل لنز)
       vec2 distortion = (uMouse - uv) * decay * 0.1 * uHover;
-      
-      // اعمال اعوجاج به تصویر
       vec2 finalUV = uv + distortion;
-
-      // خواندن رنگ تصویر (بدون جدا کردن کانال‌های رنگی = بدون گلیچ)
       vec4 color = texture2D(uTexture, finalUV);
 
-      // اضافه کردن کمی درخشش (Brightness) موقع هاور برای حس لوکس بودن
       color.rgb += 0.1 * uHover * decay;
-
       gl_FragColor = color;
     }
   `
@@ -75,13 +63,16 @@ declare global {
   }
 }
 
+// ─────────────────────────────────────────────
+// صفحه تصویر
+// ─────────────────────────────────────────────
 function ImagePlane({ src }: { src: string }) {
-  const meshRef = useRef<any>(null);
   const materialRef = useRef<any>(null);
   const texture = useTexture(src);
+  const { viewport } = useThree(); 
   
   texture.wrapS = texture.wrapT = THREE.ClampToEdgeWrapping;
-  texture.minFilter = THREE.LinearFilter; // کیفیت بالا
+  texture.minFilter = THREE.LinearFilter; 
   texture.magFilter = THREE.LinearFilter;
   
   const [hovered, setHover] = useState(false);
@@ -89,17 +80,13 @@ function ImagePlane({ src }: { src: string }) {
   useFrame((state) => {
     if (materialRef.current) {
       materialRef.current.uTime = state.clock.elapsedTime;
-      
-      // انیمیشن بسیار نرم (Damping)
       materialRef.current.uHover = THREE.MathUtils.lerp(
         materialRef.current.uHover,
         hovered ? 1 : 0,
-        0.05 // عدد کمتر = حرکت نرم‌تر و سنگین‌تر
+        0.05 
       );
 
-      // نرم کردن حرکت موس
       const mouse = state.pointer; 
-      // تبدیل مختصات موس (-1 تا 1) به (0 تا 1) برای UV
       const targetX = (mouse.x * 0.5) + 0.5;
       const targetY = (mouse.y * 0.5) + 0.5;
       
@@ -110,11 +97,10 @@ function ImagePlane({ src }: { src: string }) {
 
   return (
     <mesh
-      ref={meshRef}
       onPointerOver={() => setHover(true)}
       onPointerOut={() => setHover(false)}
     >
-      <planeGeometry args={[2, 3, 40, 40]} /> {/* سگمنت بالا برای نرمی موج */}
+      <planeGeometry args={[viewport.width, viewport.height, 32, 32]} /> 
       <liquidShaderMaterial
         ref={materialRef}
         uTexture={texture}
@@ -124,17 +110,31 @@ function ImagePlane({ src }: { src: string }) {
   );
 }
 
-export default function LiquidImage({ src, alt, className }: { src: string; alt: string; className?: string }) {
+// ─────────────────────────────────────────────
+// کامپوننت اصلی (مجهز به سیستم خواب هوشمند)
+// ─────────────────────────────────────────────
+export default function LiquidImage({ src, className = "" }: { src: string; alt?: string; className?: string }) {
+  const containerRef = useRef<HTMLDivElement>(null);
+  
+  // 👈 این هوک چک می‌کنه آیا این دیو تو مانیتور کاربر دیده می‌شه یا نه؟
+  // margin: "100px" یعنی ۱۰۰ پیکسل مونده به اینکه وارد تصویر بشه، شروع به لود شدن کن
+  const isInView = useInView(containerRef, { margin: "100px" });
+
   return (
-    <div className={`relative overflow-hidden ${className}`}>
-      <Canvas
-        camera={{ position: [0, 0, 2], fov: 50 }}
-        gl={{ alpha: true, antialias: true }}
-        className="w-full h-full"
-        dpr={[1, 2]} // کیفیت رتینا
-      >
-        <ImagePlane src={src} />
-      </Canvas>
+    <div ref={containerRef} className={`relative overflow-hidden w-full h-full block bg-[#0A0A0B] ${className}`}>
+      {/* فقط در صورتی Canvas رو بساز که کاربر در حال دیدنش باشه */}
+      {isInView && (
+        <Canvas
+          camera={{ position: [0, 0, 5], fov: 45 }}
+          gl={{ alpha: true, antialias: false }} // antialias رو برای پرفورمنس خاموش کردیم (تصویر خودش باکیفیته)
+          dpr={[1, 1.5]} 
+          className="w-full h-full pointer-events-auto block"
+        >
+          <Suspense fallback={null}>
+            <ImagePlane src={src} />
+          </Suspense>
+        </Canvas>
+      )}
     </div>
   );
 }

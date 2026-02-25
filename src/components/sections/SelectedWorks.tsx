@@ -1,16 +1,15 @@
 "use client";
 
-import { useState, useCallback, useEffect } from "react";
+import { useState } from "react";
 import Image from "next/image";
 import { useTranslations } from "next-intl";
 import { motion, AnimatePresence } from "framer-motion";
 import { X, ArrowUpRight, Sparkles } from "lucide-react";
 import { PROJECTS } from "@/constants/projects";
-import type {
-  ProjectCardProps,
-  ProjectModalProps,
-  OutcomeItemProps,
-} from "@/types";
+import type { ProjectCardProps, ProjectModalProps, OutcomeItemProps } from "@/types";
+
+// 👈 ایمپورت کامپوننت جادویی مایع
+import LiquidImage from "@/components/ui/LiquidImage"; 
 
 const easingLux = [0.22, 1, 0.36, 1] as const;
 
@@ -18,27 +17,8 @@ export default function SelectedWorks() {
   const t = useTranslations("Works");
   const [selectedId, setSelectedId] = useState<string | null>(null);
 
-  const handleClose = useCallback(() => setSelectedId(null), []);
-  const handleOpen = useCallback((id: string) => setSelectedId(id), []);
+  const handleClose = () => setSelectedId(null);
   const active = selectedId ? PROJECTS.find((p) => p.id === selectedId)! : null;
-
-  // ── ESC key → modal close ────────────────────────────
-  useEffect(() => {
-    if (!selectedId) return;
-    const onKey = (e: KeyboardEvent) => {
-      if (e.key === "Escape") handleClose();
-    };
-    document.addEventListener("keydown", onKey);
-    return () => document.removeEventListener("keydown", onKey);
-  }, [selectedId, handleClose]);
-
-  // ── Body scroll lock when modal open ────────────────
-  useEffect(() => {
-    document.body.style.overflow = selectedId ? "hidden" : "";
-    return () => {
-      document.body.style.overflow = "";
-    };
-  }, [selectedId]);
 
   return (
     <section
@@ -50,8 +30,13 @@ export default function SelectedWorks() {
         <div className="absolute left-[15%] top-[20%] h-[600px] w-[600px] rounded-full bg-gold/[0.15] blur-[120px]" />
         <div className="absolute right-[10%] bottom-[30%] h-[500px] w-[500px] rounded-full bg-gold/[0.08] blur-[100px]" />
         <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,transparent_0%,rgba(0,0,0,0.4)_100%)]" />
-        {/* ✅ FIX: local inline SVG — بدون CDN خارجی */}
-        <div className="noise-texture absolute inset-0 opacity-[0.08] mix-blend-overlay" />
+        <div
+          className="absolute inset-0 opacity-[0.08] mix-blend-overlay"
+          style={{
+            backgroundImage:
+              'url("https://grainy-gradients.vercel.app/noise.svg")',
+          }}
+        />
       </div>
 
       <div className="relative mx-auto w-full max-w-7xl px-6 lg:px-8">
@@ -59,6 +44,7 @@ export default function SelectedWorks() {
         <div className="mb-24 md:mb-32">
           <div className="mb-12 flex flex-col gap-12 border-b border-gold/20 pb-12 md:flex-row md:items-end md:justify-between">
             <div className="max-w-3xl space-y-6">
+              {/* Overline */}
               <div className="flex items-center gap-4">
                 <motion.div
                   initial={{ scaleX: 0 }}
@@ -72,6 +58,7 @@ export default function SelectedWorks() {
                 </span>
               </div>
 
+              {/* Title */}
               <motion.h2
                 initial={{ opacity: 0, y: 30 }}
                 whileInView={{ opacity: 1, y: 0 }}
@@ -83,6 +70,7 @@ export default function SelectedWorks() {
               </motion.h2>
             </div>
 
+            {/* Descriptor */}
             <motion.div
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
@@ -110,7 +98,7 @@ export default function SelectedWorks() {
               key={project.id}
               project={project}
               index={index}
-              onClick={() => handleOpen(project.id)}
+              onClick={() => setSelectedId(project.id)}
               t={t}
             />
           ))}
@@ -118,21 +106,21 @@ export default function SelectedWorks() {
       </div>
 
       <AnimatePresence mode="wait">
-        {selectedId && active && (
+        {selectedId && active ? (
           <ProjectModal
             id={selectedId}
             onClose={handleClose}
             t={t}
             project={active}
           />
-        )}
+        ) : null}
       </AnimatePresence>
     </section>
   );
 }
 
 // ─────────────────────────────────────────────
-// Project Card
+// Project Card (مجهز به افکت مایع)
 // ─────────────────────────────────────────────
 
 function ProjectCard({ project, index, onClick, t }: ProjectCardProps) {
@@ -147,33 +135,43 @@ function ProjectCard({ project, index, onClick, t }: ProjectCardProps) {
       onClick={onClick}
       role="button"
       tabIndex={0}
-      aria-label={t(`items.${project.id}.title`)}
       onKeyDown={(e) => e.key === "Enter" && onClick()}
     >
+      {/* Decorative large number */}
       <div className="absolute -left-4 -top-6 font-serif text-[140px] font-light leading-none text-paper/[0.03] md:-left-8 md:-top-10 md:text-[180px]">
         {project.id}
       </div>
 
+      {/* Card container */}
       <div className="relative">
+        {/* Outer glow */}
         <div className="absolute -inset-4 rounded-3xl bg-gradient-to-b from-gold/20 via-gold/5 to-transparent opacity-0 blur-xl transition-opacity duration-700 group-hover:opacity-100" />
 
+        {/* Gold frame */}
         <div className="relative overflow-hidden rounded-2xl bg-gradient-to-br from-gold/30 via-gold/10 to-transparent p-[1px] transition-all duration-700 group-hover:from-gold/50 group-hover:via-gold/20">
           <div className="relative overflow-hidden rounded-2xl bg-[#0A0A0B]">
+            {/* Image Container */}
             <motion.div
               layoutId={`image-${project.id}`}
               className="relative aspect-[3/4] overflow-hidden"
             >
-              <Image
+              {/* ✅ استفاده از شیدر مایع به جای عکس خشک */}
+              <LiquidImage
                 src={project.image}
                 alt={t(`items.${project.id}.title`)}
-                fill
-                sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
-                className="object-cover brightness-[0.85] contrast-[1.15] grayscale transition-all duration-[900ms] ease-out group-hover:scale-[1.08] group-hover:brightness-100 group-hover:contrast-100 group-hover:grayscale-0"
+                className="
+                  absolute inset-0 w-full h-full
+                  brightness-[0.85] contrast-[1.15] grayscale
+                  transition-all duration-[900ms] ease-out
+                  group-hover:scale-[1.08] group-hover:brightness-100 group-hover:contrast-100 group-hover:grayscale-0
+                "
               />
 
+              {/* Overlays */}
               <div className="pointer-events-none absolute inset-0 bg-gradient-to-b from-black/10 via-transparent to-black/60" />
               <div className="absolute inset-0 bg-gradient-to-br from-gold/0 via-gold/20 to-gold/0 opacity-0 mix-blend-overlay transition-opacity duration-700 group-hover:opacity-100" />
 
+              {/* Light Sweep */}
               <motion.div
                 className="absolute inset-0 translate-x-[-100%] bg-gradient-to-r from-transparent via-white/10 to-transparent opacity-0 group-hover:opacity-100"
                 animate={{ translateX: ["100%", "100%"] }}
@@ -185,9 +183,16 @@ function ProjectCard({ project, index, onClick, t }: ProjectCardProps) {
                 }}
               />
 
-              {/* ✅ FIX: local inline noise — بدون grainy-gradients.vercel.app */}
-              <div className="noise-texture absolute inset-0 opacity-[0.15] mix-blend-overlay" />
+              {/* Noise */}
+              <div
+                className="absolute inset-0 opacity-[0.15] mix-blend-overlay"
+                style={{
+                  backgroundImage:
+                    'url("https://grainy-gradients.vercel.app/noise.svg")',
+                }}
+              />
 
+              {/* Index badge */}
               <div className="absolute left-5 top-5">
                 <div className="flex items-center gap-2 rounded-full border border-gold/20 bg-black/40 px-3 py-1.5 backdrop-blur-sm">
                   <span className="font-mono text-[9px] tracking-[0.3em] text-gold/80 uppercase">
@@ -199,6 +204,7 @@ function ProjectCard({ project, index, onClick, t }: ProjectCardProps) {
                 </div>
               </div>
 
+              {/* Hover CTA */}
               <div className="absolute bottom-6 right-6 translate-y-6 opacity-0 transition-all duration-500 group-hover:translate-y-0 group-hover:opacity-100">
                 <div className="flex h-14 w-14 items-center justify-center rounded-full border border-gold/40 bg-paper/95 shadow-2xl backdrop-blur transition-all duration-300 hover:scale-110 hover:border-gold hover:bg-gold hover:shadow-gold/50">
                   <ArrowUpRight className="h-5 w-5 text-charcoal" />
@@ -209,13 +215,17 @@ function ProjectCard({ project, index, onClick, t }: ProjectCardProps) {
         </div>
       </div>
 
+      {/* Text Info */}
       <div className="relative mt-8 space-y-3 px-2">
         <h3 className="font-serif text-3xl leading-tight tracking-tight text-paper transition-colors duration-500 group-hover:text-gold md:text-4xl">
           {t(`items.${project.id}.title`)}
         </h3>
+
         <p className="border-l-2 border-gold/40 pl-4 font-sans text-[11px] uppercase tracking-[0.25em] text-paper/45">
           {t(`items.${project.id}.intent`)}
         </p>
+
+        {/* Tags */}
         <div className="flex flex-wrap gap-2 pt-2">
           {project.tags.map((tag: string) => (
             <span
@@ -232,17 +242,12 @@ function ProjectCard({ project, index, onClick, t }: ProjectCardProps) {
 }
 
 // ─────────────────────────────────────────────
-// Project Modal
+// Project Modal (سریع و بهینه با priority)
 // ─────────────────────────────────────────────
 
 function ProjectModal({ id, onClose, t, project }: ProjectModalProps) {
   return (
-    <div
-      role="dialog"
-      aria-modal="true"
-      aria-label={t(`items.${id}.title`)}
-      className="fixed inset-0 z-[100] flex items-center justify-center p-6 md:p-10"
-    >
+    <div className="fixed inset-0 z-[100] flex items-center justify-center p-6 md:p-10">
       <motion.div
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
@@ -250,7 +255,6 @@ function ProjectModal({ id, onClose, t, project }: ProjectModalProps) {
         transition={{ duration: 0.4 }}
         onClick={onClose}
         className="absolute inset-0 bg-black/92 backdrop-blur-xl"
-        aria-hidden="true"
       />
 
       <motion.div
@@ -258,22 +262,23 @@ function ProjectModal({ id, onClose, t, project }: ProjectModalProps) {
         className="relative z-10 w-full max-w-7xl overflow-hidden rounded-3xl bg-gradient-to-br from-gold/25 via-gold/10 to-transparent p-[1.5px] shadow-2xl"
       >
         <div className="relative flex h-[90vh] flex-col overflow-hidden rounded-3xl bg-[#0A0A0B] md:flex-row">
+          {/* Close Button */}
           <motion.button
             initial={{ opacity: 0, scale: 0.8 }}
             animate={{ opacity: 1, scale: 1 }}
             transition={{ delay: 0.3 }}
             onClick={onClose}
-            data-cursor="close"
             className="absolute right-6 top-6 z-50 rounded-full border border-gold/20 bg-black/60 p-3 text-paper/70 backdrop-blur transition-all duration-300 hover:border-gold hover:bg-gold/10 hover:text-gold"
-            aria-label="Close modal"
           >
             <X className="h-5 w-5" />
           </motion.button>
+
           {/* Left: Image */}
           <motion.div
             layoutId={`image-${id}`}
             className="relative h-[45%] w-full overflow-hidden md:h-full md:w-[55%]"
           >
+            {/* ✅ استفاده از تگ پیش‌فرض با priority برای نهایت سرعت در مودال */}
             <Image
               src={project.image}
               alt={t(`items.${id}.title`)}
@@ -284,9 +289,15 @@ function ProjectModal({ id, onClose, t, project }: ProjectModalProps) {
             />
             <div className="absolute inset-0 bg-gradient-to-t from-[#0A0A0B] via-black/30 to-transparent" />
             <div className="absolute inset-0 bg-gradient-to-r from-[#0A0A0B]/80 via-transparent to-transparent md:via-[#0A0A0B]/20" />
-            {/* ✅ FIX: local inline noise */}
-            <div className="noise-texture absolute inset-0 opacity-[0.12] mix-blend-overlay" />
+            <div
+              className="absolute inset-0 opacity-[0.12] mix-blend-overlay"
+              style={{
+                backgroundImage:
+                  'url("https://grainy-gradients.vercel.app/noise.svg")',
+              }}
+            />
 
+            {/* Floating Label */}
             <motion.div
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
@@ -307,6 +318,7 @@ function ProjectModal({ id, onClose, t, project }: ProjectModalProps) {
               </p>
             </motion.div>
           </motion.div>
+
           {/* Right: Content */}
           <motion.div
             initial={{ opacity: 0, x: 30 }}
@@ -316,6 +328,7 @@ function ProjectModal({ id, onClose, t, project }: ProjectModalProps) {
             className="w-full overflow-y-auto p-8 md:w-[45%] md:p-12 lg:p-16"
           >
             <div className="space-y-10">
+              {/* Description */}
               <div className="space-y-6">
                 <div className="h-[1px] w-full bg-gradient-to-r from-gold/40 via-gold/10 to-transparent" />
                 <p className="font-sans text-base leading-[1.8] tracking-wide text-paper/75 md:text-lg">
@@ -323,6 +336,7 @@ function ProjectModal({ id, onClose, t, project }: ProjectModalProps) {
                 </p>
               </div>
 
+              {/* Outcomes */}
               <div className="space-y-5">
                 <h4 className="font-mono text-[10px] tracking-[0.3em] text-gold/70 uppercase">
                   {t("keyOutcomes")}
@@ -331,6 +345,7 @@ function ProjectModal({ id, onClose, t, project }: ProjectModalProps) {
                 <OutcomeItem text={t(`items.${id}.outcome2`)} delay={0.6} />
               </div>
 
+              {/* Technologies */}
               <div className="space-y-4 border-t border-white/5 pt-8">
                 <h4 className="font-mono text-[10px] tracking-[0.3em] text-gold/70 uppercase">
                   {t("technologies")}
@@ -350,6 +365,7 @@ function ProjectModal({ id, onClose, t, project }: ProjectModalProps) {
                 </div>
               </div>
 
+              {/* CTA */}
               <motion.div
                 initial={{ opacity: 0 }}
                 animate={{ opacity: 1 }}

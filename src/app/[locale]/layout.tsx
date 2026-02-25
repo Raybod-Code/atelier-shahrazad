@@ -24,10 +24,21 @@ const serif = Playfair_Display({
   display:  "swap",
 });
 
+// ✅ متادیتا حرفه‌ای برای پیش‌نمایش شیک لینک‌ها در شبکه‌های اجتماعی
 export const metadata: Metadata = {
   title:       "Atelier Shahrazad | The Golden Thread",
-  description: "Immersive WebGL Experience for fashion & art brands.",
-  keywords:    ["web design", "luxury", "fashion", "WebGL", "Next.js"],
+  description: "Immersive WebGL experiences for luxury fashion & art brands. Where code meets the soul.",
+  keywords:    ["web design", "luxury", "fashion", "WebGL", "Next.js", "creative agency"],
+  openGraph: {
+    title: "Atelier Shahrazad | Digital Atelier",
+    description: "Immersive WebGL experiences for luxury fashion & art brands.",
+    type: "website",
+    siteName: "Atelier Shahrazad",
+    // images: ["/og-image.jpg"], // 💡 بعدا یه عکس ۱۲۰۰ در ۶۳۰ از سایتت بگیر و بذار تو پوشه public
+  },
+  twitter: {
+    card: "summary_large_image",
+  }
 };
 
 export const viewport: Viewport = {
@@ -45,13 +56,15 @@ export default async function RootLayout({
   const { locale }    = await params;
 
   return (
-    <html lang={locale} className="scroll-smooth">
+    // ❌ کلمه scroll-smooth حذف شد تا با Lenis تداخل نکنه
+    <html lang={locale}>
       <body
         className={`
           ${sans.variable} ${serif.variable}
           font-sans text-paper antialiased
           flex flex-col min-h-screen
           overflow-x-hidden
+          bg-[#050505]
         `}
       >
         <SmoothScroll>
@@ -63,18 +76,16 @@ export default async function RootLayout({
             {/* لایه ۱: noise overlay */}
             <div className="noise-overlay" style={{ zIndex: 1 }} />
 
-            {/* لایه ۵۰: UI ثابت */}
-            <div style={{ position: "relative", zIndex: 50 }}>
-              <Preloader />
-              <CustomCursor />
-              <SoundManager />
-              <CookieConsent />
-              <Header locale={locale} />
-            </div>
+            {/* لایه ۵۰: UI ثابت (آزادسازی از دیو محصورکننده) */}
+            <Preloader />
+            <CustomCursor />
+            <SoundManager />
+            <CookieConsent />
+            <Header locale={locale} />
 
-            {/* ✅ فیکس: min-h-[500vh] حذف شد */}
-            <div className="relative z-10 w-full">
-              <main className="w-full">
+            {/* لایه ۱۰: محتوای اصلی و فوتر */}
+            <div className="relative z-10 flex w-full flex-col min-h-screen">
+              <main className="w-full flex-grow">
                 {children}
               </main>
               <Footer />
