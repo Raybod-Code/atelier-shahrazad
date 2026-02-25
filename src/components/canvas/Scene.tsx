@@ -291,8 +291,8 @@ function SceneContent() {
           offset={new Vector2(0.0004, 0.0004)}
         />
         
-        {/* ✅ روش صحیح دور زدن ارور تایپ‌اسکریپت در JSX */}
-        { (<Vignette eskil={false} offset={0.1} darkness={1.3} /> as any) }
+        {/* ✅ تیر خلاص: به تایپ‌اسکریپت تضمین میدیم که این یک المان معتبر ریکت است */}
+        { (<Vignette eskil={false} offset={0.1} darkness={1.3} /> as unknown as JSX.Element) }
         
       </EffectComposer>
     </>
